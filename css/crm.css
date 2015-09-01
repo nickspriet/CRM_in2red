@@ -1,0 +1,106 @@
+#top {
+    background-color: #D9313B;
+    z-index: 3001;
+}
+
+.small-control-w, ul.dropdown-menu.ng-isolate-scope {
+    width: 300px;
+}
+
+.small-control-mr {
+    margin-right: 22px;
+}
+
+.panel-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    color: #58666e;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 16px 0;
+    margin-bottom: 5px;
+    border-bottom: none;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.footer {
+    clear: both;
+}
+
+.searchTopRight {
+    margin-right: 20px;
+}
+
+.clickable-row {
+    cursor: pointer;
+}
+
+tbody > tr.clickable-row td {
+    padding: 7.5px 15px;
+}
+
+.invoice.row {
+    margin-bottom: 20px;
+}
+
+.offerline-desc {
+    width: 85%;
+}
+
+.offerline-hours {
+    width: 65px;
+}
+
+.offerline-rate {
+    width: 150px;
+}
+
+.btnClose:hover {
+    cursor: pointer;
+    color: #D9313B;
+}
+
+.disable-width-resize {
+    resize: vertical;
+}
+
+div.invoice {
+    padding: 30px;
+}
+
+#listContactpersons li {
+    border-top-width: 0px;
+}
+
+.sortLink.active {
+    text-transform: uppercase;
+    color: #337ab7;
+}
+
+.width-25 {
+    width: 25px;
+}
+
+#singleSelection button
+{
+
+}
+
+
+
+
+/* ANIMATIONS */
+.sample-show-hide {
+    padding: 10px;
+    background: white;
+    opacity: 0
+}
+
+.sample-show-hide {
+    -webkit-transition: all linear 5s;
+    transition: all linear 5s;
+}
+
+.sample-show-hide.ng-show {
+    opacity: 1;
+}

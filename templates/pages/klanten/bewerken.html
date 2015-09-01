@@ -1,0 +1,187 @@
+<div class="wrapper" ng-controller="DetailsCustomerController as detailsCustomerCtrl">
+    <form name="customerForm">
+        <div class="page-header">
+            <h1 class="title">Bewerk klant</h1>
+            <ol class="breadcrumb">
+                <li><a href="#/klanten">Klanten</a></li>
+                <li class="active">{{selectedCustomer[0].Info.name}}</li>
+            </ol>
+            <div class="right">
+                <div class="btn-group small-control-mr" role="group" aria-label="...">
+                    <button type="submit" ng-click="customerForm.$valid && submit()" class="btn btn-light"><i class="fa fa-save"></i>Wijzigingen Opslaan</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-default">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="title">
+                        <input class="form-control input-lg" type="text" placeholder="Bedrijfsnaam" value="{{selectedCustomer[0].Info.name}}" required>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="vat" class="col-sm-2 control-label form-label">BTW-nummer</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="vat" value="{{selectedCustomer[0].Info.vat}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone" class="col-sm-2 control-label form-label">Telefoon</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="phone" value="{{selectedCustomer[0].Info.phone}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="col-sm-2 control-label form-label">E-mail</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="email" value="{{selectedCustomer[0].Info.email}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="addresses" class="list-group-item">
+                                <div class="form-horizontal">
+                                    <div class="panel-subtitle">Facturatieadres</div>
+                                    <ul class="panel-tools">
+                                        <a ng-hide="showOfficeAddress || selectedCustomer[0].Info.office_street" ng-click="showOfficeAddress = true;" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra adres</a>
+                                    </ul>
+                                    <div class="form-group">
+
+                                        <label for="billing-address" class="col-sm-2 control-label form-label">Adres</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="billing-address" value="{{selectedCustomer[0].Info.billing_street}}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="billing-zipcode" class="col-sm-2 control-label form-label">Postcode</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="billing-zipcode" value="{{selectedCustomer[0].Info.billing_zipcode}}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="billing-city" class="col-sm-2 control-label form-label">Gemeente</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="billing-city" value="{{selectedCustomer[0].Info.billing_city}}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="billing-country" class="col-sm-2 control-label form-label">Land</label>
+
+                                        <div class="col-sm-10">
+                                            <ol id="billing-country" class="nya-bs-select col-sm-12 col-xs-12" ng-model="billingCountry" data-live-search="true">
+                                                <li class="nya-bs-option" data-value="België"><a>België</a></li>
+                                                <li class="nya-bs-option" data-value="Nederland"><a>Nederland</a></li>
+                                                <li class="nya-bs-option" data-value="Frankrijk"><a>Frankrijk</a></li>
+                                                <li class="nya-bs-option" data-value="Duitsland"><a>Duitsland</a></li>
+                                                <li class="nya-bs-option" data-value="Groot-Britannië"><a>Groot-Britannië</a></li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="billing-county" class="col-sm-2 control-label form-label">Provincie</label>
+
+                                        <div class="col-sm-10">
+                                            <ol id="billing-county" class="nya-bs-select col-sm-12 col-xs-12" ng-model="billingCounty" data-live-search="true">
+                                                <li class="nya-bs-option" data-value="Antwerpen"><a>Antwerpen</a></li>
+                                                <li class="nya-bs-option" data-value="Henegouwen"><a>Henegouwen</a></li>
+                                                <li class="nya-bs-option" data-value="Limburg"><a>Limburg</a></li>
+                                                <li class="nya-bs-option" data-value="Luik"><a>Luik</a></li>
+                                                <li class="nya-bs-option" data-value="Namen"><a>Namen</a></li>
+                                                <li class="nya-bs-option" data-value="Oost-Vlaanderen"><a>Oost-Vlaandern</a></li>
+                                                <li class="nya-bs-option" data-value="Vlaams-Brabant"><a>Vlaams-Brabant</a></li>
+                                                <li class="nya-bs-option" data-value="Waals-Brabant"><a>Waals-Brabant</a></li>
+                                                <li class="nya-bs-option" data-value="West-Vlaanderen"><a>West-Vlaanderen</a></li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <kantoor-adres id="kantoorAdres" ng-show="showOfficeAddress == true || selectedCustomer[0].Info.office_street"></kantoor-adres>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="panel-subtitle">Extra gegevens</div>
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="customer-active" class="col-sm-2 control-label form-label">Klant actief ?</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Ja" data-off="Nee" id="customer-active">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-controller="DatePickerController as datePickerCtrl">
+                                        <label for="customer-create" class="col-sm-2 control-label form-label">Klant sinds</label>
+
+                                        <div class="col-sm-10">
+                                            <div class="input-prepend input-group">
+                                                <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="text" id="date-picker" class="form-control active" id="customer-create" value="{{selectedCustomer[0].Info.date_create | DateFilter }}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="panel-subtitle"><i class="fa fa-tags"></i> Tags</div>
+                                <div class="form-group">
+                                    <label for="tags" class="col-sm-2 control-label form-label">tag</label>
+
+                                    <div class="col-sm-10 padding-0">
+                                        <ol id="tags" class="nya-bs-select col-sm-12" ng-model="tag" multiple data-live-search="true" data-selected-text-format="count>3" data-size="6">
+                                            <span class="dropdown-header">Web</span>
+                                            <li class="nya-bs-option" data-value="Website"><a>Website<span class="fa fa-check check-mark"></span></a></li>
+                                            <li class="nya-bs-option" data-value="Webshop"><a>Webshop<span class="fa fa-check check-mark"></span></a></li>
+                                            <li class="nya-bs-option" data-value="Internet applicatie"><a>Internet applicatie<span class="fa fa-check check-mark"></span></a></li>
+
+                                            <span class="dropdown-header">Communicatie</span>
+                                            <li class="nya-bs-option" data-value="E-mail"><a>E-mail <span class="fa fa-check check-mark"></span></a></li>
+                                            <li class="nya-bs-option" data-value="Telefoon"><a>Telefoon <span class="fa fa-check check-mark"></span></a></li>
+                                            <li class="nya-bs-option" data-value="Kennis"><a>Kennis <span class="fa fa-check check-mark"></span></a></li>
+                                            <li class="nya-bs-option" data-value="Beurs"><a>Beurs <span class="fa fa-check check-mark"></span></a></li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-title">Contactpersonen</div>
+                    <ul class="panel-tools">
+                        <a add-contact ng-click="addNewContact()" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra contactpersoon</a>
+                    </ul>
+                    <div class="panel-body">
+                        <ul id="listContactpersons" class="list-group">
+                            <div ng-repeat="contact in selectedContacts[0] track by $index">
+                                <ngform>
+                                    <new-contact contactperson="contact"></new-contact>
+                                </ngform>
+                            </div>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="lib/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+<script src="lib/date-range-picker/daterangepicker.js"></script>
+

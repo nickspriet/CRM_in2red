@@ -1,0 +1,15 @@
+@media print {
+    #top, .sidebar, .page-header, .footer {
+        display: none;
+    }
+    
+    .content
+    {
+        margin-left: 0;
+    }
+
+    body {
+        font: 12pt Georgia, "Times New Roman", Times, serif;
+        line-height: 1.3;
+    }
+}

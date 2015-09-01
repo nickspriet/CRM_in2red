@@ -1,0 +1,77 @@
+<div class="page-header">
+    <h1 class="title">Dashboard</h1>
+</div>
+
+<div class="container-default">
+    <div>
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-title">Acties</div>
+                <div class="panel-body">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4" ng-controller="OfferController as offerCtrl">
+            <div class="panel">
+                <div class="panel-title">Laatst gewijzigde offertes</div>
+                <ul class="panel-tools">
+                    <a href="#/offertes/nieuw" class="btn btn-light"><i class="fa fa-plus"></i>Nieuwe offerte</a>
+                </ul>
+                <div class="panel-body">
+                    <ul class="basic-list">
+                        <li ng-repeat="(key, offer) in offers | orderBy:'-date' | filter:searchOffer">
+                            <b>{{offer.companyName}} - {{offer.name}}</b>
+                            <span class="desc">({{offer.date_create | date:'dd/MM/yyyy'}} - € {{offer.totalprice}})</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8" ng-controller="CustomerController as customerCtrl">
+            <div class="panel">
+                <div class="panel-title">Laatst gewijzigde klanten</div>
+                <ul class="panel-tools">
+                    <a href="#/klanten/nieuw" class="btn btn-light"><i class="fa fa-plus"></i>Nieuwe klant</a>
+                </ul>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <td>Naam</td>
+                                <td>Adres</td>
+                                <td>Telefoon</td>
+                                <td>E-mail</td>
+                                <td>Contactpersonen</td>
+                                <td>Tags</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-click="goToDetails(customer.Info.id)" ng-repeat="customer in customers | orderBy:'-Info.date_edit' | limitTo:'10'" class="clickable-row">
+                                <td>{{customer.Info.name}}</td>
+                                <td>
+                                    <a ng-click="$event.stopPropagation();" ng-href="https://www.google.com/maps/search/ {{customer.Info.billing_street + ', ' + customer.Info.billing_zipcode + ' ' + customer.Info.billing_city}}" target="_blank">
+                                        <div>{{customer.Info.billing_street + ", "}}</div>
+                                        <div>{{customer.Info.billing_zipcode + " " + customer.Info.billing_city}}</div>
+                                    </a>
+                                </td>
+                                <td>{{customer.Info.phone}}</td>
+                                <td><a ng-click="$event.stopPropagation();" ng-href="mailto:{{customer.Info.email}}">{{customer.Info.email}}</a></td>
+                                <td>
+                                    <div ng-repeat="contact in customer.Contacts">
+                                        {{contact.firstname + " " + contact.lastname + " - " + contact.phone + " - "}}
+                                        <a ng-click="$event.stopPropagation();" ng-href="mailto:{{contact.email}}">{{contact.email}}</a>
+                                    </div>
+                                </td>
+                                <td><span ng-repeat="tag in customer.Tags">{{tag.name + ", "}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<div id="wrapper" ng-controller="DetailsCustomerController as detailsCustomerCtrl">
+    <div class="page-header">
+        <h1 class="title">Details klant</h1>
+        <ol class="breadcrumb">
+            <li><a href="#/klanten">Klanten</a></li>
+            <li class="active">{{selectedCustomer[0].Info.name}}</li>
+        </ol>
+
+        <div class="right">
+            <div class="btn-group small-control-mr" role="group" aria-label="...">
+                <a href="#/klanten/bewerken/{{selectedCustomer[0].Info.id}}" class="btn btn-light"><i class="fa fa-pencil"></i>Bewerken</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-default">
+        <!-- START CONTAINER -->
+
+        <div class="panel padding-0">
+            <div role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs font-title-tab" role="tablist">
+                    <li role="presentation" class="active"><a href="" ng-click="detailsCustomerCtrl.setTab(1)" aria-controls="gegevens" role="tab" data-toggle="tab">Gegevens</a></li>
+                    <li role="presentation"><a href="" ng-click="detailsCustomerCtrl.setTab(2)" aria-controls="offertes" role="tab" data-toggle="tab">Offertes</a></li>
+                    <li role="presentation"><a href="" ng-click="detailsCustomerCtrl.setTab(3)" aria-controls="acties" role="tab" data-toggle="tab">Acties</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div ng-class="{active: detailsCustomerCtrl.checkTab(1)}" role="tabpanel" class="tab-pane active clearfix">
+                        <div class="col-md-6 padding-0">
+                            <div class="panel panel-default">
+                                <div class="panel-title"><h3>{{selectedCustomer[0].Info.name}}</h3></div>
+                                <div>
+                                    <div>
+                                        <span class="f-bold padding-r-10 width-25 display-inline-block">% </span>
+                                        <span ng-if="selectedCustomer[0].Info.vat">{{selectedCustomer[0].Info.vat}}</span>
+                                        <span ng-if="!selectedCustomer[0].Info.vat" class="f-bold"> /</span>
+                                    </div>
+                                    <div ng-if="selectedCustomer[0].Info.phone"><i class="fa fa-phone padding-r-5 width-25"></i>{{selectedCustomer[0].Info.phone}}</div>
+                                    <div ng-if="selectedCustomer[0].Info.email"><i class="fa fa-envelope padding-r-5 width-25"></i><a ng-href="mailto:{{selectedCustomer[0].Info.email}}">{{selectedCustomer[0].Info.email}}</a></div>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="panel-subtitle">Facturatieadres</div>
+                                            <div>{{selectedCustomer[0].Info.billing_street}}</div>
+                                            <div>{{selectedCustomer[0].Info.billing_zipcode}} {{selectedCustomer[0].Info.billing_city}}</div>
+                                            <div>{{selectedCustomer[0].Info.billing_county}}</div>
+                                            <div>{{selectedCustomer[0].Info.billing_country}}</div>
+
+                                            <div ng-if="selectedCustomer[0].Info.office_street" class="panel-subtitle">Kantooradres</div>
+                                            <div>{{selectedCustomer[0].Info.office_street}}</div>
+                                            <div>{{selectedCustomer[0].Info.office_zipcode}} {{selectedCustomer[0].Info.office_city}}</div>
+                                            <div>{{selectedCustomer[0].Info.office_county}}</div>
+                                            <div>{{selectedCustomer[0].Info.office_country}}</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="panel-subtitle">Extra gegevens</div>
+                                            <div>
+                                                <span ng-if="selectedCustomer[0].Info.active"><i class="fa fa-check color7 padding-r-5"></i> ACTIEF</span>
+                                                <span ng-if="!selectedCustomer[0].Info.active"><i class="fa fa-times color10"></i> NIET ACTIEF</span>
+                                            </div>
+                                            <div><i class="fa fa-clock-o padding-r-5"></i> Klant sinds: {{selectedCustomer[0].Info.date_active}}</div>
+                                            <div class="padding-l-20">Aanmakdatum: {{selectedCustomer[0].Info.date_create}}</div>
+                                            <div class="padding-l-20">Laatst gewijzigd: {{selectedCustomer[0].Info.date_edit}}</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="panel-subtitle">Tags</div>
+                                            <div ng-if="selectedCustomer[0].Tags" ng-repeat="tag in selectedCustomer[0].Tags">
+                                                <span class="badge">{{tag.name}} <i class="fa fa-time"></i></span>
+                                            </div>
+                                            <div ng-if="!selectedCustomer[0].Tags">
+                                                Nog geen tags toegevoegd
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel">
+                                <div class="panel-title">Contactpersonen</div>
+                                <div class="panel-body">
+                                    <div>
+                                        <ul class="list-group">
+                                            <li ng-repeat="contact in selectedCustomer[0].Contacts" class="list-group-item">
+                                                <b><i class="fa fa-user padding-r-5 width-25"></i>{{contact.firstname + " " + contact.lastname}} <span ng-if="contact.title">({{contact.title}})</span></b>
+
+                                                <div ng-if="contact.phone"><i class="fa fa-phone padding-r-5 width-25"></i>{{contact.phone}}</div>
+                                                <div ng-if="contact.mobile"><i class="fa fa-mobile-phone padding-r-5 width-25"></i>{{contact.mobile}}</div>
+                                                <div ng-if="contact.email"><i class="fa fa-envelope padding-r-5 width-25"></i><a ng-href="mailto:{{contact.email}}">{{contact.email}}</a></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-class="{active: detailsCustomerCtrl.checkTab(2)}" role="tabpanel" class="tab-pane">
+                        <div class="float-r">
+                            <div class="input-prepend input-group small-control-w small-control-mr float-l">
+                                <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" id="date-range-picker" class="form-control" value="03/18/2015 - 03/23/2015"/>
+                            </div>
+                            <div class="input-group small-control-w small-control-mr">
+                                <input type="text" ng-model="searchOffer" class="form-control smallSearch ng-pristine ng-valid ng-touched" placeholder="Search">
+
+                                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                            </div>
+                        </div>
+                        <ul class="basic-list fc-clear" ng-controller="OfferController as offerCtrl">
+                            <li ng-repeat="offer in offers | orderBy:'-date' | filter:searchOffer">
+                                <b>{{offer.name}}</b>
+                                <span class="desc">({{offer.date_create | date:'dd/MM/yyyy'}} - € {{offer.totalprice}})</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ng-class="{active: detailsCustomerCtrl.checkTab(3)}" role="tabpanel" class="tab-pane" id="acties">
+                        <p>Duis ac enim diam</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CONTAINER -->
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+    </div>
+</div>

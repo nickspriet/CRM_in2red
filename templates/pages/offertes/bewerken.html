@@ -1,0 +1,105 @@
+<div class="page-header">
+    <h1 class="title">Bewerken offerte</h1>
+    <ol class="breadcrumb">
+        <li><a href="klanten.html">Klanten</a></li>
+        <li><a href="#">in2red</a></li>
+        <li><a href="#">Offertes</a></li>
+        <li class="active">Drukwerk</li>
+    </ol>
+
+    <div class="right">
+        <div class="btn-group small-control-mr" role="group" aria-label="...">
+            <a href="offerte_details.html" class="btn btn-light"><i class="fa fa-save"></i>Opslaan</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-default">
+    <div class="col-md-12">
+        <form>
+            <div class="invoice row">
+                <div class="invoicename">OFFERTE</div>
+                <div class="logo">
+                    <b>in2red</b>
+
+                    <div>Haighlaan 5, 8900 Ieper</div>
+                    <div>West-Vlaanderen, België</div>
+                </div>
+
+                <div class="line row">
+                    <div class="col-md-8 col-xs-8 padding-0 text-left">
+                        <h4>ONDERWERP</h4>
+                        <input type="text" data-provide="typeahead" class="form-control form-control-line margin-t-5" placeholder="Drukwerk"><br>
+
+                        <h4 class="padding-t-40">BERICHT</h4>
+                            <textarea class="form-control form-control-line margin-b-40" rows="3" placeholder="Typ hier uw berichje">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto earum enim eum, eveniet explicabo facere id iste necessitatibus nulla obcaecati pariatur perferendis qui recusandae rerum similique, sunt temporibus voluptate?
+                            </textarea>
+                    </div>
+                    <div class="col-md-4 col-xs-4 padding-0 text-right">
+                        <h4>DATUM</h4>
+
+                        <div class="input-prepend input-group small-control-w pull-right">
+                            <span class="add-on input-group-addon panel-transparent"><i class="fa fa-calendar"></i></span>
+                            <input type="text" id="date-picker" class="form-control form-control-line text-r padding-r-0" value="03/23/2015"/>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead class="title">
+                    <tr>
+                        <td>Omschrijving</td>
+                        <td>Uren</td>
+                        <td>RATE PER HOUR</td>
+                        <td class="text-right">Totaal</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><input type="text" class="form-control form-control-line offerline-desc" placeholder="Productlijn" value="Voorbeeld"><br>
+                        </td>
+                        <td><input type="number" min="0" class="form-control form-control-line offerline-hours text-center padding-r-0"/></td>
+                        <td><input type="number" step="0.01" min="0.00" class="form-control form-control-line offerline-rate"/></td>
+                        <td class="text-right">€ 1.000,00</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="form-control form-control-line offerline-desc" placeholder="Productlijn"><br>
+                        </td>
+                        <td><input type="number" min="0" class="form-control form-control-line offerline-hours text-center padding-r-0"/></td>
+                        <td><input type="number" step="0.01" min="0.00" class="form-control form-control-line offerline-rate"/></td>
+                        <td class="text-right">€ 1.000,00</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="form-control form-control-line offerline-desc" placeholder="Productlijn"><br>
+                        </td>
+                        <td><input type="number" min="0" class="form-control form-control-line offerline-hours text-center padding-r-0"/></td>
+                        <td><input type="number" step="0.01" min="0.00" class="form-control form-control-line offerline-rate"/></td>
+                        <td class="text-right">€ 1.000,00</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">
+                            <div>Totaal (excl. BTW):</div>
+                            <div class="checkbox checkbox-danger">
+                                <input id="checkbox1" checked type="checkbox">
+                                <label for="checkbox1">BTW (21 %)</label>
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <h6 class="total">€ 4.000,00</h6>
+                            <h6 class="total">€ 480,00</h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">TOTAL<h4 class="total">$ 4.480,00</h4></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>

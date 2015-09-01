@@ -1,0 +1,109 @@
+<div class="page-header">
+    <h1 class="title">Nieuwe offerte</h1>
+
+    <div class="right">
+        <div class="btn-group small-control-mr" role="group" aria-label="...">
+            <button href="#/offertes/details" class="btn btn-light"><i class="fa fa-save"></i>Opslaan</button>
+        </div>
+    </div>
+</div>
+
+<div class="container-default" ng-controller="NewOfferController as newOfferCtrl">
+    <div class="col-md-12">
+        <form>
+            <div class="invoice row">
+                <div class="invoicename">OFFERTE</div>
+                <div class="logo" ng-controller="TypeaheadController as typeaheadCtrl">
+                    <input type="text" ng-model="selected" typeahead="customer.Info.name for customer in customers track by $index | filter:$viewValue | limitTo:8" class="form-control form-control-line margin-t-5 small-control-w center-block" placeholder="Bedrijfsnaam"><br>
+
+                    <div>{{selected.$index}}</div>
+                    <div>West-Vlaanderen, België</div>
+                </div>
+
+                <div class="line row">
+                    <div class="col-md-8 col-xs-8 padding-0 text-left">
+                        <h4>ONDERWERP</h4>
+                        <input type="text" class="form-control form-control-line margin-t-5" placeholder="Onderwerp"><br>
+
+                        <h4 class="padding-t-40">BERICHT</h4>
+                        <textarea class="form-control form-control-line margin-b-40" rows="3" placeholder="Typ hier uw berichtje"></textarea>
+                    </div>
+                    <div class="col-md-4 col-xs-4 padding-0 text-right">
+                        <h4>DATUM</h4>
+
+                        <div class="input-prepend input-group small-control-w pull-right">
+                            <span class="add-on input-group-addon panel-transparent"><i class="fa fa-calendar"></i></span>
+                            <input type="text" id="date-picker" class="form-control form-control-line text-r padding-r-0" value="03/23/2015"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="title">
+                        <tr>
+                            <td style="width: 30px;"></td>
+                            <td>Omschrijving</td>
+                            <td>Uren</td>
+                            <td>
+                                <div class="checkbox checkbox-danger">
+                                    <input id="rate" checked type="checkbox">
+                                    <label for="rate">Tarief per uur</label>
+                                </div>
+                            </td>
+                            <td class="text-right">Totaal</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td><textarea class="form-control form-control-line offerline-desc disable-width-resize" rows="1" placeholder="Productlijn"></textarea></td>
+                            <td><input type="number" ng-model="hours" min="0" value="0" class="form-control form-control-line offerline-hours text-center padding-r-0"/></td>
+                            <td><input type="number" ng-model="rate" step="0.01" min="0.00" value="0" class="form-control form-control-line offerline-rate"/></td>
+                            <td class="text-right">{{(hours * rate) | currency:'€'}}</td>
+                        </tr>
+
+                        <tr ng-init="$scope.hidden = false" ng-hide="$scope.hidden">
+                            <td><div ng-click="$scope.hidden = true" class="btnClose"><i class="fa fa-close"></i></div></td>
+                            <td><textarea class="form-control form-control-line offerline-desc disable-width-resize" rows="1" placeholder="Productlijn"></textarea></td>
+                            <td><input type="number" ng-model="hours" min="0" value="0" class="form-control form-control-line offerline-hours text-center padding-r-0"/></td>
+                            <td><input type="number" ng-model="rate" step="0.01" min="0.00" value="0" class="form-control form-control-line offerline-rate"/></td>
+                            <td class="text-right">{{(hours * rate) | currency:'€'}}</td>
+                        </tr>
+                        <tr ng-init="$scope.hidden = false" ng-hide="$scope.hidden">
+                            <td><div ng-click="$scope.hidden = true" class="btnClose"><i class="fa fa-close"></i></div></td>
+                            <td><textarea class="form-control form-control-line offerline-desc disable-width-resize" rows="1" placeholder="Productlijn"></textarea></td>
+                            <td><input type="number" ng-model="hours" min="0" value="0" class="form-control form-control-line offerline-hours text-center padding-r-0"/></td>
+                            <td><input type="number" ng-model="rate" step="0.01" min="0.00" value="0" class="form-control form-control-line offerline-rate"/></td>
+                            <td class="text-right">{{(hours * rate) | currency:'€'}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right">
+                                <div>Totaal (excl. BTW):</div>
+                                <div class="checkbox checkbox-danger">
+                                    <input id="vat" checked type="checkbox">
+                                    <label for="vat">BTW (21 %)</label>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <h6 class="total">€ 4.000,00</h6>
+                                <h6 class="total">€ 480,00</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right">TOTAL<h4 class="total">$ 4.480,00</h4></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="page-header">
+    <h1 class="title">Overzicht offertes</h1>
+
+    <!-- Start Page Header Right Div -->
+    <div class="right">
+        <div class="btn-group" role="group" aria-label="...">
+            <div class="input-prepend input-group small-control-w small-control-mr float-l">
+                <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input type="text" id="date-range-picker" class="form-control" value="03/18/2015 - 03/23/2015"/>
+            </div>
+            <div class="input-group small-control-w small-control-mr">
+                <input type="text" ng-model="searchOffer" class="form-control small-control-w small-control-mr" placeholder="Search">
+
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            </div>
+        </div>
+
+    </div>
+    <!-- End Page Header Right Div -->
+</div>
+
+<div class="container-default" ng-controller="OfferController as offerCtrl">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-title">Offertes</div>
+            <ul class="panel-tools">
+                <a href="#/offertes/nieuw" class="btn btn-light"><i class="fa fa-plus"></i>Nieuwe offerte</a>
+            </ul>
+            <div class="panel-body">
+                <ul class="basic-list">
+                    <li ng-repeat="offer in offers | orderBy:'-date' | filter:searchOffer">
+                        <b>{{offer.companyName}} - {{offer.name}}</b>
+                        <span class="desc">({{offer.date_create | date:'dd/MM/yyyy'}} - € {{offer.totalprice}})</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

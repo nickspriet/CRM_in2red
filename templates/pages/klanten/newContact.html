@@ -1,0 +1,51 @@
+<li class="list-group-item">
+    <div ng-click="removeContact(contact)" ng-hide="$first || removing" class="btnClose float-r margin-t-5 padding-10">
+        <i class="fa fa-close"></i>
+    </div>
+    <remove-contact ng-show="removing"></remove-contact>
+
+    <div class="form-horizontal padding-t-20 fc-clear">
+        <div class="form-group">
+            <label for="firstname{{contact.id}}" class="col-sm-2 control-label form-label">Voornaam</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="firstname{{contact.id}}" value="{{contact.firstname}}" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name{{contact.id}}" class="col-sm-2 control-label form-label">Naam</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" required id="name{{contact.id}}" value="{{contact.lastname}}" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="function{{contact.id}}" class="col-sm-2 control-label form-label">Functie</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="function{{contact.id}}" value="{{contact.title}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phone{{contact.id}}" class="col-sm-2 control-label form-label">Telefoon</label>
+
+            <div class="col-sm-10">
+                <input type="tel" class="form-control" id="phone{{contact.id}}" value="{{contact.phone}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="mobile{{contact.id}}" class="col-sm-2 control-label form-label">GSM</label>
+
+            <div class="col-sm-10">
+                <input type="tel" class="form-control" id="mobile{{contact.id}}" value="{{contact.mobile}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email{{contact.id}}" class="col-sm-2 control-label form-label">E-mail</label>
+
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="email{{contact.id}}" value="{{contact.email}}">
+            </div>
+        </div>
+    </div>
+</li>
