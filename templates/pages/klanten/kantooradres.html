@@ -7,27 +7,27 @@
         <label for="office-address" class="col-sm-2 control-label form-label">Adres</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="office-address" name="office-address" value="{{selectedCustomer[0].Info.office_street}}" ng-model="customerFormData.Info.officeStreet" required>
+            <input type="text" class="form-control" id="office-address" name="office-address" value="{{selectedCustomer[0].Info.office_street}}" ng-model="customerFormData.Info.officeStreet">
         </div>
     </div>
     <div class="form-group">
         <label for="office-zipcode" class="col-sm-2 control-label form-label">Postcode</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="office-zipcode" name="office-zipcode" value="{{selectedCustomer[0].Info.office_zipcode}}" ng-model="customerFormData.Info.officeZipcode" required>
+            <input type="text" class="form-control" id="office-zipcode" name="office-zipcode" value="{{selectedCustomer[0].Info.office_zipcode}}" ng-model="customerFormData.Info.officeZipcode">
         </div>
     </div>
     <div class="form-group">
         <label for="office-city" class="col-sm-2 control-label form-label">Gemeente</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="office-city" name="office-city" value="{{selectedCustomer[0].Info.office_city}}" ng-model="customerFormData.Info.officeCity" required>
+            <input type="text" class="form-control" id="office-city" name="office-city" value="{{selectedCustomer[0].Info.office_city}}" ng-model="customerFormData.Info.officeCity">
         </div>
     </div>
     <div class="form-group">
         <label for="office-country" class="col-sm-2 control-label form-label">Land</label>
         <div class="col-sm-10">
-            <ol id="office-country" name="office-country" class="nya-bs-select col-sm-12 col-xs-12" ng-model="customerFormData.Info.officeCountry" data-live-search="true">
+            <ol id="office-country" ng-change="customerFormData.Info.officeCounty = null" name="office-country" class="nya-bs-select colf-sm-12 col-xs-12" ng-model="customerFormData.Info.officeCountry" data-live-search="true">
                 <li class="nya-bs-option" data-value="België"><a>België</a></li>
                 <li class="nya-bs-option" data-value="Nederland"><a>Nederland</a></li>
                 <li class="nya-bs-option" data-value="Frankrijk"><a>Frankrijk</a></li>
@@ -36,8 +36,7 @@
             </ol>
         </div>
     </div>
-    {{customerFormData.Info.officeCountry}}
-    <div class="form-group" ng-show="officeCountry == 'België'">
+    <div class="form-group" ng-show="customerFormData.Info.officeCountry === 'België'">
         <label for="office-county" class="col-sm-2 control-label form-label">Provincie</label>
 
         <div class="col-sm-10">

@@ -10,11 +10,11 @@ angular.module("crmApp")
         $scope.customerFormData = {};
 
 
-        CustomerService.getCustomers().then(function (customers) {
+        CustomerService.getCustomers().then(function (data) {
 
             // convert object to associative array
-            $scope.customers =  Object.keys(customers).map(function (k) {
-                return customers[k];
+            $scope.customers =  Object.keys(data).map(function (k) {
+                return data[k];
             });
         });
 

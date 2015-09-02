@@ -4,30 +4,28 @@
 
 
 angular.module("crmApp").
-    controller("DetailsCustomerController", function ($scope, $http, $routeParams) {
+    controller("DetailsCustomerController", function ($scope, $http, $routeParams, CustomerService) {
         $scope.customerFormData = {};
         $scope.customerFormData.Info = {};
 
         // get customer by id
-        $http.get("/php/customers/?id=" + $routeParams.id).then(function (response) {
+        CustomerService.getCustomerById($routeParams.id).then(function(data){
+
             //convert object to associative array
-            $scope.selectedCustomer = Object.keys(response.data).map(function (a) {
-                return response.data[a];
+            $scope.selectedCustomer = Object.keys(data).map(function (a) {
+                return data[a];
             });
 
-            $scope.billingCountry = $scope.selectedCustomer[0].Info.billing_country;
-            $scope.billingCounty = $scope.selectedCustomer[0].Info.billing_county;
-            $scope.officeCountry = $scope.selectedCustomer[0].Info.office_country;
-            $scope.officeCounty = $scope.selectedCustomer[0].Info.office_county;
+            $scope.customerFormData.Info.billingCountry = $scope.selectedCustomer[0].Info.billing_country;
+            $scope.customerFormData.Info.billingCounty = $scope.selectedCustomer[0].Info.billing_county;
+            $scope.customerFormData.Info.officeCountry = $scope.selectedCustomer[0].Info.office_country;
+            $scope.customerFormData.Info.officeCounty = $scope.selectedCustomer[0].Info.office_county;
             $scope.customerFormData.Info.active = $scope.selectedCustomer[0].Info.active;
 
-            $scope.selectedContacts = Object.keys(response.data).map(function (a) {
-                return response.data[a].Contacts;
+            $scope.selectedContacts = Object.keys(data).map(function (a) {
+                return data[a].Contacts;
             });
-
         });
-
-
 
 
         //change tabs

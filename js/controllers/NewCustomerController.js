@@ -3,12 +3,13 @@
  */
 
 angular.module("crmApp")
-    .controller("NewCustomerController", function ($scope, $http) {
+    .controller("NewCustomerController", function ($scope, $http, CustomerService) {
 
         $scope.billingCountry = 'België';
         $scope.selectedContacts = [];
         $scope.selectedContacts["Contacts"] = {};
 
+        
         //init datepicker
         angular.element('#date-picker').daterangepicker({
             singleDatePicker: true,
@@ -19,10 +20,13 @@ angular.module("crmApp")
 
             console.log("formdata", $scope.customerFormData.Info);
 
-            $http.post('/php/customersPOST', $scope.customerFormData.Info).success(function (data, status, header, config) {
-                console.log("data-after-submit", data, status, header, config);
-            }).error(function (data) {
-                console.log("error-after-submit", data);
-            })
+            // post customer + contacts + tags
+            CustomerService.postCustomer($scope.customerFormData.Info).then(function (id) {
+                console.log("data-after-submit", id);
+
+                //forEach()
+                //contacts
+
+            });
         }
     });
