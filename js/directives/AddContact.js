@@ -13,6 +13,8 @@ angular.module("crmApp")
             templateUrl: "templates/pages/klanten/newContact.html",
             controller: function ($scope) {
                 $scope.removeContact = function (contact) {
+
+                    console.log("selContacts", $scope.$parent.selectedContacts);
                     var id = $scope.$parent.selectedContacts[0].indexOf(contact);
                     if (id > -1) {
                         $scope.removing = true;
@@ -61,5 +63,6 @@ angular.module("crmApp")
                 };
             }
         }
-    })
+    });
+
 var counter = 0;

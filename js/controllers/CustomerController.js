@@ -10,6 +10,7 @@ angular.module("crmApp")
         $scope.customerFormData = {};
 
 
+        //get all customers
         CustomerService.getCustomers().then(function (data) {
 
             // convert object to associative array
@@ -18,6 +19,7 @@ angular.module("crmApp")
             });
         });
 
+        //go to details page when click on customer-row in table
         $scope.goToDetails = function (index) {
             console.log("index", index);
 
@@ -25,7 +27,7 @@ angular.module("crmApp")
         };
 
 
-
+        //get a list of  the filtered customers (for CSV export)
         $scope.filterCustomers = function (customers, searchCustomer) {
             var filtered = {};
 
@@ -40,7 +42,7 @@ angular.module("crmApp")
             return filtered;
         };
 
-
+        //get a list of  the filtered customers (for CSV export) 2
         $scope.exportCustomers = function () {
             var newArray = [];
 

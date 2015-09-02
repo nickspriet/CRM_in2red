@@ -1,5 +1,4 @@
 <li class="list-group-item">
-    <div>
     <div ng-click="removeContact(contact)" ng-hide="$first || removing" class="btnClose float-r margin-t-5 padding-10">
         <i class="fa fa-close"></i>
     </div>
@@ -10,7 +9,7 @@
             <label for="firstname{{contact.id}}" class="col-sm-2 control-label form-label">Voornaam</label>
 
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="firstname{{contact.id}}" value="{{contact.firstname}}" ng-model="{{customerFormData.Contacts[contact.id].firstname}}" required>
+                <input type="text" class="form-control" id="firstname{{contact.id}}" value="{{contact.firstname}}" required>
             </div>
         </div>
         <div class="form-group">
