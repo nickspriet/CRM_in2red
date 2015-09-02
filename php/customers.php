@@ -78,5 +78,23 @@ function getTagsByCustomerId($conn, $rows, $rowCustomer, $id)
 }
 
 
+
+
+
+// $sqlInsert = "INSERT INTO customers(Username, Score) VALUES (?,?)";
+// if ($stmt = $connection->prepare($sqlInsert)) 
+// {
+// 	$stmt->bind_param("si", $username, $score);
+// 	$stmt->execute();
+// 	$stmt->close();
+// 	$connection->close();
+// }
+
+
+
+
+
+
+
 $conn->close();
 ?>

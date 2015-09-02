@@ -37,7 +37,7 @@ angular.module("crmApp")
                     }
                 }
 
-                $scope.cancelRemove = function(){
+                $scope.cancelRemove = function () {
                     $scope.removing = false;
                 }
             }
@@ -49,10 +49,17 @@ angular.module("crmApp")
             restrict: "A",
             scope: true,
             controller: function ($scope) {
-                $scope.addNewContact = function () {
-                    var newContact = {};
-                    $scope.selectedContacts[0].push(newContact);
+                $scope.addNewContact = function (array) {
+
+                    if (array == $scope.selectedContacts[0]) var newContact = {};
+                    else {
+                        var newContact = {
+                            id: counter++
+                        };
+                    }
+                    array.push(newContact);
                 };
             }
         }
     })
+var counter = 0;

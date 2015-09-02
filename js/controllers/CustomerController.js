@@ -9,6 +9,7 @@ angular.module("crmApp")
         $scope.sortElement = "Info.name";
         $scope.customerFormData = {};
 
+
         CustomerService.getCustomers().then(function (customers) {
 
             // convert object to associative array

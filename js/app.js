@@ -2,7 +2,7 @@
  * Created by Nick Spriet on 21/08/2015.
  */
 
-angular.module("crmApp", ["templates", "routes", "ngAnimate", "type", "ngSanitize", "ngCsv", "nya.bootstrap.select"])
+angular.module("crmApp", ["templates", "routes", "ngAnimate", "type", "ngSanitize", "ngCsv", "nya.bootstrap.select", "toggle-switch"])
     .controller("AppController", function($scope){
 
     });

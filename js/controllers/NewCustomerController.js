@@ -3,7 +3,7 @@
  */
 
 angular.module("crmApp")
-    .controller("NewCustomerController", function ($scope) {
+    .controller("NewCustomerController", function ($scope, $http) {
 
         $scope.billingCountry = 'België';
         $scope.selectedContacts = [];
@@ -14,4 +14,15 @@ angular.module("crmApp")
             singleDatePicker: true,
             format: 'DD/MM/YYYY'
         });
+
+        $scope.submitForm = function () {
+
+            console.log("formdata", $scope.customerFormData.Info);
+
+            $http.post('/php/customersPOST', $scope.customerFormData.Info).success(function (data, status, header, config) {
+                console.log("data-after-submit", data, status, header, config);
+            }).error(function (data) {
+                console.log("error-after-submit", data);
+            })
+        }
     });

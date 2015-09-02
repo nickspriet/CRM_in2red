@@ -81,13 +81,27 @@ div.invoice {
     width: 25px;
 }
 
-#singleSelection button
-{
-
+sidebar {
+    position: fixed;
 }
 
+.ng-invalid.ng-dirty {
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.1);
+}
 
+.ng-valid.ng-dirty {
+    border-color: green;
+}
 
+.ng-invalid.ng-dirty {
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.ng-valid.ng-dirty {
+    border-color: green;
+}
 
 /* ANIMATIONS */
 .sample-show-hide {

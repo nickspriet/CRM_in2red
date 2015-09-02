@@ -116,8 +116,9 @@
                                     <div class="form-group">
                                         <label for="customer-active" class="col-sm-2 control-label form-label">Klant actief ?</label>
 
-                                        <div class="col-sm-10">
-                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Ja" data-off="Nee" id="customer-active">
+
+                                        <div class="col-sm-10" ng-init="switchStatus = selectedCustomer[0].Info.active">
+                                            <toggle-switch id="customer-active" class="switch-small switch-success" ng-model="customerFormData.Info.active" on-label="Ja" off-label="Nee"></toggle-switch>
                                         </div>
                                     </div>
 
@@ -165,7 +166,7 @@
                 <div class="panel panel-default">
                     <div class="panel-title">Contactpersonen</div>
                     <ul class="panel-tools">
-                        <a add-contact ng-click="addNewContact()" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra contactpersoon</a>
+                        <a add-contact ng-click="addNewContact(selectedContacts[0])" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra contactpersoon</a>
                     </ul>
                     <div class="panel-body">
                         <ul id="listContactpersons" class="list-group">
@@ -174,14 +175,18 @@
                                     <new-contact contactperson="contact"></new-contact>
                                 </ngform>
                             </div>
-
                         </ul>
                     </div>
                 </div>
+
+                <pre>
+                    {{customerFormData}}
+                </pre>
             </div>
         </div>
     </form>
 </div>
-<script src="lib/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+
+
 <script src="lib/date-range-picker/daterangepicker.js"></script>
 

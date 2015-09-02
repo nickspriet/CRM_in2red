@@ -1,5 +1,5 @@
-<div class="wrapper">
-    <form>
+<div class="wrapper" ng-controller="NewCustomerController as newCustomerCtrl">
+    <form name="newCustomerForm" ng-submit="newCustomerForm.$valid && submitForm()" novalidate>
         <div class="page-header">
             <h1 class="title">Nieuwe klant</h1>
             <ol class="breadcrumb">
@@ -13,12 +13,17 @@
             </div>
         </div>
 
-        <div class="container-default" ng-controller="NewCustomerController as newCustomerCtrl">
+        <div class="container-default">
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="title">
-                        <input class="form-control input-lg" type="text" placeholder="Bedrijfsnaam" ng-model="customerFormData.Info.name" required>
+                        <div class="form-group" ng-class="{'has-error': newCustomerForm.name.$invalid && submitted}">
+                            <input class="form-control input-lg" type="text" placeholder="Bedrijfsnaam" name="name" ng-model="customerFormData.Info.name" required>
+                        </div>
                     </div>
+
+                    {{newCustomerForm.name.$valid}}
+                    {{newCustomerForm.name.$touched}}
                     <div class="panel-body">
                         <ul class="list-group">
                             <li class="list-group-item">
@@ -27,21 +32,21 @@
                                         <label for="vat" class="col-sm-2 control-label form-label">BTW-nummer</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="vat" ng-model="customerFormData.Info.vat">
+                                            <input type="text" class="form-control" id="vat" name="vat" ng-model="customerFormData.Info.vat">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="phone" class="col-sm-2 control-label form-label">Telefoon</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="phone" ng-model="customerFormData.Info.phone">
+                                            <input type="text" class="form-control" id="phone" name="phone" ng-model="customerFormData.Info.phone">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="col-sm-2 control-label form-label">E-mail</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="email" ng-model="customerFormData.Info.email">
+                                            <input type="email" class="form-control" id="email" name="email" ng-model="customerFormData.Info.email">
                                         </div>
                                     </div>
                                 </div>
@@ -57,28 +62,28 @@
                                         <label for="billing-street" class="col-sm-2 control-label form-label">Adres</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="billing-street" ng-model="customerFormData.Info.billingStreet" required>
+                                            <input type="text" class="form-control" id="billing-street" name="billing-street" ng-model="customerFormData.Info.billingStreet" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="billing-zipcode" class="col-sm-2 control-label form-label">Postcode</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="billing-zipcode" ng-model="customerFormData.billingZipcode" required>
+                                            <input type="text" class="form-control" id="billing-zipcode" name="billing-zipcode" ng-model="customerFormData.Info.billingZipcode" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="billing-city" class="col-sm-2 control-label form-label">Gemeente</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="billing-city" ng-model="customerFormData.billingCity" required>
+                                            <input type="text" class="form-control" id="billing-city" name="billing-city" ng-model="customerFormData.Info.billingCity" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="billing-country" class="col-sm-2 control-label form-label">Land</label>
 
                                         <div class="col-sm-10">
-                                            <ol id="billing-country" class="nya-bs-select col-sm-12 col-xs-12" ng-model="customerFormData.billingCountry" data-live-search="true">
+                                            <ol id="billing-country" name="billing-country" class="nya-bs-select col-sm-12 col-xs-12" ng-model="customerFormData.Info.billingCountry" data-live-search="true">
                                                 <li class="nya-bs-option" data-value="België"><a>België</a></li>
                                                 <li class="nya-bs-option" data-value="Nederland"><a>Nederland</a></li>
                                                 <li class="nya-bs-option" data-value="Frankrijk"><a>Frankrijk</a></li>
@@ -89,10 +94,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="billing-county" class="col-sm-2 control-label form-label">Provincie</label>
+                                        <label for="billing-county" name="billing-county" class="col-sm-2 control-label form-label">Provincie</label>
 
                                         <div class="col-sm-10">
-                                            <ol id="billing-county" class="nya-bs-select col-sm-12 col-xs-12" ng-model="customerFormData.billingCounty" data-live-search="true">
+                                            <ol id="billing-county" class="nya-bs-select col-sm-12 col-xs-12" ng-model="customerFormData.Info.billingCounty" data-live-search="true">
                                                 <li class="nya-bs-option" data-value="Antwerpen"><a>Antwerpen</a></li>
                                                 <li class="nya-bs-option" data-value="Henegouwen"><a>Henegouwen</a></li>
                                                 <li class="nya-bs-option" data-value="Limburg"><a>Limburg</a></li>
@@ -107,7 +112,7 @@
                                     </div>
                                 </div>
 
-                                <kantoor-adres id="kantoorAdres" ng-show="showOfficeAddress" ng-animate="'sample-show-hide'"></kantoor-adres>
+                                <kantoor-adres id="kantoorAdres" ng-show="showOfficeAddress"></kantoor-adres>
                             </li>
 
                             <li class="list-group-item">
@@ -116,8 +121,9 @@
                                     <div class="form-group">
                                         <label for="customer-active" class="col-sm-2 control-label form-label">Klant actief ?</label>
 
-                                        <div class="col-sm-10">
-                                            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Ja" data-off="Nee" id="customer-active" ng-model="customerFormData.dateActive">
+                                        <div class="col-sm-10" ng-init="customerFormData.Info.active = true">
+                                            <toggle-switch id="customer-active" name="customer-active" class="switch-small switch-success" ng-model="customerFormData.Info.active" on-label="Ja" off-label="Nee"></toggle-switch>
+                                            <!--<input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Ja" data-off="Nee" id="customer-active" ng-model="customerFormData.dateActive">-->
                                         </div>
                                     </div>
 
@@ -127,7 +133,7 @@
                                         <div class="col-sm-10">
                                             <div class="input-prepend input-group">
                                                 <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                <input type="text" id="date-picker" class="form-control active" id="customer-create">
+                                                <input type="text" id="date-picker" name="date-picker" class="form-control active" id="customer-create" ng-model="customerFormData.Info.dateCreate" required>
                                             </div>
                                         </div>
                                     </div>
@@ -137,22 +143,21 @@
                             <li class="list-group-item">
                                 <div class="panel-subtitle"><i class="fa fa-tags"></i> Tags</div>
                                 <div class="form-group">
-                                    <label for="tags" class="col-sm-2 control-label form-label">tag</label>
+                                    <label for="tags" class="col-sm-2 control-label form-label"></label>
 
-                                    <div class="col-sm-8">
-                                        <select ng-model="tag" ng-change="updateTags(tag)" class="selectpicker" multiple style="display: none;" data-live-search="true" data-selected-text-format="count>3" id="tags">
-                                            <optgroup label="Web">
-                                                <option>Website</option>
-                                                <option>Webshop</option>
-                                                <option>Internet applicatie</option>
-                                            </optgroup>
-                                            <optgroup label="Communicatie">
-                                                <option>E-mail</option>
-                                                <option>Telefoon</option>
-                                                <option>Kennis</option>
-                                                <option>Beurs</option>
-                                            </optgroup>
-                                        </select>
+                                    <div class="col-sm-10 padding-0">
+                                        <ol id="tags" name="tags" class="nya-bs-select dropup col-sm-12" ng-model="customerFormData.tags" multiple data-live-search="true" data-selected-text-format="count>6" data-size="6">
+                                            <span class="dropdown-header">Web</span>
+                                            <li class="nya-bs-option" data-value="Website"><a>Website<span class="fa fa-check check-mark"></span></a></li>
+                                            <li class="nya-bs-option" data-value="Webshop"><a>Webshop<span class="fa fa-check check-mark"></span></a></li>
+                                            <li class="nya-bs-option" data-value="Internet applicatie"><a>Internet applicatie<span class="fa fa-check check-mark"></span></a></li>
+
+                                            <span class="dropdown-header">Communicatie</span>
+                                            <li class="nya-bs-option" data-value="E-mail"><a>E-mail <span class="fa fa-check check-mark"></span></a></li>
+                                            <li class="nya-bs-option" data-value="Telefoon"><a>Telefoon <span class="fa fa-check check-mark"></span></a></li>
+                                            <li class="nya-bs-option" data-value="Kennis"><a>Kennis <span class="fa fa-check check-mark"></span></a></li>
+                                            <li class="nya-bs-option" data-value="Beurs"><a>Beurs <span class="fa fa-check check-mark"></span></a></li>
+                                        </ol>
                                     </div>
                                 </div>
                             </li>
@@ -166,11 +171,15 @@
                 <div class="panel panel-default">
                     <div class="panel-title">Contactpersonen</div>
                     <ul class="panel-tools">
-                        <a add-contact ng-click="addNewContact()" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra contactpersoon</a>
+                        <a add-contact ng-click="addNewContact(selectedContacts)" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra contactpersoon</a>
                     </ul>
                     <div class="panel-body">
                         <ul id="listContactpersons" class="list-group">
-                            <new-contact></new-contact>
+                            <div ng-repeat="contact in selectedContacts track by $index">
+                                <ngform>
+                                    <new-contact contactperson="contact"></new-contact>
+                                </ngform>
+                            </div>
                         </ul>
                     </div>
                 </div>
@@ -178,12 +187,14 @@
                 <pre>
                     {{customerFormData}}
                 </pre>
+                <pre>
+                    {{newCustomerForm.$valid}}
+                </pre>
             </div>
         </div>
     </form>
 </div>
-<script src="lib/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script src="lib/bootstrap-select/bootstrap-select.js"></script>
+
 <script src="lib/date-range-picker/daterangepicker.js"></script>
 
 <script>

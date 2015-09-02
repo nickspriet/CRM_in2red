@@ -41,6 +41,7 @@
         .directive("kantoorAdres", function(){
             return {
                 restrict: "E",
-                templateUrl: "templates/pages/klanten/kantooradres.html"
+                templateUrl: "templates/pages/klanten/kantooradres.html",
+                scope: false
             }
         })
