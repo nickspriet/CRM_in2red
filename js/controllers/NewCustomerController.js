@@ -12,7 +12,7 @@ angular.module("crmApp")
 
         //init datepicker
         angular.element('#date-picker').daterangepicker({
-            singlteDatePicker: true,
+            singleDatePicker: true,
             format: 'DD/MM/YYYY'
         });
 
