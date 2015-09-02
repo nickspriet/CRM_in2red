@@ -9,10 +9,10 @@ angular.module("crmApp")
         $scope.selectedContacts = [];
         $scope.selectedContacts["Contacts"] = {};
 
-        
+
         //init datepicker
         angular.element('#date-picker').daterangepicker({
-            singleDatePicker: true,
+            singlteDatePicker: true,
             format: 'DD/MM/YYYY'
         });
 
