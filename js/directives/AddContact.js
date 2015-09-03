@@ -12,13 +12,11 @@ angular.module("crmApp")
             },
             templateUrl: "templates/pages/klanten/newContact.html",
             controller: function ($scope) {
+                //set removing to true to show warning
                 $scope.removeContact = function (contact) {
-
-                    console.log("selContacts", $scope.$parent.selectedContacts);
-                    var id = $scope.$parent.selectedContacts[0].indexOf(contact);
-                    if (id > -1) {
-                        $scope.removing = true;
-                    }
+                    //check if contact exists
+                    var id = $scope.$parent.selectedContacts.indexOf(contact);
+                    if (id > -1) $scope.removing = true;
                 }
             }
         }
@@ -31,17 +29,20 @@ angular.module("crmApp")
             controller: function ($scope) {
                 $scope.removing = false;
 
+                //remove contact from array
                 $scope.proceedRemove = function (contact) {
-                    var id = $scope.$parent.selectedContacts[0].indexOf(contact);
+                    //check if contact exists
+                    var id = $scope.$parent.selectedContacts.indexOf(contact);
                     if (id > -1) {
-                        $scope.$parent.selectedContacts[0].splice(id, 1);
+                        $scope.$parent.selectedContacts.splice(id, 1);
                         $scope.removing = false;
                     }
-                }
+                };
 
+                //do nothing
                 $scope.cancelRemove = function () {
                     $scope.removing = false;
-                }
+                };
             }
         }
     })
@@ -53,16 +54,15 @@ angular.module("crmApp")
             controller: function ($scope) {
                 $scope.addNewContact = function (array) {
 
-                    if (array == $scope.selectedContacts[0]) var newContact = {};
-                    else {
-                        var newContact = {
-                            id: counter++
-                        };
-                    }
+                    //add empty contact object (id is just for Name Attribute of each input field)
+                    if (!array) array = $scope.$parent.selectedContacts = [];
+                    var newContact = {id: counter++};
+
                     array.push(newContact);
                 };
             }
         }
     });
 
+//declare counter for Name Attribute of each input field
 var counter = 0;

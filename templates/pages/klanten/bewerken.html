@@ -4,7 +4,7 @@
             <h1 class="title">Bewerk klant</h1>
             <ol class="breadcrumb">
                 <li><a href="#/klanten">Klanten</a></li>
-                <li class="active">{{selectedCustomer[0].Info.name}}</li>
+                <li class="active">{{selectedCustomer.name}}</li>
             </ol>
             <div class="right">
                 <div class="btn-group small-control-mr" role="group" aria-label="...">
@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="title">
-                        <input class="form-control input-lg" type="text" placeholder="Bedrijfsnaam" value="{{selectedCustomer[0].Info.name}}" required>
+                        <input class="form-control input-lg" type="text" placeholder="Bedrijfsnaam" value="{{selectedCustomer.name}}" required>
                     </div>
                     <div class="panel-body">
                         <ul class="list-group">
@@ -27,21 +27,21 @@
                                         <label for="vat" class="col-sm-2 control-label form-label">BTW-nummer</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="vat" value="{{selectedCustomer[0].Info.vat}}">
+                                            <input type="text" class="form-control" id="vat" value="{{selectedCustomer.vat}}">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="phone" class="col-sm-2 control-label form-label">Telefoon</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="phone" value="{{selectedCustomer[0].Info.phone}}">
+                                            <input type="text" class="form-control" id="phone" value="{{selectedCustomer.phone}}">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="col-sm-2 control-label form-label">E-mail</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="email" value="{{selectedCustomer[0].Info.email}}">
+                                            <input type="text" class="form-control" id="email" value="{{selectedCustomer.email}}">
                                         </div>
                                     </div>
                                 </div>
@@ -50,28 +50,28 @@
                                 <div class="form-horizontal">
                                     <div class="panel-subtitle">Facturatieadres</div>
                                     <ul class="panel-tools">
-                                        <a ng-hide="showOfficeAddress || selectedCustomer[0].Info.office_street" ng-click="showOfficeAddress = true;" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra adres</a>
+                                        <a ng-hide="showOfficeAddress || selectedCustomer.office_street" ng-click="showOfficeAddress = true;" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra adres</a>
                                     </ul>
                                     <div class="form-group">
 
                                         <label for="billing-address" class="col-sm-2 control-label form-label">Adres</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="billing-address" value="{{selectedCustomer[0].Info.billing_street}}" required>
+                                            <input type="text" class="form-control" id="billing-address" value="{{selectedCustomer.billing_street}}" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="billing-zipcode" class="col-sm-2 control-label form-label">Postcode</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="billing-zipcode" value="{{selectedCustomer[0].Info.billing_zipcode}}" required>
+                                            <input type="text" class="form-control" id="billing-zipcode" value="{{selectedCustomer.billing_zipcode}}" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="billing-city" class="col-sm-2 control-label form-label">Gemeente</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="billing-city" value="{{selectedCustomer[0].Info.billing_city}}" required>
+                                            <input type="text" class="form-control" id="billing-city" value="{{selectedCustomer.billing_city}}" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
 
-                                <kantoor-adres id="kantoorAdres" ng-show="showOfficeAddress == true || selectedCustomer[0].Info.office_street"></kantoor-adres>
+                                <kantoor-adres id="kantoorAdres" ng-show="showOfficeAddress == true || selectedCustomer.office_street"></kantoor-adres>
                             </li>
 
                             <li class="list-group-item">
@@ -117,7 +117,7 @@
                                         <label for="customer-active" class="col-sm-2 control-label form-label">Klant actief ?</label>
 
 
-                                        <div class="col-sm-10" ng-init="switchStatus = selectedCustomer[0].Info.active">
+                                        <div class="col-sm-10" ng-init="switchStatus = selectedCustomer.active">
                                             <toggle-switch id="customer-active" class="switch-small switch-success" ng-model="customerFormData.Info.active" on-label="Ja" off-label="Nee"></toggle-switch>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
                                         <div class="col-sm-10">
                                             <div class="input-prepend input-group">
                                                 <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                <input type="text" id="date-picker" class="form-control active" id="customer-create" value="{{selectedCustomer[0].Info.date_create | DateFilter }}">
+                                                <input type="text" id="date-picker" class="form-control active" id="customer-create" value="{{selectedCustomer.date_create | DateFilter }}">
                                             </div>
                                         </div>
                                     </div>
@@ -166,11 +166,11 @@
                 <div class="panel panel-default">
                     <div class="panel-title">Contactpersonen</div>
                     <ul class="panel-tools">
-                        <a add-contact ng-click="addNewContact(selectedContacts[0])" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra contactpersoon</a>
+                        <a add-contact ng-click="addNewContact(selectedContacts)" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra contactpersoon</a>
                     </ul>
                     <div class="panel-body">
                         <ul id="listContactpersons" class="list-group">
-                            <div ng-repeat="contact in selectedContacts[0] track by $index">
+                            <div ng-repeat="contact in selectedContacts track by $index">
                                 <ngform>
                                     <new-contact contactperson="contact"></new-contact>
                                 </ngform>

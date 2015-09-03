@@ -1,27 +1,27 @@
 <div class="form-horizontal">
     <div class="panel-subtitle float-l">Kantooradres</div>
-    <div ng-click="showOfficeAddress = false" class="btnClose float-r margin-t-5 padding-10">
+    <div ng-click="showOfficeAddress = false; selectedCustomer.office_street = null;" class="btnClose float-r margin-t-5 padding-10">
         <i class="fa fa-close"></i>
     </div>
     <div class="form-group fc-clear">
         <label for="office-address" class="col-sm-2 control-label form-label">Adres</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="office-address" name="office-address" value="{{selectedCustomer[0].Info.office_street}}" ng-model="customerFormData.Info.officeStreet">
+            <input type="text" class="form-control" id="office-address" name="office-address" value="{{selectedCustomer.office_street}}" ng-model="customerFormData.Info.officeStreet">
         </div>
     </div>
     <div class="form-group">
         <label for="office-zipcode" class="col-sm-2 control-label form-label">Postcode</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="office-zipcode" name="office-zipcode" value="{{selectedCustomer[0].Info.office_zipcode}}" ng-model="customerFormData.Info.officeZipcode">
+            <input type="text" class="form-control" id="office-zipcode" name="office-zipcode" value="{{selectedCustomer.office_zipcode}}" ng-model="customerFormData.Info.officeZipcode">
         </div>
     </div>
     <div class="form-group">
         <label for="office-city" class="col-sm-2 control-label form-label">Gemeente</label>
 
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="office-city" name="office-city" value="{{selectedCustomer[0].Info.office_city}}" ng-model="customerFormData.Info.officeCity">
+            <input type="text" class="form-control" id="office-city" name="office-city" value="{{selectedCustomer.office_city}}" ng-model="customerFormData.Info.officeCity">
         </div>
     </div>
     <div class="form-group">

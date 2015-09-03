@@ -9,42 +9,42 @@
             <label for="firstname{{contact.id}}" class="col-sm-2 control-label form-label">Voornaam</label>
 
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="firstname{{contact.id}}" value="{{contact.firstname}}" required>
+                <input type="text" class="form-control" id="firstname{{contact.id}}" value="{{contact.firstname}}" ng-model="contact.firstname" required>
             </div>
         </div>
         <div class="form-group">
             <label for="name{{contact.id}}" class="col-sm-2 control-label form-label">Naam</label>
 
             <div class="col-sm-10">
-                <input type="text" class="form-control" required id="name{{contact.id}}" value="{{contact.lastname}}" required>
+                <input type="text" class="form-control" required id="name{{contact.id}}" value="{{contact.lastname}}" ng-model="contact.lastname" required>
             </div>
         </div>
         <div class="form-group">
             <label for="function{{contact.id}}" class="col-sm-2 control-label form-label">Functie</label>
 
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="function{{contact.id}}" value="{{contact.title}}">
+                <input type="text" class="form-control" id="function{{contact.id}}" value="{{contact.title}}" ng-model="contact.title">
             </div>
         </div>
         <div class="form-group">
             <label for="phone{{contact.id}}" class="col-sm-2 control-label form-label">Telefoon</label>
 
             <div class="col-sm-10">
-                <input type="tel" class="form-control" id="phone{{contact.id}}" value="{{contact.phone}}">
+                <input type="tel" class="form-control" id="phone{{contact.id}}" value="{{contact.phone}}" ng-model="contact.phone">
             </div>
         </div>
         <div class="form-group">
             <label for="mobile{{contact.id}}" class="col-sm-2 control-label form-label">GSM</label>
 
             <div class="col-sm-10">
-                <input type="tel" class="form-control" id="mobile{{contact.id}}" value="{{contact.mobile}}">
+                <input type="tel" class="form-control" id="mobile{{contact.id}}" value="{{contact.mobile}}" ng-model="contact.mobile">
             </div>
         </div>
         <div class="form-group">
             <label for="email{{contact.id}}" class="col-sm-2 control-label form-label">E-mail</label>
 
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="email{{contact.id}}" value="{{contact.email}}">
+                <input type="email" class="form-control" id="email{{contact.id}}" value="{{contact.email}}" ng-model="contact.email">
             </div>
         </div>
     </div>

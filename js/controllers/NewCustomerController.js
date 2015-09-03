@@ -7,7 +7,6 @@ angular.module("crmApp")
 
         $scope.billingCountry = 'België';
         $scope.selectedContacts = [];
-        $scope.selectedContacts["Contacts"] = {};
 
 
         //init datepicker
@@ -16,11 +15,13 @@ angular.module("crmApp")
             format: 'DD/MM/YYYY'
         });
 
+
+        //submit newCustomerForm
         $scope.submitForm = function () {
 
             console.log("formdata", $scope.customerFormData.Info);
 
-            // post customer + contacts + tags
+            //post customer + contacts + tags
             CustomerService.postCustomer($scope.customerFormData.Info).then(function (id) {
                 console.log("data-after-submit", id);
 
@@ -28,5 +29,12 @@ angular.module("crmApp")
                 //contacts
 
             });
+
+
+            //after submit => go to details page of inserted customer
+            $scope.goToDetails = function (index) {
+                $location.path("klanten/details/" + index);
+            };
+
         }
     });

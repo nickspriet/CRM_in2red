@@ -6,6 +6,7 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
     var customers = [];
     var selectedCustomer = [];
     var postedCustomer = [];
+    var postedContacts = [];
     return {
         getCustomers: function () {
             return $http.get("/php/customersGET").then(function (response) {
@@ -28,6 +29,14 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
                 console.log("data", response.data);
                 postedCustomer = response;
                 return postedCustomer;
+            })
+        },
+
+        postContacts: function (formdata) {
+            return $http.post("/php/contactsPOST", formdata).then(function(response){
+                console.log("data-contactsPOST", response.data);
+                postedContacts = response;
+                return postedContacts;
             })
         }
     }

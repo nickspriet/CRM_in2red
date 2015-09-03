@@ -14,17 +14,16 @@ angular.module("crmApp")
         CustomerService.getCustomers().then(function (data) {
 
             // convert object to associative array
-            $scope.customers =  Object.keys(data).map(function (k) {
+            $scope.customers = Object.keys(data).map(function (k) {
                 return data[k];
             });
         });
 
         //go to details page when click on customer-row in table
         $scope.goToDetails = function (index) {
-            console.log("index", index);
-
             $location.path("klanten/details/" + index);
         };
+
 
 
         //get a list of  the filtered customers (for CSV export)
@@ -35,12 +34,12 @@ angular.module("crmApp")
                 if (!value.hasOwnProperty(searchCustomer)) filtered[key] = value;
             });
 
-
             console.log("custs", customers);
             console.log("search", searchCustomer);
 
             return filtered;
         };
+
 
         //get a list of  the filtered customers (for CSV export) 2
         $scope.exportCustomers = function () {
@@ -58,14 +57,11 @@ angular.module("crmApp")
                 newArray.push($scope.filteredCustomers[i]["Info"]);
             }
 
-
             console.log("exportCustomers", $scope.filteredCustomers);
             console.log("newArray", newArray);
 
-
             return newArray;
         }
-
 
 
     }
