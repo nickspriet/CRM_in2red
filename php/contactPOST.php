@@ -6,7 +6,7 @@
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
 
-    $customer_id = isset($request->customer_id) ? $request->customer_id : null;
+    $customers_id = isset($request->customersId) ? $request->customersId : null;
     $firstname = isset($request->firstname) ? $request->firstname : null;
     $lastname = isset($request->lastname) ? $request->lastname : null;
     $title = isset($request->title) ? $request->title : null;
@@ -19,15 +19,25 @@
 
 
 
-    $sqlInsert = "INSERT INTO contacts(customer_id, firstname, lastname, title, phone, mobile, email, $date_create, $date_edit, $archive) VALUES (?,?,?,?,?,?,?,?)";
+    $sqlInsert = "INSERT INTO contacts(customers_id, firstname, lastname, title, phone, mobile, email, date_create, date_edit, archive) VALUES (?,?,?,?,?,?,?,?,?,?)";
     if ($stmt = $conn->prepare($sqlInsert))
     {
-        $stmt->bind_param("isssssss", customer_id, $fistname, $lastname, $title, $phone, $mobile, $email, $date_create, $date_edit, $archive);
-        $stmt->execute();
+        $stmt->bind_param("isssssssss", $customers_id, $firstname, $lastname, $title, $phone, $mobile, $email, $date_create, $date_edit, $archive);
+
+       // print_r($stmt);
+
+        try{
+            $stmt->execute();
+        }
+        catch (Exception $ex) {
+            echo $e->getMessage();
+        }
+
+        print_r($stmt);
+
+        echo $conn->insert_id;
         $stmt->close();
         $conn->close();
     }
     else echo 'FOUTJEEEEE';
-
-
 ?>

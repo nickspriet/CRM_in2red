@@ -3,7 +3,7 @@
  */
 
 angular.module("crmApp")
-    .controller("NewCustomerController", function ($scope, $http, CustomerService) {
+    .controller("NewCustomerController", function ($scope, $http, $location, CustomerService) {
 
         $scope.billingCountry = 'België';
         $scope.selectedContacts = [];
@@ -21,20 +21,25 @@ angular.module("crmApp")
 
             console.log("formdata", $scope.customerFormData.Info);
 
-            //post customer + contacts + tags
+            //post customer (==> id.data contains customers_id of last inserted customer/row)
             CustomerService.postCustomer($scope.customerFormData.Info).then(function (id) {
-                console.log("data-after-submit", id);
 
-                //forEach()
-                //contacts
+                console.log($scope.customerFormData.Contacts);
+                //post contacts for this customer
+                angular.forEach($scope.customerFormData.Contacts, function (c) {
+                    c.customersId = id.data;
 
+                    console.log("a contact", c);
+                    CustomerService.postContact(c).then(function (data) {
+                        console.log("contactIds-after-submit", data);
+                    });
+                });
+
+                //post tags for this customer
+
+
+                //after submit => go to details page of inserted customer
+                $location.path("klanten/details/" + id.data);
             });
-
-
-            //after submit => go to details page of inserted customer
-            $scope.goToDetails = function (index) {
-                $location.path("klanten/details/" + index);
-            };
-
         }
     });

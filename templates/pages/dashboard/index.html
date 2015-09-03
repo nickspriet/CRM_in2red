@@ -65,7 +65,7 @@
                                         <a ng-click="$event.stopPropagation();" ng-href="mailto:{{contact.email}}">{{contact.email}}</a>
                                     </div>
                                 </td>
-                                <td><span ng-repeat="tag in customer.Tags">{{tag.name + ", "}}</span></td>
+                                <td><span ng-repeat="tag in customer.Tags">{{tag.name}}{{$last ? '' : ', '}}</span></td>
                             </tr>
                             </tbody>
                         </table>
