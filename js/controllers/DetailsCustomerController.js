@@ -30,6 +30,7 @@ angular.module("crmApp").
 
 
             //init ng-model (because value doesn't work)
+            $scope.customerFormData.Info.customertypesId = $scope.selectedCustomer.customertypes_name;
             $scope.customerFormData.Info.billingCountry = $scope.selectedCustomer.billing_country;
             $scope.customerFormData.Info.billingCounty = $scope.selectedCustomer.billing_county;
             $scope.customerFormData.Info.officeStreet = $scope.selectedCustomer.office_street;
@@ -48,7 +49,6 @@ angular.module("crmApp").
         this.tab = 1;
         this.checkTab = function (checkTab) { return this.tab === checkTab; };
         this.setTab = function (setTab) { this.tab = setTab; };
-
 
         $scope.submit = function()
         {

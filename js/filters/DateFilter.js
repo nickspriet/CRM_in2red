@@ -14,13 +14,17 @@ angular.module("crmApp").filter("DateFilter", function () {
         if (mm < 10) mm = '0' + mm;
         var output = dd + '/' + mm + '/' + yyyy;
 
-        angular.element("#date-picker").daterangepicker(
-            {
-                singleDatePicker: true,
-                startDate: output,
-                format: "DD/MM/YYYY"
-            });
-        
+
+        //TODO: move this to another place, it doesn't belong here !!
+        if (angular.element("#date-picker")[0]) {
+            angular.element("#date-picker").daterangepicker(
+                {
+                    singleDatePicker: true,
+                    startDate: output,
+                    format: "DD/MM/YYYY"
+                });
+        }
+
         return output;
     }
 });

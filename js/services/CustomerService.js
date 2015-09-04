@@ -7,6 +7,8 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
     var selectedCustomer = [];
     var postedCustomer = [];
     var postedContact = [];
+
+
     return {
         getCustomers: function () {
             return $http.get("/php/customersGET").then(function (response) {
@@ -26,7 +28,7 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
 
         postCustomer: function (formdata) {
             return $http.post("/php/customerPOST", formdata).then(function (response) {
-                console.log("data", response.data);
+                console.log("data-customerPOST", response.data);
                 postedCustomer = response;
                 return postedCustomer;
             })
@@ -37,6 +39,14 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
                 console.log("data-contactPOST", response.data);
                 postedContact = response;
                 return postedContact;
+            })
+        },
+
+        postTag: function (formdata)
+        {
+            return $http.post("/php/tagPOST", formdata).then(function(response){
+                console.log("data-tagPOST", response.data);
+                return response;
             })
         }
     }

@@ -7,7 +7,7 @@ angular.module("crmApp")
 
         $scope.billingCountry = 'België';
         $scope.selectedContacts = [];
-
+        $scope.customertypes_name = "Klant";
 
         //init datepicker
         angular.element('#date-picker').daterangepicker({
@@ -18,7 +18,6 @@ angular.module("crmApp")
 
         //submit newCustomerForm
         $scope.submitForm = function () {
-
             console.log("formdata", $scope.customerFormData.Info);
 
             //post customer (==> id.data contains customers_id of last inserted customer/row)
@@ -36,7 +35,9 @@ angular.module("crmApp")
                 });
 
                 //post tags for this customer
-
+                //angular.forEach($scope.customerFormData.Tags, function (t) {
+                //
+                //})
 
                 //after submit => go to details page of inserted customer
                 $location.path("klanten/details/" + id.data);

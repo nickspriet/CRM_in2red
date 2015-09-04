@@ -23,18 +23,7 @@
     if ($stmt = $conn->prepare($sqlInsert))
     {
         $stmt->bind_param("isssssssss", $customers_id, $firstname, $lastname, $title, $phone, $mobile, $email, $date_create, $date_edit, $archive);
-
-       // print_r($stmt);
-
-        try{
-            $stmt->execute();
-        }
-        catch (Exception $ex) {
-            echo $e->getMessage();
-        }
-
-        print_r($stmt);
-
+        $stmt->execute();
         echo $conn->insert_id;
         $stmt->close();
         $conn->close();

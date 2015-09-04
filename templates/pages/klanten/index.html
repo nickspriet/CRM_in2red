@@ -21,57 +21,72 @@
     </div>
 
 
-    <div class="container-default">
-        <div>
+    <div class="container-default" ng-init="searchCustomer = 'Klant'">
+        <div class="panel padding-0">
+            <div role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs font-title-tab" role="tablist">
+                    <li role="presentation" class="active"><a href="" ng-click="searchCustomer = 'Klant'" aria-controls="gegevens" role="tab" data-toggle="tab">Klanten</a></li>
+                    <li role="presentation"><a href="" ng-click="searchCustomer = 'Prospect'" aria-controls="offertes" role="tab" data-toggle="tab">Prospects</a></li>
+                    <li role="presentation"><a href="" ng-click="searchCustomer = 'Leverancier'" aria-controls="acties" role="tab" data-toggle="tab">Leveranciers</a></li>
+                    <li role="presentation"><a href="" ng-click="searchCustomer = ''" aria-controls="acties" role="tab" data-toggle="tab">Alle</a></li>
+                </ul>
 
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-title float-l margin-t-0 padding-t-0 padding-r-25">Sorteer:</div>
-                    <a class="sortLink" ng-class="{active: sortElement == 'Info.name'}" ng-click="sortElement = 'Info.name'" href=""> Alfabetisch</a> | <a class="sortLink" ng-class="{active: sortElement == '-Info.date_edit'}" ng-click="sortElement = '-Info.date_edit'" href="">Laatst gewijzigd</a>
+                <!-- Tab panes -->
+                <div class="tab-content padding-0">
+                    <div role="tabpanel" class="tab-pane active clearfix">
 
-                    <ul class="panel-tools">
-                        <a href="#/klanten/nieuw" class="btn btn-light"><i class="fa fa-plus"></i>Nieuwe klant</a>
-                    </ul>
-                    <div class="panel-body fc-clear">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <td>Naam</td>
-                                    <td>Adres</td>
-                                    <td>Telefoon</td>
-                                    <td>E-mail</td>
-                                    <td>Contactpersonen</td>
-                                    <td>Tags</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-click="goToDetails(customer.Info.id)" ng-repeat="customer in (filteredCustomers = customers | orderBy:sortElement | filter: searchCustomer)" class="clickable-row" href="#/klanten/nieuw">
-                                    <td>{{customer.Info.name}}</td>
-                                    <td>
-                                        <a ng-click="$event.stopPropagation();" ng-href="https://www.google.com/maps/search/ {{customer.Info.billing_street + ', ' + customer.Info.billing_zipcode + ' ' + customer.Info.billing_city}}" target="_blank">
-                                            <div>{{customer.Info.billing_street + ", "}}</div>
-                                            <div>{{customer.Info.billing_zipcode + " " + customer.Info.billing_city}}</div>
-                                        </a>
-                                    </td>
-                                    <td>{{customer.Info.phone}}</td>
-                                    <td><a ng-click="$event.stopPropagation();" ng-href="mailto:{{customer.Info.email}}">{{customer.Info.email}}</a></td>
-                                    <td>
-                                        <div ng-repeat="(key, contact) in customer.Contacts">
-                                            {{contact.firstname + " " + contact.lastname}}
-                                            <span ng-if="contact.phone"> - {{contact.phone}}</span>
-                                            <span ng-if="contact.email">- <a ng-click="$event.stopPropagation();" ng-href="mailto:{{contact.email}}">{{contact.email}}</a></span>
-                                        </div>
-                                    </td>
-                                    <td><span ng-repeat="tag in customer.Tags">{{tag.name}}{{$last ? '' : ', '}}</span></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div class="panel panel-default border-none">
+                                <div class="panel-title float-l margin-t-0 padding-t-0 padding-r-25">Sorteer:</div>
+                                <a class="sortLink" ng-class="{active: sortElement == 'Info.name'}" ng-click="sortElement = 'Info.name'" href=""> Alfabetisch</a> | <a class="sortLink" ng-class="{active: sortElement == '-Info.date_edit'}" ng-click="sortElement = '-Info.date_edit'" href="">Laatst gewijzigd</a>
+
+                                <ul class="panel-tools">
+                                    <a href="#/klanten/nieuw" class="btn btn-light"><i class="fa fa-plus"></i>Nieuwe klant</a>
+                                </ul>
+                                <div class="panel-body fc-clear">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <td>Naam</td>
+                                                <td>Adres</td>
+                                                <td>Telefoon</td>
+                                                <td>E-mail</td>
+                                                <td>Contactpersonen</td>
+                                                <td>Tags</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-click="goToDetails(customer.Info.id)" ng-repeat="customer in (filteredCustomers = customers | orderBy:sortElement | filter: searchCustomer)" class="clickable-row" href="#/klanten/nieuw">
+                                                <td>{{customer.Info.name}}</td>
+                                                <td>
+                                                    <a ng-click="$event.stopPropagation();" ng-href="https://www.google.com/maps/search/ {{customer.Info.billing_street + ', ' + customer.Info.billing_zipcode + ' ' + customer.Info.billing_city}}" target="_blank">
+                                                        <div>{{customer.Info.billing_street + ", "}}</div>
+                                                        <div>{{customer.Info.billing_zipcode + " " + customer.Info.billing_city}}</div>
+                                                    </a>
+                                                </td>
+                                                <td>{{customer.Info.phone}}</td>
+                                                <td><a ng-click="$event.stopPropagation();" ng-href="mailto:{{customer.Info.email}}">{{customer.Info.email}}</a></td>
+                                                <td>
+                                                    <div ng-repeat="(key, contact) in customer.Contacts">
+                                                        {{contact.firstname + " " + contact.lastname}}
+                                                        <span ng-if="contact.phone"> - {{contact.phone}}</span>
+                                                        <span ng-if="contact.email">- <a ng-click="$event.stopPropagation();" ng-href="mailto:{{contact.email}}">{{contact.email}}</a></span>
+                                                    </div>
+                                                </td>
+                                                <td><span ng-repeat="tag in customer.Tags">{{tag.name}}{{$last ? '' : ', '}}</span></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
 

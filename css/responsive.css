@@ -18,7 +18,7 @@ smaller than 1024
 @media screen and (max-width: 1024px) {
 	.profilebox b{display: none;}
 	.searchform{display: none;}
-	.sidebar{display: none;}
+	.sidebar{display: none; }
 	.content{margin-left: 0 !important;}
 	.sidebar-open-button{display: none;}
 	.sidebar-open-button-mobile{display: block;}

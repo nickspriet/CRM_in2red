@@ -14,6 +14,11 @@ angular.module("routes", ["ngRoute"])
                 templateUrl: "templates/pages/dashboard/index.html"
             })
 
+            //instellingen
+            .when("/instellingen",{
+                templateUrl: "templates/pages/instellingen/index.html"
+            })
+
             // klanten
             .when("/klanten", {
                 templateUrl: "templates/pages/klanten/index.html"

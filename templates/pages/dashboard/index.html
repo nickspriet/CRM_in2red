@@ -22,8 +22,8 @@
                 <div class="panel-body">
                     <ul class="basic-list">
                         <li ng-repeat="(key, offer) in offers | orderBy:'-date' | filter:searchOffer">
-                            <b>{{offer.companyName}} - {{offer.name}}</b>
-                            <span class="desc">({{offer.date_create | date:'dd/MM/yyyy'}} - € {{offer.totalprice}})</span>
+                            <b>{{offer.customers_name}} - {{offer.name}}</b>
+                            <span class="desc">({{offer.date_create | DateFilter}} - € {{offer.totalprice}})</span>
                         </li>
                     </ul>
                 </div>

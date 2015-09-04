@@ -6,6 +6,7 @@
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
 
+    $customertypes_id = isset($request->customertypes_id) ? $request->customertypes_id : null;
     $name = isset($request->name) ? $request->name : null;
     $phone = isset($request->phone) ? $request->phone : null;
     $email = isset($request->email) ? $request->email : null;
@@ -28,10 +29,10 @@
 
 
 
-    $sqlInsert = "INSERT INTO customers(name, phone, email, billing_street, billing_zipcode, billing_city, billing_county, billing_country, office_street, office_zipcode, office_city, office_county, office_country, vat, date_active, date_create, date_edit , active, archive) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sqlInsert = "INSERT INTO customers(customertypes_id, name, phone, email, billing_street, billing_zipcode, billing_city, billing_county, billing_country, office_street, office_zipcode, office_city, office_county, office_country, vat, date_active, date_create, date_edit , active, archive) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     if ($stmt = $conn->prepare($sqlInsert))
     {
-        $stmt->bind_param("sssssssssssssssssss", $name, $phone, $email, $billing_street, $billing_zipcode, $billing_city, $billing_county, $billing_country, $office_street, $office_zipcode, $office_city, $office_county, $office_country, $vat, $date_active, $date_create, $date_edit , $active, $archive);
+        $stmt->bind_param("isssssssssssssssssss", $customertypes_id, $name, $phone, $email, $billing_street, $billing_zipcode, $billing_city, $billing_county, $billing_country, $office_street, $office_zipcode, $office_city, $office_county, $office_country, $vat, $date_active, $date_create, $date_edit , $active, $archive);
         $stmt->execute();
         echo $conn->insert_id;
         $stmt->close();

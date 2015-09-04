@@ -31,12 +31,18 @@
     margin-right: 20px;
 }
 
-.clickable-row {
+li.clickable-row {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.clickable-row:hover {
+    background-color: #EFF7FF;
     cursor: pointer;
 }
 
 tbody > tr.clickable-row td {
-    padding: 7.5px 15px;
+    padding: 5px 15px;
 }
 
 .invoice.row {
@@ -81,8 +87,10 @@ div.invoice {
     width: 25px;
 }
 
-sidebar {
-    position: fixed;
+@media screen and (min-width: 1025px) {
+    sidebar {
+        position: fixed;
+    }
 }
 
 .ng-invalid.ng-dirty {

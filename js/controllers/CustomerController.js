@@ -2,13 +2,11 @@
  * Created by nikes on 21/08/2015.
  */
 
-angular.module("crmApp")
-    .controller("CustomerController", function ($scope, $http, $location, CustomerService) {
+angular.module("crmApp").controller("CustomerController", function ($scope, $location, CustomerService) {
 
         $scope.csvHeader = ["id", "Bedrijfsnaam", "telefoon", "e-mail", "facturatie-adres", "facturatie-postcode", "facturatie-gemeente", "facturatie-provincie", "facturatie-land", "kantoor-adres", "kantoor-postcode", "kantoor-gemeente", "kantoor-provincie", "kantoor-land", "BTW-nummer", "datum-actief", "datum-aangemaakt", "datum-bewerkt", "actief", "gearchiveerd"];
         $scope.sortElement = "Info.name";
         $scope.customerFormData = {};
-
 
         //get all customers
         CustomerService.getCustomers().then(function (data) {
