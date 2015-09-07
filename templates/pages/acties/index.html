@@ -4,9 +4,9 @@
     <!-- Start Page Header Right Div -->
     <div class="right">
         <div class="btn-group" role="group" aria-label="...">
-            <div class="input-prepend input-group small-control-w small-control-mr">
+            <div class="input-prepend input-group small-control-w small-control-mr" ng-controller="DatePickerController as datePickerCtrl">
                 <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
-                <input type="text" id="date-picker" class="form-control active" placeholder="Spring naar datum...">
+                <input type="text" id="date-picker" class="form-control active" placeholder="Spring naar datum..." ng-model="jumpdate" ng-change="jumpToDate()">
             </div>
         </div>
     </div>

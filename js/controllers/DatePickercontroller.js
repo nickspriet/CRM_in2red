@@ -10,4 +10,9 @@ angular.module("crmApp")
             singleDatePicker: true,
             format: 'DD/MM/YYYY'
         });
+
+
+        $scope.jumpToDate = function () {
+            angular.element("#calendar").fullCalendar('gotoDate', moment($scope.jumpdate, "DD/MM/YYYY").format("YYYY-MM-DD"));
+        }
     });

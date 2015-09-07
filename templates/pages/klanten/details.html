@@ -1,12 +1,12 @@
-<div id="wrapper" ng-controller="DetailsCustomerController as detailsCustomerCtrl">
+<div id="wrapper">
     <div class="page-header">
         <h1 class="title">Details klant</h1>
         <ol class="breadcrumb">
             <li><a href="#/klanten">Klanten</a></li>
             <li class="active">{{selectedCustomer.name}}</li>
         </ol>
-
         <div class="right">
+
             <div class="btn-group small-control-mr" role="group" aria-label="...">
                 <a href="#/klanten/bewerken/{{selectedCustomer.id}}" class="btn btn-light"><i class="fa fa-pencil"></i>Bewerken</a>
             </div>
@@ -17,17 +17,17 @@
         <!-- START CONTAINER -->
 
         <div class="panel padding-0">
-            <div role="tabpanel">
+            <div role="tabpanel" ng-init="setTab(1)">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs font-title-tab" role="tablist">
-                    <li role="presentation" class="active"><a href="" ng-click="detailsCustomerCtrl.setTab(1)" aria-controls="gegevens" role="tab" data-toggle="tab">Gegevens</a></li>
-                    <li role="presentation"><a href="" ng-click="detailsCustomerCtrl.setTab(2)" aria-controls="offertes" role="tab" data-toggle="tab">Offertes</a></li>
-                    <li role="presentation"><a href="" ng-click="detailsCustomerCtrl.setTab(3)" aria-controls="acties" role="tab" data-toggle="tab">Acties</a></li>
+                    <li role="presentation" class="active"><a href="" ng-click="setTab(1)" aria-controls="gegevens" role="tab" data-toggle="tab">Gegevens</a></li>
+                    <li role="presentation"><a href="" ng-click="setTab(2)" aria-controls="offertes" role="tab" data-toggle="tab">Offertes</a></li>
+                    <li role="presentation"><a href="" ng-click="setTab(3)" aria-controls="acties" role="tab" data-toggle="tab">Acties</a></li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div ng-class="{active: detailsCustomerCtrl.checkTab(1)}" role="tabpanel" class="tab-pane active clearfix">
+                    <div ng-class="{active: checkTab(1)}" role="tabpanel" class="tab-pane active clearfix">
                         <div class="col-md-6 padding-0">
                             <div class="panel panel-default">
                                 <div class="panel-title"><h3>{{selectedCustomer.name}}</h3></div>
@@ -72,9 +72,7 @@
                                             <div ng-if="selectedTags" ng-repeat="tag in selectedTags">
                                                 <span class="badge">{{tag.name}} <i class="fa fa-time"></i></span>
                                             </div>
-                                            <div ng-if="!selectedTags">
-                                                Nog geen tags toegevoegd
-                                            </div>
+                                            <p ng-if="!selectedTags">Er zijn nog geen tags toegevoegd.</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -82,10 +80,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="panel">
-                                <div class="panel-title">Contactpersonen</div>
+                                <div class="panel-title margin-t-5">Contactpersonen</div>
                                 <div class="panel-body">
                                     <div>
-                                        <ul class="list-group">
+                                        <ul ng-if="selectedContacts" class="list-group">
                                             <li ng-repeat="contact in selectedContacts" class="list-group-item">
                                                 <b><i class="fa fa-user padding-r-5 width-25"></i>{{contact.firstname + " " + contact.lastname}} <span ng-if="contact.title">({{contact.title}})</span></b>
 
@@ -94,12 +92,13 @@
                                                 <div ng-if="contact.email"><i class="fa fa-envelope padding-r-5 width-25"></i><a ng-href="mailto:{{contact.email}}">{{contact.email}}</a></div>
                                             </li>
                                         </ul>
+                                        <p ng-if="!selectedContacts">Er zijn nog geen contactpersonen toegevoegd</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div ng-class="{active: detailsCustomerCtrl.checkTab(2)}" role="tabpanel" class="tab-pane">
+                    <div ng-class="{active: checkTab(2)}" role="tabpanel" class="tab-pane">
                         <div class="float-r">
                             <div class="input-prepend input-group small-control-w small-control-mr float-l">
                                 <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -118,7 +117,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div ng-class="{active: detailsCustomerCtrl.checkTab(3)}" role="tabpanel" class="tab-pane" id="acties">
+                    <div ng-class="{active: checkTab(3)}" role="tabpanel" class="tab-pane" id="acties">
                         <div class="float-r">
                             <div class="input-group small-control-w small-control-mr">
                                 <input type="text" ng-model="searchAction" class="form-control smallSearch ng-pristine ng-valid ng-touched" placeholder="Search">
@@ -128,7 +127,12 @@
                         </div>
                         <div class="fc-clear">
 
-                            <p>Duis ac enim diam</p>
+                            <ul class="basic-list">
+                                <li class="clickable-row" ng-repeat="action in actions">
+                                    <b>{{offer.customers_name}} - {{action.name}}</b>
+                                    <span class="desc">({{action.date_reminder}} - € {{offer.totalprice}})</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

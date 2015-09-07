@@ -27,7 +27,8 @@ angular.module("routes", ["ngRoute"])
                 templateUrl: "templates/pages/klanten/nieuw.html"
             })
             .when("/klanten/details/:id", {
-                templateUrl: "templates/pages/klanten/details.html"
+                templateUrl: "templates/pages/klanten/details.html",
+                controller: "DetailsCustomerController"
             })
             .when("/klanten/bewerken/:id", {
                 templateUrl: "templates/pages/klanten/bewerken.html"
@@ -38,7 +39,8 @@ angular.module("routes", ["ngRoute"])
                 templateUrl: "templates/pages/offertes/index.html"
             })
             .when("/offertes/nieuw", {
-                templateUrl: "templates/pages/offertes/nieuw.html"
+                templateUrl: "templates/pages/offertes/nieuw.html",
+                controller: "NewOfferController"
             })
             .when("/offertes/details/:id", {
                 templateUrl: "templates/pages/offertes/details.html"
@@ -54,6 +56,13 @@ angular.module("routes", ["ngRoute"])
             })
             .when("/acties/nieuw", {
                 templateUrl: "templates/pages/acties/nieuw.html"
+            })
+            .when("/acties/details/:id", {
+                templateUrl: "templates/pages/acties/details.html",
+                controller: "DetailsActionController"
+            })
+            .when("/acties/bewerken/:id", {
+                templateUrl: "templates/pages/acties/bewerken.html"
             })
 
             .otherwise("/");

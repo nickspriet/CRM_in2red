@@ -4,7 +4,7 @@
 
 
 angular.module("crmApp").
-    controller("DetailsCustomerController", function ($scope, $http, $routeParams, $location, CustomerService) {
+    controller("DetailsCustomerController", function ($scope, $routeParams, $location, CustomerService, ActionService) {
         $scope.customerFormData = {};
         $scope.customerFormData.Info = {};
         $scope.customerFormData.Contacts = {};
@@ -16,30 +16,52 @@ angular.module("crmApp").
         $scope.selectedTags = [];
 
 
-        //get customer by id
-        CustomerService.getCustomerById($routeParams.id).then(function(data){
-
-            //convert object to associative array
-            selectedCustomer = Object.keys(data).map(function (a) {
-                return data[a];
-            });
-
-            console.log("sc", selectedCustomer);
-            $scope.selectedCustomer = selectedCustomer[0].Info;
-            $scope.selectedContacts = selectedCustomer[0].Contacts;
-            $scope.selectedTags = selectedCustomer[0].Tags;
-
-
-            //init ng-model (because value doesn't work)
-            initFields($scope);
-        });
-
-
         //change tabs
-        this.tab = 1;
-        this.checkTab = function (checkTab) { return this.tab === checkTab; };
-        this.setTab = function (setTab) { this.tab = setTab; };
+        $scope.tab = 1;
+        $scope.checkTab = function (checkTab) {
+            return this.tab === checkTab;
+        };
+        $scope.setTab = function (setTab) {
+            switch (setTab) {
+                case 1:
+                    $scope.getCustomer();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    $scope.getActions();
+                    break;
+            }
+            this.tab = setTab;
+        };
 
+
+        $scope.getCustomer = function () {
+            //get customer by id
+            CustomerService.getCustomerById($routeParams.id).then(function (data) {
+
+                //convert object to associative array
+                selectedCustomer = Object.keys(data).map(function (a) {
+                    return data[a];
+                });
+
+                console.log("sc", selectedCustomer);
+                $scope.selectedCustomer = selectedCustomer[0].Info;
+                $scope.selectedContacts = selectedCustomer[0].Contacts;
+                $scope.selectedTags = selectedCustomer[0].Tags;
+
+
+                //init ng-model (because value doesn't work)
+                initFields($scope);
+            });
+        }
+
+        $scope.getActions = function () {
+            //get actions by customers_id
+            ActionService.getActionsByCustomersId($routeParams.id).then(function (data) {
+                $scope.actions = data;
+            });
+        }
 
 
         //submit detailCustomerForm
@@ -74,16 +96,15 @@ angular.module("crmApp").
     });
 
 
-function initFields($scope)
-{
+function initFields($scope) {
     $scope.customerFormData.Info.name = $scope.selectedCustomer.name;
     $scope.customerFormData.Info.customertypesId = $scope.selectedCustomer.customertypes_id;
     $scope.customerFormData.Info.vat = $scope.selectedCustomer.vat;
     $scope.customerFormData.Info.phone = $scope.selectedCustomer.phone;
     $scope.customerFormData.Info.email = $scope.selectedCustomer.email;
-    $scope.customerFormData.Info.billingStreet= $scope.selectedCustomer.billing_street;
-    $scope.customerFormData.Info.billingZipcode= $scope.selectedCustomer.billing_zipcode;
-    $scope.customerFormData.Info.billingCity= $scope.selectedCustomer.billing_city;
+    $scope.customerFormData.Info.billingStreet = $scope.selectedCustomer.billing_street;
+    $scope.customerFormData.Info.billingZipcode = $scope.selectedCustomer.billing_zipcode;
+    $scope.customerFormData.Info.billingCity = $scope.selectedCustomer.billing_city;
     $scope.customerFormData.Info.billingCountry = $scope.selectedCustomer.billing_country;
     $scope.customerFormData.Info.billingCounty = $scope.selectedCustomer.billing_county;
     $scope.customerFormData.Info.officeStreet = $scope.selectedCustomer.office_street;
@@ -91,6 +112,6 @@ function initFields($scope)
     $scope.customerFormData.Info.officeCity = $scope.selectedCustomer.office_city;
     $scope.customerFormData.Info.officeCountry = $scope.selectedCustomer.office_country;
     $scope.customerFormData.Info.officeCounty = $scope.selectedCustomer.office_county;
-    $scope.customerFormData.Info.dateCreate  = $scope.selectedCustomer.date_create;
+    $scope.customerFormData.Info.dateCreate = $scope.selectedCustomer.date_create;
     $scope.customerFormData.Info.active = $scope.selectedCustomer.active;
 }

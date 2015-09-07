@@ -10,13 +10,14 @@ angular.module("type", ["ui.bootstrap"])
 
         $scope.selected = undefined;
         console.log($scope.selected);
-        console.log($scope.$index);
 
-        CustomerService.getCustomers().then(function (customers) {
+        //get all customers
+        CustomerService.getCustomers().then(function (data) {
 
             // convert object to associative array
-            $scope.customers =  Object.keys(customers).map(function (k) {
-                return customers[k];
+            $scope.customers =  Object.keys(data).map(function (k) {
+                return data[k];
             });
         });
+
     });

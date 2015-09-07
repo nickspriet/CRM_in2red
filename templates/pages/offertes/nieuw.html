@@ -8,16 +8,16 @@
     </div>
 </div>
 
-<div class="container-default" ng-controller="NewOfferController as newOfferCtrl">
+<div class="container-default">
     <div class="col-md-12">
         <form>
             <div class="invoice row">
                 <div class="invoicename">OFFERTE</div>
                 <div class="logo" ng-controller="TypeaheadController as typeaheadCtrl">
-                    <input type="text" ng-model="selected" typeahead="customer.Info.name for customer in customers track by $index | filter:$viewValue | limitTo:8" class="form-control form-control-line margin-t-5 small-control-w center-block" placeholder="Bedrijfsnaam"><br>
+                    <input type="text" ng-model="selected" typeahead="customer as customer.Info.name for customer in customers | filter:$viewValue | limitTo:8" class="form-control form-control-line margin-t-5 small-control-w center-block" placeholder="Bedrijfsnaam"><br>
 
-                    <div>{{selected.$index}}</div>
-                    <div>West-Vlaanderen, België</div>
+                    <div>{{selected.Info.billing_zipcode + " " + selected.Info.billing_city}}</div>
+                    <div>{{selected.Info.billing_county + ", " + selected.Info.billing_country}}</div>
                 </div>
 
                 <div class="line row">

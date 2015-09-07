@@ -1,0 +1,38 @@
+<div class="page-header">
+    <h1 class="title">Details actie</h1>
+    <ol class="breadcrumb">
+        <li><a href="#/acties">Acties</a></li>
+        <li class="active">{{selectedAction.name | limitTo: 50 }}{{selectedAction.name.length > 50 ? "..." : ""}}</li>
+    </ol>
+    <div class="right">
+        <div class="btn-group small-control-mr" role="group" aria-label="...">
+            <button type="submit" class="btn btn-light"><i class="fa fa-pencil"></i>Bewerken</button>
+        </div>
+    </div>
+</div>
+
+<div class="container-default">
+    <div class="panel">
+        <div class="panel-title">
+
+        </div>
+        <div class="panel-body">
+            <div class="col-sm-6">
+                <form-group>
+                    <label>Omschrijving</label>
+
+                    <p>{{selectedAction.name}}</p>
+                </form-group>
+                <form-group>
+                    <label>Bijlagen</label>
+
+                    <div>
+                        <span ng-repeat="selectedAttachment in selectedAttachments">
+                            <a href="">{{selectedAttachment.name}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </div>
+                </form-group>
+            </div>
+        </div>
+    </div>
+</div>

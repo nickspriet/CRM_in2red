@@ -9,13 +9,6 @@ angular.module("crmApp")
         $scope.selectedContacts = [];
         $scope.customertypes_name = "Klant";
 
-        //init datepicker
-        angular.element('#date-picker').daterangepicker({
-            singleDatePicker: true,
-            format: 'DD/MM/YYYY'
-        });
-
-
         //submit newCustomerForm
         $scope.submitForm = function () {
             console.log("formdata", $scope.customerFormData.Info);
