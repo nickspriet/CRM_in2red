@@ -1,12 +1,13 @@
 <?php
-    //header("Content-type: application/json");
 
-    include('connection.php');
+	include('../connection.php');
 
-    $postdata = file_get_contents("php://input");
+	//update customer
+     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata);
 
-    $customertypes_id = isset($request->customertypes_id) ? $request->customertypes_id : null;
+    $id = isset($request->id) ? $request->id : null;
+    $customertypes_id = isset($request->customertypesId) ? $request->customertypesId : null;
     $name = isset($request->name) ? $request->name : null;
     $phone = isset($request->phone) ? $request->phone : null;
     $email = isset($request->email) ? $request->email : null;
@@ -29,16 +30,12 @@
 
 
 
-    $sqlInsert = "INSERT INTO customers(customertypes_id, name, phone, email, billing_street, billing_zipcode, billing_city, billing_county, billing_country, office_street, office_zipcode, office_city, office_county, office_country, vat, date_active, date_create, date_edit , active, archive) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    if ($stmt = $conn->prepare($sqlInsert))
+    $sqlUpdate = "UPDATE customers SET customertypes_id=".$customertypes_id.", name='".$name."', phone='".$phone."', email='".$email."', billing_street='".$billing_street."', billing_zipcode='".$billing_zipcode."', billing_city='".$billing_city."', billing_county='".$billing_county."', billing_country='".$billing_country."', office_street='".$office_street."', office_zipcode='".$office_zipcode."', office_city='".$office_city."', office_county='".$office_county."', office_country='".$office_country."', vat='".$vat."', date_active='".$date_active."', date_create='".$date_create."', date_edit='".$date_edit."', active='".$active."', archive='".$archive."' WHERE id=".$id;
+    if ($stmt = $conn->prepare($sqlUpdate))
     {
-        $stmt->bind_param("isssssssssssssssssss", $customertypes_id, $name, $phone, $email, $billing_street, $billing_zipcode, $billing_city, $billing_county, $billing_country, $office_street, $office_zipcode, $office_city, $office_county, $office_country, $vat, $date_active, $date_create, $date_edit , $active, $archive);
         $stmt->execute();
-        echo $conn->insert_id;
         $stmt->close();
         $conn->close();
     }
     else echo 'FOUTJEEEEE';
-
-
 ?>

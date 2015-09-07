@@ -3,7 +3,42 @@
  */
 
 angular.module("crmApp")
-    .controller("ActionController", function ($scope) {
+    .controller("ActionController", function ($scope, ActionService) {
+
+        var actionEvents = [];
+
+        //get all actions
+        ActionService.getActions().then(function (data) {
+            console.log(data);
+
+            $scope.actions = data;
+
+
+            actionEvents = data.map(function (a) {
+                console.log(a);
+                return {
+                    "title": a.name,
+                    "start": a.date_create,
+                    "color": "red"
+                };
+            });
+
+            console.log("actionEvents", actionEvents);
+
+            //init calendar
+            angular.element("#calendar").fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,basicWeek,basicDay'
+                },
+                lang: 'nl',
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: actionEvents
+            });
+        });
+
 
         //init datepicker
         angular.element('#date-picker').daterangepicker({
@@ -36,7 +71,7 @@ angular.module("crmApp")
             },
             {
                 title: 'Conference',
-                start: '2015-082-3',
+                start: '2015-02-3',
                 end: '2015-08-5',
                 color: '#E99844'
             },
@@ -74,16 +109,5 @@ angular.module("crmApp")
             }
         ];
 
-//init calendar
-        angular.element("#calendar").fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,basicWeek,basicDay'
-            },
-            lang: 'nl',
-            editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            events: actionEvents
-        });
+
     });

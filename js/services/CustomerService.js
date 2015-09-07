@@ -10,8 +10,9 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
 
 
     return {
+        //get customers (+ contacts + tags)
         getCustomers: function () {
-            return $http.get("/php/customersGET").then(function (response) {
+            return $http.get("/php/get/customers").then(function (response) {
                 console.log("data", response.data);
                 customers = response.data;
                 return customers;
@@ -19,7 +20,7 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
         },
 
         getCustomerById: function (identity) {
-            return $http.get("/php/customersGET/?id=" + identity).then(function (response) {
+            return $http.get("/php/get/customers/?id=" + identity).then(function (response) {
                 console.log("data", response.data);
                 selectedCustomer = response.data;
                 return selectedCustomer;
@@ -27,24 +28,30 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
         },
 
         postCustomer: function (formdata) {
-            return $http.post("/php/customerPOST", formdata).then(function (response) {
+            return $http.post("/php/post/customer", formdata).then(function (response) {
                 console.log("data-customerPOST", response.data);
                 postedCustomer = response;
                 return postedCustomer;
             })
         },
 
+        updateCustomer: function (formdata) {
+            return $http.put("/php/update/customer", formdata).then(function (response) {
+                console.log("data-customerUPDATE", response.data);
+                return response;
+            })
+        },
+
         postContact: function (formdata) {
-            return $http.post("/php/contactPOST", formdata).then(function(response){
+            return $http.post("/php/post/contact", formdata).then(function (response) {
                 console.log("data-contactPOST", response.data);
                 postedContact = response;
                 return postedContact;
             })
         },
 
-        postTag: function (formdata)
-        {
-            return $http.post("/php/tagPOST", formdata).then(function(response){
+        postTag: function (formdata) {
+            return $http.post("/php/post/tag", formdata).then(function (response) {
                 console.log("data-tagPOST", response.data);
                 return response;
             })

@@ -68,7 +68,7 @@
                                                 <td>{{customer.Info.phone}}</td>
                                                 <td><a ng-click="$event.stopPropagation();" ng-href="mailto:{{customer.Info.email}}">{{customer.Info.email}}</a></td>
                                                 <td>
-                                                    <div ng-repeat="(key, contact) in customer.Contacts">
+                                                    <div ng-repeat="contact in customer.Contacts">
                                                         {{contact.firstname + " " + contact.lastname}}
                                                         <span ng-if="contact.phone"> - {{contact.phone}}</span>
                                                         <span ng-if="contact.email">- <a ng-click="$event.stopPropagation();" ng-href="mailto:{{contact.email}}">{{contact.email}}</a></span>

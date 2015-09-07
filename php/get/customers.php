@@ -1,7 +1,7 @@
 <?php
 	header("Content-type: application/json");
 
-	include('connection.php');
+	include('../connection.php');
 
 	//customer by Id
 	if (!empty($_GET["id"]))

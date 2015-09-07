@@ -15,7 +15,7 @@ angular.module("routes", ["ngRoute"])
             })
 
             //instellingen
-            .when("/instellingen",{
+            .when("/instellingen", {
                 templateUrl: "templates/pages/instellingen/index.html"
             })
 
@@ -49,7 +49,11 @@ angular.module("routes", ["ngRoute"])
 
             // acties
             .when("/acties", {
-                templateUrl: "templates/pages/acties/index.html"
+                templateUrl: "templates/pages/acties/index.html",
+                controller: "ActionController"
+            })
+            .when("/acties/nieuw", {
+                templateUrl: "templates/pages/acties/nieuw.html"
             })
 
             .otherwise("/");

@@ -7,7 +7,7 @@ angular.module("crmApp").factory("OfferService", function ($http) {
 
     return {
         getOffers: function () {
-            return $http.get("/php/offersGET").then(function(response){
+            return $http.get("/php/get/offers").then(function(response){
                 offers = response.data;
                 console.log("data", response.data);
                 return offers;

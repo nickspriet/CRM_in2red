@@ -1,5 +1,5 @@
 <div class="wrapper" ng-controller="DetailsCustomerController as detailsCustomerCtrl">
-    <form name="customerForm">
+    <form name="detailCustomerForm" ng-submit="detailCustomerForm.$valid && submitForm()" novalidate>
         <div class="page-header">
             <h1 class="title">Bewerk klant</h1>
             <ol class="breadcrumb">
@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="title">
-                        <input class="form-control input-lg" type="text" placeholder="Bedrijfsnaam" value="{{selectedCustomer.name}}" required>
+                        <input class="form-control input-lg" type="text" placeholder="Bedrijfsnaam" value="{{selectedCustomer.name}}" ng-model="customerFormData.Info.name" required>
                     </div>
                     <div class="panel-body">
                         <ul class="list-group">
@@ -28,9 +28,9 @@
 
                                         <div class="col-sm-10">
                                             <ol id="customertypes" name="customertypesId" class="nya-bs-select col-sm-12 col-xs-12" ng-model="customerFormData.Info.customertypesId">
-                                                <li class="nya-bs-option" data-value="Klant"><a>Klant</a></li>
-                                                <li class="nya-bs-option" data-value="Prospect"><a>Prospect</a></li>
-                                                <li class="nya-bs-option" data-value="Leverancier"><a>Leverancier</a></li>
+                                                <li class="nya-bs-option" data-value="1"><a>Klant</a></li>
+                                                <li class="nya-bs-option" data-value="2"><a>Prospect</a></li>
+                                                <li class="nya-bs-option" data-value="3"><a>Leverancier</a></li>
                                             </ol>
                                         </div>
                                     </div>
@@ -38,21 +38,21 @@
                                         <label for="vat" class="col-sm-2 control-label form-label">BTW-nummer</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="vat" value="{{selectedCustomer.vat}}">
+                                            <input type="text" class="form-control" id="vat" value="{{selectedCustomer.vat}}" ng-model="customerFormData.Info.vat">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="phone" class="col-sm-2 control-label form-label">Telefoon</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="phone" value="{{selectedCustomer.phone}}">
+                                            <input type="text" class="form-control" id="phone" value="{{selectedCustomer.phone}}" ng-model="customerFormData.Info.phone">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="col-sm-2 control-label form-label">E-mail</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="email" value="{{selectedCustomer.email}}">
+                                            <input type="text" class="form-control" id="email" value="{{selectedCustomer.email}}" ng-model="customerFormData.Info.email">
                                         </div>
                                     </div>
                                 </div>
@@ -68,21 +68,21 @@
                                         <label for="billing-address" class="col-sm-2 control-label form-label">Adres</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="billing-address" value="{{selectedCustomer.billing_street}}" required>
+                                            <input type="text" class="form-control" id="billing-address" value="{{selectedCustomer.billing_street}}" ng-model="customerFormData.Info.billingStreet" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="billing-zipcode" class="col-sm-2 control-label form-label">Postcode</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="billing-zipcode" value="{{selectedCustomer.billing_zipcode}}" required>
+                                            <input type="text" class="form-control" id="billing-zipcode" value="{{selectedCustomer.billing_zipcode}}" ng-model="customerFormData.Info.billingZipcode" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="billing-city" class="col-sm-2 control-label form-label">Gemeente</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="billing-city" value="{{selectedCustomer.billing_city}}" required>
+                                            <input type="text" class="form-control" id="billing-city" value="{{selectedCustomer.billing_city}}" ng-model="customerFormData.Info.billingCity" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -139,7 +139,7 @@
                                         <div class="col-sm-10">
                                             <div class="input-prepend input-group">
                                                 <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                <input type="text" id="date-picker" class="form-control active" id="customer-create" value="{{selectedCustomer.date_create | DateFilter }}">
+                                                <input type="text" id="date-picker" class="form-control active" id="customer-create" value="{{selectedCustomer.date_create | DateFilter }}" ng-model="customerFormData.Info.dateCreate" >
                                             </div>
                                         </div>
                                     </div>
@@ -181,7 +181,7 @@
                     </ul>
                     <div class="panel-body">
                         <ul id="listContactpersons" class="list-group">
-                            <div ng-repeat="contact in selectedContacts track by $index">
+                            <div ng-repeat="contact in customerFormData.Contacts = selectedContacts track by $index">
                                 <ngform>
                                     <new-contact contactperson="contact"></new-contact>
                                 </ngform>
@@ -191,7 +191,10 @@
                 </div>
 
                 <pre>
-                    {{customerFormData}}
+                    InfoDATA: {{customerFormData.Info}}
+                </pre>
+                <pre>
+                    ContactDATA: {{customerFormData.Contacts}}
                 </pre>
             </div>
         </div>

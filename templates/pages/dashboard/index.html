@@ -44,8 +44,6 @@
                                 <td>Adres</td>
                                 <td>Telefoon</td>
                                 <td>E-mail</td>
-                                <td>Contactpersonen</td>
-                                <td>Tags</td>
                             </tr>
                             </thead>
                             <tbody>
@@ -59,13 +57,6 @@
                                 </td>
                                 <td>{{customer.Info.phone}}</td>
                                 <td><a ng-click="$event.stopPropagation();" ng-href="mailto:{{customer.Info.email}}">{{customer.Info.email}}</a></td>
-                                <td>
-                                    <div ng-repeat="contact in customer.Contacts">
-                                        {{contact.firstname + " " + contact.lastname + " - " + contact.phone + " - "}}
-                                        <a ng-click="$event.stopPropagation();" ng-href="mailto:{{contact.email}}">{{contact.email}}</a>
-                                    </div>
-                                </td>
-                                <td><span ng-repeat="tag in customer.Tags">{{tag.name}}{{$last ? '' : ', '}}</span></td>
                             </tr>
                             </tbody>
                         </table>

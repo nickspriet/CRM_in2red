@@ -1,8 +1,7 @@
 <?php
 	header("Content-type: application/json");
 
-	include('connection.php');
-
+	include('../connection.php');
 
 	//all tags
 	$sql1 = "SELECT t.*, tt.name as tagtypes_name FROM tagtypes tt INNER JOIN tags t ON tt.id = t.tagtypes_id WHERE tt.archive = 'N' AND t.archive = 'N'";
