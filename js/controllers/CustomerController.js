@@ -26,7 +26,7 @@ angular.module("crmApp").controller("CustomerController", function ($scope, $fil
 
         //get a list of  the filtered customers (for CSV export) 2
         $scope.exportCustomers = function () {
-            var filteredCustomers = $filter('filter')($scope.customers, -$scope.searchCustomer);
+            var filteredCustomers = $filter('filter')($scope.customers, $scope.searchCustomer);
             var output = filteredCustomers.map(function (cust) {
                 return cust.Info;
             });

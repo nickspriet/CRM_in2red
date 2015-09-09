@@ -45,8 +45,8 @@ angular.module("crmApp")
             }
         });
 
-        $scope.goToDetails = function(id)
-        {
+
+        $scope.goToDetails = function (id) {
             $location.path("acties/details/" + id);
         }
 

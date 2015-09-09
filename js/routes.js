@@ -21,22 +21,26 @@ angular.module("routes", ["ngRoute"])
 
             // klanten
             .when("/klanten", {
-                templateUrl: "templates/pages/klanten/index.html"
+                templateUrl: "templates/pages/klanten/index.html",
+                controller: "CustomerController"
             })
             .when("/klanten/nieuw", {
-                templateUrl: "templates/pages/klanten/nieuw.html"
+                templateUrl: "templates/pages/klanten/nieuw.html",
+                controller: "NewCustomerController"
             })
             .when("/klanten/details/:id", {
                 templateUrl: "templates/pages/klanten/details.html",
                 controller: "DetailsCustomerController"
             })
             .when("/klanten/bewerken/:id", {
-                templateUrl: "templates/pages/klanten/bewerken.html"
+                templateUrl: "templates/pages/klanten/bewerken.html",
+                controller: "DetailsCustomerController"
             })
 
             // offertes
             .when("/offertes", {
-                templateUrl: "templates/pages/offertes/index.html"
+                templateUrl: "templates/pages/offertes/index.html",
+                controller: "OfferController"
             })
             .when("/offertes/nieuw", {
                 templateUrl: "templates/pages/offertes/nieuw.html",
@@ -55,14 +59,16 @@ angular.module("routes", ["ngRoute"])
                 controller: "ActionController"
             })
             .when("/acties/nieuw", {
-                templateUrl: "templates/pages/acties/nieuw.html"
+                templateUrl: "templates/pages/acties/nieuw.html",
+                controller: "NewActionController"
             })
             .when("/acties/details/:id", {
                 templateUrl: "templates/pages/acties/details.html",
                 controller: "DetailsActionController"
             })
             .when("/acties/bewerken/:id", {
-                templateUrl: "templates/pages/acties/bewerken.html"
+                templateUrl: "templates/pages/acties/bewerken.html",
+                controller: "DetailsActionController"
             })
 
             .otherwise("/");

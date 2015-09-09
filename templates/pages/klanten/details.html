@@ -17,12 +17,12 @@
         <!-- START CONTAINER -->
 
         <div class="panel padding-0">
-            <div role="tabpanel" ng-init="setTab(1)">
+            <div role="tabpanel" ng-init="loadInfo()">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs font-title-tab" role="tablist">
-                    <li role="presentation" class="active"><a href="" ng-click="setTab(1)" aria-controls="gegevens" role="tab" data-toggle="tab">Gegevens</a></li>
-                    <li role="presentation"><a href="" ng-click="setTab(2)" aria-controls="offertes" role="tab" data-toggle="tab">Offertes</a></li>
-                    <li role="presentation"><a href="" ng-click="setTab(3)" aria-controls="acties" role="tab" data-toggle="tab">Acties</a></li>
+                    <li role="presentation" class="active"><a href="" ng-click="setTab(1); loadInfo();" aria-controls="gegevens" role="tab" data-toggle="tab">Gegevens</a></li>
+                    <li role="presentation"><a href="" ng-click="setTab(2); loadOffers();" aria-controls="offertes" role="tab" data-toggle="tab">Offertes</a></li>
+                    <li role="presentation"><a href="" ng-click="setTab(3); loadActions();" aria-controls="acties" role="tab" data-toggle="tab">Acties</a></li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -61,10 +61,14 @@
                                             <div class="panel-subtitle">Extra gegevens</div>
                                             <div>
                                                 <span ng-if="selectedCustomer.active"><i class="fa fa-check color7 padding-r-5"></i> ACTIEF</span>
-                                                <span ng-if="!selectedCustomer.active"><i class="fa fa-times color10"></i> NIET ACTIEF</span>
+                                                <span ng-if="!selectedCustomer.active"><i class="fa fa-times color10 padding-r-5"></i> NIET ACTIEF</span>
+                                            </div>
+                                            <div>
+                                                <span ng-if="selectedCustomer.archive == 'N'"><i class="fa fa-check color7 padding-r-5"></i> NIET GEARCHIVEERD</span>
+                                                <span ng-if="selectedCustomer.archive == 'Y'"><i class="fa fa-times color10 padding-r-5"></i> GEARCHIVEERD</span>
                                             </div>
                                             <div><i class="fa fa-clock-o padding-r-5"></i> Klant sinds: {{selectedCustomer.date_active}}</div>
-                                            <div class="padding-l-20">Aanmakdatum: {{selectedCustomer.date_create}}</div>
+                                            <div class="padding-l-20">Aanmaakdatum: {{selectedCustomer.date_create}}</div>
                                             <div class="padding-l-20">Laatst gewijzigd: {{selectedCustomer.date_edit}}</div>
                                         </li>
                                         <li class="list-group-item">
@@ -117,7 +121,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div ng-class="{active: checkTab(3)}" role="tabpanel" class="tab-pane" id="acties">
+                    <div ng-class="{active: checkTab(3)}" role="tabpanel" class="tab-pane" id="acties" ng-controller="ActionController as actionCtrl">
                         <div class="float-r">
                             <div class="input-group small-control-w small-control-mr">
                                 <input type="text" ng-model="searchAction" class="form-control smallSearch ng-pristine ng-valid ng-touched" placeholder="Search">
@@ -127,12 +131,15 @@
                         </div>
                         <div class="fc-clear">
 
-                            <ul class="basic-list">
-                                <li class="clickable-row" ng-repeat="action in actions">
-                                    <b>{{offer.customers_name}} - {{action.name}}</b>
-                                    <span class="desc">({{action.date_reminder}} - € {{offer.totalprice}})</span>
+                            <ul ng-if="actions" class="basic-list">
+                                <li class="clickable-row" ng-repeat="action in actions | filter:searchAction">
+                                    <b>{{action.name}}</b>
+                                    <span class="desc">({{action.date_reminder}} - € {{action.totalprice}})</span>
                                 </li>
                             </ul>
+                            <div ng-if="!actions">
+                                Er zijn nog geen acties aan deze klant toegevoegd.
+                            </div>
                         </div>
                     </div>
                 </div>

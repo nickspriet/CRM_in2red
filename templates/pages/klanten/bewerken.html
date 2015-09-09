@@ -1,5 +1,4 @@
-<div class="wrapper" ng-controller="DetailsCustomerController as detailsCustomerCtrl" ng-init="setTab(1)">
-    <form name="detailCustomerForm" ng-submit="detailCustomerForm.$valid && submitForm()" novalidate>
+    <form name="detailCustomerForm" ng-init="loadInfo()" ng-submit="detailCustomerForm.$valid && submitForm()" novalidate>
         <div class="page-header">
             <h1 class="title">Bewerk klant</h1>
             <ol class="breadcrumb">
@@ -199,7 +198,6 @@
             </div>
         </div>
     </form>
-</div>
 
 
 <script src="lib/date-range-picker/daterangepicker.js"></script>

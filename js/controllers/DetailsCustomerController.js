@@ -22,21 +22,11 @@ angular.module("crmApp").
             return this.tab === checkTab;
         };
         $scope.setTab = function (setTab) {
-            switch (setTab) {
-                case 1:
-                    $scope.getCustomer();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    $scope.getActions();
-                    break;
-            }
             this.tab = setTab;
         };
 
 
-        $scope.getCustomer = function () {
+        $scope.loadInfo = function () {
             //get customer by id
             CustomerService.getCustomerById($routeParams.id).then(function (data) {
 
@@ -45,6 +35,7 @@ angular.module("crmApp").
                     return data[a];
                 });
 
+                //init variables
                 console.log("sc", selectedCustomer);
                 $scope.selectedCustomer = selectedCustomer[0].Info;
                 $scope.selectedContacts = selectedCustomer[0].Contacts;
@@ -52,11 +43,15 @@ angular.module("crmApp").
 
 
                 //init ng-model (because value doesn't work)
-                initFields($scope);
+                initFields();
             });
         }
 
-        $scope.getActions = function () {
+        $scope.loadOffers = function () {
+            console.log("loadoffers");
+        }
+
+        $scope.loadActions = function () {
             //get actions by customers_id
             ActionService.getActionsByCustomersId($routeParams.id).then(function (data) {
                 $scope.actions = data;
@@ -64,7 +59,7 @@ angular.module("crmApp").
         }
 
 
-        //submit detailCustomerForm
+        //submit detailsCustomerForm
         $scope.submitForm = function () {
             $scope.customerFormData.Info.id = $routeParams.id;
             console.log("formdata", $scope.customerFormData.Info);
@@ -93,25 +88,28 @@ angular.module("crmApp").
                 $location.path("klanten/details/" + $routeParams.id);
             });
         }
+
+
+
+        function initFields() {
+            $scope.customerFormData.Info.name = $scope.selectedCustomer.name;
+            $scope.customerFormData.Info.customertypesId = $scope.selectedCustomer.customertypes_id;
+            $scope.customerFormData.Info.vat = $scope.selectedCustomer.vat;
+            $scope.customerFormData.Info.phone = $scope.selectedCustomer.phone;
+            $scope.customerFormData.Info.email = $scope.selectedCustomer.email;
+            $scope.customerFormData.Info.billingStreet = $scope.selectedCustomer.billing_street;
+            $scope.customerFormData.Info.billingZipcode = $scope.selectedCustomer.billing_zipcode;
+            $scope.customerFormData.Info.billingCity = $scope.selectedCustomer.billing_city;
+            $scope.customerFormData.Info.billingCountry = $scope.selectedCustomer.billing_country;
+            $scope.customerFormData.Info.billingCounty = $scope.selectedCustomer.billing_county;
+            $scope.customerFormData.Info.officeStreet = $scope.selectedCustomer.office_street;
+            $scope.customerFormData.Info.officeZipcode = $scope.selectedCustomer.office_zipcode;
+            $scope.customerFormData.Info.officeCity = $scope.selectedCustomer.office_city;
+            $scope.customerFormData.Info.officeCountry = $scope.selectedCustomer.office_country;
+            $scope.customerFormData.Info.officeCounty = $scope.selectedCustomer.office_county;
+            $scope.customerFormData.Info.dateCreate = $scope.selectedCustomer.date_create;
+            $scope.customerFormData.Info.active = $scope.selectedCustomer.active;
+        }
     });
 
 
-function initFields($scope) {
-    $scope.customerFormData.Info.name = $scope.selectedCustomer.name;
-    $scope.customerFormData.Info.customertypesId = $scope.selectedCustomer.customertypes_id;
-    $scope.customerFormData.Info.vat = $scope.selectedCustomer.vat;
-    $scope.customerFormData.Info.phone = $scope.selectedCustomer.phone;
-    $scope.customerFormData.Info.email = $scope.selectedCustomer.email;
-    $scope.customerFormData.Info.billingStreet = $scope.selectedCustomer.billing_street;
-    $scope.customerFormData.Info.billingZipcode = $scope.selectedCustomer.billing_zipcode;
-    $scope.customerFormData.Info.billingCity = $scope.selectedCustomer.billing_city;
-    $scope.customerFormData.Info.billingCountry = $scope.selectedCustomer.billing_country;
-    $scope.customerFormData.Info.billingCounty = $scope.selectedCustomer.billing_county;
-    $scope.customerFormData.Info.officeStreet = $scope.selectedCustomer.office_street;
-    $scope.customerFormData.Info.officeZipcode = $scope.selectedCustomer.office_zipcode;
-    $scope.customerFormData.Info.officeCity = $scope.selectedCustomer.office_city;
-    $scope.customerFormData.Info.officeCountry = $scope.selectedCustomer.office_country;
-    $scope.customerFormData.Info.officeCounty = $scope.selectedCustomer.office_county;
-    $scope.customerFormData.Info.dateCreate = $scope.selectedCustomer.date_create;
-    $scope.customerFormData.Info.active = $scope.selectedCustomer.active;
-}

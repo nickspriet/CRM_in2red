@@ -87,16 +87,21 @@ div.invoice {
     width: 25px;
 }
 
-.width-100p {
-    width: 90%;
+.width-125 {
+    width: 125px;
 }
 
+
+.height-56 {
+    height: 56px;
+}
 
 .btn-file {
     position: relative;
     overflow: hidden;
     padding: 6px;
 }
+
 .btn-file input[type=file] {
     position: absolute;
     top: 0;
@@ -112,7 +117,6 @@ div.invoice {
     cursor: inherit;
     display: block;
 }
-
 
 @media screen and (min-width: 1025px) {
     sidebar {
@@ -138,18 +142,41 @@ div.invoice {
     border-color: green;
 }
 
-/* ANIMATIONS */
-.sample-show-hide {
-    padding: 10px;
-    background: white;
-    opacity: 0
+.no-bullet{
+    list-style-type: none;
 }
 
-.sample-show-hide {
-    -webkit-transition: all linear 5s;
-    transition: all linear 5s;
+/* file uploader */
+.my-drop-zone {
+    border: dotted 3px lightgray;
 }
 
-.sample-show-hide.ng-show {
-    opacity: 1;
+.nv-file-over {
+    border: dotted 3px red;
+}
+
+/* Default class applied to drop zones on over */
+.another-file-over-class {
+    border: dotted 3px green;
+}
+
+/* modal*/
+.modal {
+    z-index: 3500;
+}
+
+.modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+    -moz-box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+    -o-box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+}
+
+.pdfAttach {
+    height: 75vh;
+    width: 100%;
+}
+
+.imgAttach {
+    width: 100%;
 }

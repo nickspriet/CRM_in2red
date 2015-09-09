@@ -1,6 +1,6 @@
-<form name="newActionForm" ng-submit="newActionForm.$valid && submitForm()" novalidate>
+<form name="actionForm" ng-submit="actionForm.$valid && submitForm()" novalidate>
     <div class="page-header">
-        <h1 class="title">Nieuwe actie</h1>
+        <h1 class="title">Bewerk actie</h1>
         <ol class="breadcrumb">
             <li><a href="#/acties">Acties</a></li>
             <li class="active">Nieuwe actie</li>
@@ -12,6 +12,11 @@
         </div>
     </div>
 
+       <pre>
+            {{actionFormData}}
+       </pre>
+
+
     <div class="container-default">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -19,27 +24,21 @@
                     <div class="col-sm-7">
                         <div class="form-horizontal">
                             <div class="form-group">
-                                <div ng-controller="TypeaheadController as typeaheadCtrl">
-                                    <label for="companyname" class="col-sm-2 control-label form-label">Bedrijfsnaam</label>
-
-                                    <div class="col-sm-10">
-                                        <input id="companyname" type="text" ng-change="uploader.formData.customersId = selectedCompany.Info.id == null ? 0 : selectedCompany.Info.Id;" typeahead-editable="false" typeahead-on-select="onSelect($item, $model, $label)" ng-model="selectedCompany" typeahead="customer as customer.Info.name for customer in customers | filter:$viewValue | limitTo:8" class="form-control"><br>
-                                        {{selectedCompany.Info.id}}
-                                    </div>
-                                </div>
+                                    <label class="col-sm-2 control-label form-label">Bedrijfsnaam</label>
+                                    <div class="col-sm-10 padding-t-5">{{selectedAction.customers_name}}</div>
                             </div>
                             <div class="form-group">
                                 <label for="type" class="col-sm-2 control-label form-label">Type actie</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="type" name="type">
+                                    <input type="text" class="form-control" id="type" name="type" ng-model="actionFormData.type">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="description" class="col-sm-2 control-label form-label">Omschrijving</label>
 
                                 <div class="col-sm-10">
-                                    <textarea id="description" class="form-control disable-width-resize" rows="5"></textarea>
+                                    <textarea id="description" class="form-control disable-width-resize" rows="5" ng-model="actionFormData.name"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +53,7 @@
                                 <div class="form-group" ng-controller="DatePickerController as datePickerCtrl">
                                     <div class="input-prepend input-group">
                                         <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input type="text" id="date-picker" name="date-picker" class="form-control active" id="action-create" ng-model="newActionFormData.dateCreate">
+                                        <input type="text" id="date-picker" name="date-picker" class="form-control active" id="action-create" ng-model="actionFormData.dateCreate">
                                     </div>
                                 </div>
                             </div>
@@ -74,13 +73,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{uploader.formData}}
+
+
                             </div>
                         </div>
                     </div>
                     <div class="row">
-
-
                         <div class="col-sm-12" style="margin-bottom: 40px">
 
                             <h3>Upload wachtrij</h3>
@@ -152,23 +150,4 @@
         </div>
     </div>
     <script src="lib/date-range-picker/daterangepicker.js"></script>
-
-
-    <!--<script>
-        $(document).on('change', '.btn-file :file', function () {
-
-            var input = $(this), numFiles = input.get(0).files ? input.get(0).files.length : 1, label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [numFiles, label]);
-        });
-
-        $(document).ready(function () {
-            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
-
-                var input = $(this).parents('.input-group').find(':text'), log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                if (input.length) input.val(log);
-                else if (log) alert(log);
-            });
-        });
-    </script>-->
 </form>
