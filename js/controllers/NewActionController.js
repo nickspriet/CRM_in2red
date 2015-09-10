@@ -18,62 +18,66 @@ angular.module("crmApp").controller("NewActionController", function ($scope, $ro
     };
 
 
-
     //FILTERS uploader
     uploader.filters.push({
         name: 'customFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {
+            //maximum upload items is 10
             return this.queue.length < 10;
         }
     });
 
-    //CALLBCKS uploader
-    uploader.onWhenAddingFileFailed = function (item /*{File|FileLikeObject}*/, filter, options) {
+    //<editor-fold desc="CALLBACKS uploader">
+    $scope.uploader.onWhenAddingFileFailed = function (item /*{File|FileLikeObject}*/, filter, options) {
         console.info('onWhenAddingFileFailed', item, filter, options);
     };
-    uploader.onAfterAddingFile = function (fileItem) {
+    $scope.uploader.onAfterAddingFile = function (fileItem) {
         console.info('onAfterAddingFile', fileItem);
     };
-    uploader.onAfterAddingAll = function (addedFileItems) {
+    $scope.uploader.onAfterAddingAll = function (addedFileItems) {
         console.info('onAfterAddingAll', addedFileItems);
     };
-    uploader.onBeforeUploadItem = function (item) {
+    $scope.uploader.onBeforeUploadItem = function (item) {
         item.formData = uploader.formData;
         console.info('onBeforeUploadItem', item);
     };
-    uploader.onProgressItem = function (fileItem, progress) {
+    $scope.uploader.onProgressItem = function (fileItem, progress) {
         console.info('onProgressItem', fileItem, progress);
     };
-    uploader.onProgressAll = function (progress) {
+    $scope.uploader.onProgressAll = function (progress) {
         console.info('onProgressAll', progress);
     };
-    uploader.onSuccessItem = function (fileItem, response, status, headers) {
+    $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {
         console.info('onSuccessItem', fileItem, response, status, headers);
     };
-    uploader.onErrorItem = function (fileItem, response, status, headers) {
+    $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
         console.info('onErrorItem', fileItem, response, status, headers);
     };
-    uploader.onCancelItem = function (fileItem, response, status, headers) {
+    $scope.uploader.onCancelItem = function (fileItem, response, status, headers) {
         console.info('onCancelItem', fileItem, response, status, headers);
     };
-    uploader.onCompleteItem = function (fileItem, response, status, headers) {
+    $scope.uploader.onCompleteItem = function (fileItem, response, status, headers) {
         console.info('onCompleteItem', fileItem, response, status, headers);
     };
-    uploader.onCompleteAll = function () {
+    $scope.uploader.onCompleteAll = function () {
+
         console.info('onCompleteAll');
+
+        //submit the form when all files are uploaded
+        submitForm();
     };
 
     console.info('uploader', uploader);
+    //</editor-fold>
 
-    //submit newActionForm
+    //upload attachments & submit newActionForm
+    $scope.uploadAndSubmitForm = function () {
+        //check if there are items to upload
+        if ($scope.uploader.queue.length > 0) $scope.uploader.uploadAll();
+        else submitForm();  //<-- see uploader.onCompleteAll function for submission form after every file has been uploaded
+    }
 
     $scope.submitForm = function () {
-        console.log("submit");
-    }
 
-
-    $scope.addFile = function (el) {
-        console.log("el", el);
-        console.log("fffffff", $scope.files);
     }
-})
+});

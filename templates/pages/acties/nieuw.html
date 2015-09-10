@@ -1,4 +1,4 @@
-<form name="newActionForm" ng-submit="newActionForm.$valid && submitForm()" novalidate>
+<form name="newActionForm" ng-submit="newActionForm.$valid && uploadAndSubmitForm()" novalidate>
     <div class="page-header">
         <h1 class="title">Nieuwe actie</h1>
         <ol class="breadcrumb">
@@ -12,6 +12,7 @@
         </div>
     </div>
 
+    <pre>{{uploader.formData | json}}</pre>
     <div class="container-default">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -30,11 +31,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" ng-class="{'error' : newActionForm.type.$dirty && newActionForm.type.$invalid}">
                                 <label for="type" class="col-sm-2 control-label form-label">Type actie</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="type" name="type">
+                                    <input type="text" class="form-control" id="type" name="type" ng-model="newActionForm.type">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -48,7 +49,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-5">
-                            <div class="form-group">
+                            <div class="form-grou">
                                 <div class="checkbox checkbox-danger float-l padding-r-20">
                                     <input id="reminder" checked type="checkbox">
                                     <label for="reminder">Herinner me op:</label>
@@ -75,8 +76,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <span class="color10" ng-show="uploader.queue.length >= 10"><i class="fa fa-exclamation-triangle"></i> Er kunnen maximaal 10 bestanden in 1 keer upgeload worden.</span>
                                 </div>
-                                {{uploader.formData}}
                             </div>
                         </div>
                     </div>
@@ -85,9 +86,7 @@
 
                         <div class="col-sm-12" style="margin-bottom: 40px">
 
-                            <h3>Upload wachtrij</h3>
-
-                            <p>Wachtrij lengte: {{ uploader.queue.length }}</p>
+                            <!--<h3>Upload wachtrij</h3>-->
 
                             <div class="table-responsive">
                                 <table class="table">
@@ -97,7 +96,7 @@
                                         <th ng-show="uploader.isHTML5">Grootte</th>
                                         <th ng-show="uploader.isHTML5">Progress</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -118,11 +117,11 @@
                                             <!--<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">-->
                                             <!--<i class="fa fa-upload"></i> Upload-->
                                             <!--</button>-->
-                                            <!--<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">-->
-                                            <!--<i class="fa fa-ban"></i> Cancel-->
-                                            <!--</button>-->
+                                            <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                            <i class="fa fa-ban"></i> Annuleer
+                                            </button>
                                             <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                                                <i class="fa fa-trash"></i> Remove
+                                                <i class="fa fa-trash"></i> Verwijder
                                             </button>
                                         </td>
                                     </tr>
@@ -131,20 +130,25 @@
                             </div>
                             <div>
                                 <div class="margin-t-30">
-                                    Queue progress:
+                                    <p class="float-r" ng-class="{'color10' : uploader.queue.length >= 10}">Wachtrij lengte: {{ uploader.queue.length }}</p>
+
+                                    <p>Queue progress:</p>
+
                                     <div class="progress" style="">
                                         <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-                                    <i class="fa fa-upload"></i> Upload all
-                                </button>
-                                <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
-                                    <i class="fa fa-ban"></i> Cancel all
-                                </button>
-                                <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
-                                    <i class="fa fa-trash"></i> Remove all
-                                </button>
+                                <!--<button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">-->
+                                <!--<i class="fa fa-upload"></i> Upload all-->
+                                <!--</button>-->
+                                <div class="float-r">
+                                    <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                                        <i class="fa fa-ban"></i> Annuleer alles
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                                        <i class="fa fa-trash"></i> Verwijder alles
+                                    </button>
+                                </div>
                             </div>
 
                         </div>
@@ -153,24 +157,9 @@
             </div>
         </div>
     </div>
-    <script src="lib/date-range-picker/daterangepicker.js"></script>
-
-
-    <!--<script>
-        $(document).on('change', '.btn-file :file', function () {
-
-            var input = $(this), numFiles = input.get(0).files ? input.get(0).files.length : 1, label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-            input.trigger('fileselect', [numFiles, label]);
-        });
-
-        $(document).ready(function () {
-            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
-
-                var input = $(this).parents('.input-group').find(':text'), log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-                if (input.length) input.val(log);
-                else if (log) alert(log);
-            });
-        });
-    </script>-->
 </form>
+<pre>{{newActionForm| json}}</pre>
+
+
+<script src="lib/date-range-picker/daterangepicker.js"></script>
+

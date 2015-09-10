@@ -14,7 +14,9 @@
 <div class="container-default">
     <div class="panel">
         <div class="panel-title">
-
+            <div ng-if="selectedAction.Info.customers_name">
+                <div>{{selectedAction.Info.customers_name}}</div>
+            </div>
         </div>
         <div class="panel-body">
             <ul class="basic-list">
@@ -25,7 +27,7 @@
                 </li>
                 <li ng-repeat="subaction in selectedAction.Subactions">
                     <div class="row padding-20 margin-0">
-                        <one-action selected-attachments="selectedSubactionAttachments" action="subaction"></one-action>
+                        <one-action selected-attachments="selectedActionAttachments" action="subaction"></one-action>
                     </div>
                 </li>
             </ul>

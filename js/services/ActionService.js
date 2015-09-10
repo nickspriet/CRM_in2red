@@ -27,17 +27,9 @@ angular.module("crmApp").factory("ActionService", function ($http) {
             })
         },
 
-        getAttachmentsByActionsId: function(actions_id){
+        getActionAttachmentsByActionsId: function(actions_id){
             return $http.get("/php/get/attachments/?actions_id=" + actions_id).then(function (response) {
                 console.log("data-getAttachmentsByActionsId", response.data);
-                return response.data;
-            })
-        },
-
-
-        getAttachmentsBySubactionsId: function(subactions_id){
-            return $http.get("/php/get/attachments/?subactions_id=" + subactions_id).then(function (response) {
-                console.log("data-getAttachmentsBySubactionsId", response.data);
                 return response.data;
             })
         }

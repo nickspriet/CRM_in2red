@@ -1,8 +1,5 @@
 <div class="col-sm-6">
-    <div ng-if="action.customers_name">
-        <div class="width-125 float-l f-bold">Bedrijfsnaam</div>
-        <div>{{action.customers_name}}</div>
-    </div>
+
     <div>
         <div class="width-125 float-l f-bold">Type actie</div>
         <div>{{action.type}}</div>
@@ -12,7 +9,7 @@
         <div>{{action.date_create}}</div>
     </div>
     <div>
-        <label class="padding-t-20">Omschrijving</label>
+        <label>Omschrijving</label>
 
         <p class="padding-l-40">{{action.name}}</p>
     </div>
@@ -25,13 +22,13 @@
         <p class="color10 padding-l-40">U wordt herinnerd op: {{action.date_reminder | DateFilter}}</p>
     </div>
     <div ng-if="selectedAttachments.length > 0">
-        <label class="padding-t-30">Bijlagen</label>
+        <label>Bijlagen</label>
 
 
         <!-- show or download file ? -->
         <div>
             <ul class="no-bullet">
-                <div ng-init="ext = selectedAttachment.name.split('.').pop().toLowerCase()" ng-repeat="selectedAttachment in selectedAttachments">
+                <div ng-if="selectedAttachment.actions_id == action.actions_id && selectedAttachment.subactions_id == action.sub_id" ng-init="ext = selectedAttachment.name.split('.').pop().toLowerCase()" ng-repeat="selectedAttachment in selectedAttachments">
                     <!-- show file -->
                     <li ng-if="modalFiles.indexOf(ext) > -1" class="padding-0">
                         <a download href="/_userfiles/{{action.customers_id + '/' + selectedAttachment.name}}"><span class="icon"><i class="fa fa-download"></i></span></a>
@@ -49,5 +46,3 @@
         </div>
     </div>
 </div>
-
-{{action}}

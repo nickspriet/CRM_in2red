@@ -54,7 +54,7 @@ angular.module("templates", [])
                 action: "=action",
                 selectedAttachments: '=selectedAttachments'
             },
-            controller: function ($scope, $rootScope) {
+            controller: function ($scope) {
                 //files to show modal
                 $scope.modalFiles = ['pdf', 'png', 'jpg', 'jpeg'];
 
@@ -64,8 +64,6 @@ angular.module("templates", [])
                     //get extension of file (pdf, png, jpg, jpeg...) + source
                     var ext = fileName.split(".").pop().toLowerCase();
                     var source = "/_userfiles/" + $scope.action.customers_id + "/" + fileName;
-
-                    console.log("rooot", $rootScope.$broadcast);
 
                     //clear content of modal
                     $scope.$parent.pdfSource = $scope.$parent.imgSource = null;
@@ -77,7 +75,6 @@ angular.module("templates", [])
                     //add filename + show the modal
                     $scope.$parent.filename = fileName;
                     $('#myModal').modal('show');
-
                 }
             }
         }

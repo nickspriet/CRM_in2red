@@ -13,14 +13,10 @@ angular.module("crmApp").controller("DetailsActionController", function ($scope,
         console.log("selectedAction", $scope.selectedAction);
 
         //get attachments by actions_id
-        ActionService.getAttachmentsByActionsId($routeParams.id).then(function (actionAttachments) {
+        ActionService.getActionAttachmentsByActionsId($routeParams.id).then(function (actionAttachments) {
             $scope.selectedActionAttachments = actionAttachments;
-        });
 
-
-        //get attachments by subactions_id
-        ActionService.getAttachmentsBySubactionsId($routeParams.id).then(function (subactionAttachments) {
-            $scope.selectedSubactionAttachments = subactionAttachments;
+            console.log("selectedActionAttachments", $scope.selectedActionAttachments);
         });
 
 
@@ -29,18 +25,12 @@ angular.module("crmApp").controller("DetailsActionController", function ($scope,
     });
 
 
-
-
-
     var uploader = $scope.uploader = new FileUploader({
         url: '/php/post/upload_files.php',
         formData: [{
-           // customersId: $scope.selectedAction.customers_id
+            // customersId: $scope.selectedAction.customers_id
         }]
     });
-
-
-
 
 
     //init ng-model (because value doesn't work)
