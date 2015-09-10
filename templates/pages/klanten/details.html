@@ -121,7 +121,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div ng-class="{active: checkTab(3)}" role="tabpanel" class="tab-pane" id="acties" ng-controller="ActionController as actionCtrl">
+                    <div ng-class="{active: checkTab(3)}" role="tabpanel" class="tab-pane" id="acties">
                         <div class="float-r">
                             <div class="input-group small-control-w small-control-mr">
                                 <input type="text" ng-model="searchAction" class="form-control smallSearch ng-pristine ng-valid ng-touched" placeholder="Search">
@@ -130,11 +130,27 @@
                             </div>
                         </div>
                         <div class="fc-clear">
-
                             <ul ng-if="actions" class="basic-list">
-                                <li class="clickable-row" ng-repeat="action in actions | filter:searchAction">
-                                    <b>{{action.name}}</b>
-                                    <span class="desc">({{action.date_reminder}} - € {{action.totalprice}})</span>
+                                <li class="actionListItem" ng-repeat="action in actions | filter:searchAction">
+                                    <div>
+                                        <i ng-if="action.Subactions" ng-click="toggleList($event)" class="fa fa-caret-right float-l padding-15"></i>
+
+                                        <div class="clickable-row">
+                                            <b ng-class="{'padding-l-20' : !action.Subactions}">{{action.Info.name}}</b>
+                                            <span class="desc">({{action.Info.date_create | DateFilter}})</span>
+                                            <span ng-if="action.Info.reminder == 'Y'"> <i class="fa fa-clock-o color10"></i></span>
+                                            <span ng-if="action.Subactions"><i class="fa fa-sort-amount-asc"></i></span>
+                                        </div>
+
+
+                                        <ul class="hidden">
+                                            <li class="clickable-row-small" ng-repeat="subaction in action.Subactions">
+                                                {{subaction.name}}
+                                                <span class="desc">({{subaction.date_create | DateFilter}})</span>
+                                                <span ng-if="subaction.reminder == 'Y'"> <i class="fa fa-clock-o color10"></i></span>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                             </ul>
                             <div ng-if="!actions">

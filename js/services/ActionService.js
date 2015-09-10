@@ -32,6 +32,14 @@ angular.module("crmApp").factory("ActionService", function ($http) {
                 console.log("data-getAttachmentsByActionsId", response.data);
                 return response.data;
             })
+        },
+
+
+        getAttachmentsBySubactionsId: function(subactions_id){
+            return $http.get("/php/get/attachments/?subactions_id=" + subactions_id).then(function (response) {
+                console.log("data-getAttachmentsBySubactionsId", response.data);
+                return response.data;
+            })
         }
     }
 });

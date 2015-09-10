@@ -34,8 +34,12 @@ angular.module("crmApp")
                     //check if contact exists
                     var id = $scope.$parent.selectedContacts.indexOf(contact);
                     if (id > -1) {
+                        //delete the contact
                         $scope.$parent.selectedContacts.splice(id, 1);
                         $scope.removing = false;
+
+                        //collect an array of deleted contacts
+                        $scope.$parent.deletedContacts.push(contact);
                     }
                 };
 

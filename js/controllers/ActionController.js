@@ -13,6 +13,12 @@ angular.module("crmApp")
 
             $scope.actions = data;
 
+            var eventColors = {
+                "telefoon" : "green",
+                "e-mail" : "#399bff",
+                "afspraak": "#f39c12",
+            }
+
 
             actionEvents = data.map(function (a) {
                 console.log(a);
@@ -20,9 +26,10 @@ angular.module("crmApp")
                     "id": a.id,
                     "title": a.name,
                     "start": a.date_create,
-                    "color": "red"
+                    "color": a.reminder == 'Y' ? 'red' : eventColors[a.type.toLowerCase()]
                 };
             });
+
 
             console.log("actionEvents", actionEvents);
 

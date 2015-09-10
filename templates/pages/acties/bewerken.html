@@ -3,7 +3,7 @@
         <h1 class="title">Bewerk actie</h1>
         <ol class="breadcrumb">
             <li><a href="#/acties">Acties</a></li>
-            <li class="active">Nieuwe actie</li>
+            <li class="active">{{actionFormData.name| limitTo: 50 }}{{actionFormData.name.length > 50 ? "..." : ""}}</li>
         </ol>
         <div class="right">
             <div class="btn-group small-control-mr" role="group" aria-label="...">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-5">
-                            <div class="form-group height-56">
+                            <div class="form-group">
                                 <div class="checkbox checkbox-danger float-l padding-r-20">
                                     <input id="reminder" checked type="checkbox">
                                     <label for="reminder">Herinner me op:</label>
@@ -53,7 +53,7 @@
                                 <div class="form-group" ng-controller="DatePickerController as datePickerCtrl">
                                     <div class="input-prepend input-group">
                                         <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input type="text" id="date-picker" name="date-picker" class="form-control active" id="action-create" ng-model="actionFormData.dateCreate">
+                                        <input type="text" id="date-picker" name="date-picker" class="form-control active" id="action-create" ng-model="actionFormData.dateReminder">
                                     </div>
                                 </div>
                             </div>

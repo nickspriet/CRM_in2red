@@ -18,8 +18,8 @@ angular.module("crmApp").controller("NewActionController", function ($scope, $ro
     };
 
 
-    // FILTERS
 
+    //FILTERS uploader
     uploader.filters.push({
         name: 'customFilter',
         fn: function (item /*{File|FileLikeObject}*/, options) {

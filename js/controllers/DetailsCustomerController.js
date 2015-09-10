@@ -16,6 +16,8 @@ angular.module("crmApp").
         $scope.selectedTags = [];
 
 
+        $scope.deletedContacts = [];
+
         //change tabs
         $scope.tab = 1;
         $scope.checkTab = function (checkTab) {
@@ -45,18 +47,38 @@ angular.module("crmApp").
                 //init ng-model (because value doesn't work)
                 initFields();
             });
-        }
+        };
 
         $scope.loadOffers = function () {
             console.log("loadoffers");
-        }
+        };
+
 
         $scope.loadActions = function () {
             //get actions by customers_id
             ActionService.getActionsByCustomersId($routeParams.id).then(function (data) {
-                $scope.actions = data;
+                // convert object to associative array
+                $scope.actions = Object.keys(data).map(function (k) {
+                    return data[k];
+                });
+
+                console.log("actions", $scope.actions);
             });
-        }
+        };
+
+        //show+hide subactions
+        $scope.toggleList = function (event) {
+            var target = angular.element(event.target);
+            if (target.hasClass("fa-caret-right"))
+            {
+                target.removeClass("fa-caret-right").addClass("fa-caret-down");
+                target.parent().find("ul").removeClass("hidden");
+            }
+            else {
+                target.removeClass("fa-caret-down").addClass("fa-caret-right");
+                target.parent().find("ul").addClass("hidden");
+            }
+        };
 
 
         //submit detailsCustomerForm
@@ -69,7 +91,7 @@ angular.module("crmApp").
 
                 console.log($scope.customerFormData.Contacts);
 
-                //post contacts for this customer
+                //update contacts for this customer
                 //angular.forEach($scope.customerFormData.Contacts, function (c) {
                 //    c.customersId = id.data;
                 //
@@ -87,8 +109,7 @@ angular.module("crmApp").
                 //after submit => go to details page of inserted customer
                 $location.path("klanten/details/" + $routeParams.id);
             });
-        }
-
+        };
 
 
         function initFields() {

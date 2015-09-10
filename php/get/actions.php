@@ -12,7 +12,15 @@
 		$result = $conn->query($sql1);
 		while($row = $result->fetch_assoc())
 		{
-			$rows[] = $row;
+			$id = $row["id"];
+			$rows[$id]["Info"] = $row;
+
+			$sql2 = "SELECT * FROM subactions WHERE archive = 'N' AND actions_id=".$id;
+			$result2 = $conn->query($sql2);
+			while($row2 = $result2->fetch_assoc())
+			{
+				$rows[$id]["Subactions"][] = $row2;
+			}
 		}
 
 		echo json_encode($rows);
@@ -29,7 +37,15 @@
 		$result = $conn->query($sql1);
 		while($row = $result->fetch_assoc())
 		{
-			$rows[] = $row;
+			$id = $row["id"];
+			$rows[$id]["Info"] = $row;
+
+			$sql2 = "SELECT * FROM subactions WHERE archive = 'N' AND actions_id=".$id;
+			$result2 = $conn->query($sql2);
+			while($row2 = $result2->fetch_assoc())
+			{
+				$rows[$id]["Subactions"][] = $row2;
+			}
 		}
 
 		echo json_encode($rows);

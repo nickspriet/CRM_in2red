@@ -7,40 +7,29 @@ angular.module("crmApp").controller("DetailsActionController", function ($scope,
 
     $scope.actionFormData = {};
 
-    //files to show modal
-    $scope.modalFiles = ['pdf', 'png', 'jpg', 'jpeg'];
-
     //get action by id
     ActionService.getActionById($routeParams.id).then(function (data) {
-        $scope.selectedAction = data[0];
+        $scope.selectedAction = data[$routeParams.id];
+        console.log("selectedAction", $scope.selectedAction);
 
-        //get attachmens by actions_id
-        ActionService.getAttachmentsByActionsId($routeParams.id).then(function (attachments) {
-            $scope.selectedAttachments = attachments;
+        //get attachments by actions_id
+        ActionService.getAttachmentsByActionsId($routeParams.id).then(function (actionAttachments) {
+            $scope.selectedActionAttachments = actionAttachments;
         });
+
+
+        //get attachments by subactions_id
+        ActionService.getAttachmentsBySubactionsId($routeParams.id).then(function (subactionAttachments) {
+            $scope.selectedSubactionAttachments = subactionAttachments;
+        });
+
+
 
         initFields();
     });
 
 
-    //show modal if document is PDF or Image
-    $scope.openModal = function (fileName) {
-        //get extension of file (pdf, png, jpg, jpeg...) + source
-        var ext = fileName.split(".").pop().toLowerCase();
-        var source = "/_userfiles/" + $scope.selectedAction.customers_id + "/" + fileName;
 
-        //clear content of modal
-        $scope.pdfSource = $scope.imgSource = null;
-
-        //check if file is pdf-document or image
-        if (ext == "pdf" || ext == "docx") $scope.pdfSource = source;
-        if (ext == "png" || ext == "jpg" || ext == "jpeg") $scope.imgSource = "/_userfiles/" + $scope.selectedAction.customers_id + "/" + fileName;
-
-        //add filename + show the modal
-        $scope.filename = fileName;
-        $('#myModal').modal('show');
-
-    }
 
 
     var uploader = $scope.uploader = new FileUploader({

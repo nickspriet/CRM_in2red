@@ -31,14 +31,22 @@
     margin-right: 20px;
 }
 
-li.clickable-row {
-    padding-left: 15px;
-    padding-right: 15px;
+li.clickable-row, div.clickable-row {
+    padding: 10px 15px;
 }
 
-.clickable-row:hover {
+li.clickable-row-small, div.clickable-small {
+    padding: 5px 15px;
+}
+
+.clickable-row:hover, .clickable-row-small:hover {
     background-color: #EFF7FF;
     cursor: pointer;
+}
+
+li.actionListItem {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 tbody > tr.clickable-row td {
@@ -91,9 +99,12 @@ div.invoice {
     width: 125px;
 }
 
-
 .height-56 {
     height: 56px;
+}
+
+li.padding-0 {
+    padding: 0;
 }
 
 .btn-file {
@@ -142,7 +153,7 @@ div.invoice {
     border-color: green;
 }
 
-.no-bullet{
+.no-bullet {
     list-style-type: none;
 }
 
