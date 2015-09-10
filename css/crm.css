@@ -153,6 +153,10 @@ li.padding-0 {
     border-color: green;
 }
 
+div.has-error .input-group-addon, div.has-error .form-control {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
 .no-bullet {
     list-style-type: none;
 }
@@ -171,7 +175,8 @@ li.padding-0 {
     border: dotted 3px green;
 }
 
-/* modal*/
+
+/* modal */
 .modal {
     z-index: 3500;
 }

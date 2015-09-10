@@ -64,18 +64,22 @@ angular.module("crmApp").controller("NewActionController", function ($scope, $ro
         console.info('onCompleteAll');
 
         //submit the form when all files are uploaded
-        submitForm();
+        $scope.submitForm();
     };
 
     console.info('uploader', uploader);
     //</editor-fold>
 
+
+
     //upload attachments & submit newActionForm
     $scope.uploadAndSubmitForm = function () {
+        console.log("uploading... submit...");
         //check if there are items to upload
         if ($scope.uploader.queue.length > 0) $scope.uploader.uploadAll();
-        else submitForm();  //<-- see uploader.onCompleteAll function for submission form after every file has been uploaded
+        else $scope.submitForm();  //<-- see uploader.onCompleteAll function for submission form after every file has been uploaded
     }
+
 
     $scope.submitForm = function () {
 

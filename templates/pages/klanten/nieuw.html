@@ -7,7 +7,7 @@
         </ol>
         <div class="right">
             <div class="btn-group small-control-mr" role="group" aria-label="...">
-                <button type="submit" class="btn btn-light"><i class="fa fa-save"></i>Opslaan</button>
+                <button ng-click="submit = true" type="submit" class="btn btn-light"><i class="fa fa-save"></i>Opslaan</button>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="title">
-                    <div class="form-group" ng-class="{'has-error': newCustomerForm.name.$invalid && submitted}">
+                    <div class="form-group" ng-class="{'has-error' : (newCustomerForm.name.$dirty && newCustomerForm.name.$invalid) || (newCustomerForm.name.$touched && newCustomerForm.name.$invalid) || (newCustomerForm.name.$invalid && submit)}">
                         <input class="form-control input-lg" type="text" placeholder="Bedrijfsnaam" name="name" ng-model="customerFormData.Info.name" required>
                     </div>
 
@@ -52,11 +52,11 @@
                                         <input type="text" class="form-control" id="phone" name="phone" ng-model="customerFormData.Info.phone">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error' : (newCustomerForm.email.$dirty && newCustomerForm.email.$invalid) || (newCustomerForm.email.$touched && newCustomerForm.email.$invalid) || (newCustomerForm.email.$invalid && submit)}">
                                     <label for="email" class="col-sm-2 control-label form-label">E-mail</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="email" name="email" ng-model="customerFormData.Info.email">
+                                        <input type="email" class="form-control" id="email" name="email" ng-model="customerFormData.Info.email" required>
                                     </div>
                                 </div>
                             </div>
@@ -67,33 +67,33 @@
                                 <ul class="panel-tools">
                                     <a ng-hide="showOfficeAddress" ng-click="showOfficeAddress = true;" href="" class="btn btn-light"><i class="fa fa-plus"></i>Extra adres</a>
                                 </ul>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error' : (newCustomerForm.billingStreet.$dirty && newCustomerForm.billingStreet.$invalid) || (newCustomerForm.billingStreet.$touched && newCustomerForm.billingStreet.$invalid) || (newCustomerForm.billingStreet.$invalid && submit)}">
 
                                     <label for="billing-street" class="col-sm-2 control-label form-label">Adres</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="billing-street" name="billing-street" ng-model="customerFormData.Info.billingStreet" required>
+                                        <input type="text" class="form-control" id="billing-street" name="billingStreet" ng-model="customerFormData.Info.billingStreet" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error' : (newCustomerForm.billingZipcode.$dirty && newCustomerForm.billingZipcode.$invalid) || (newCustomerForm.billingZipcode.$touched && newCustomerForm.billingZipcode.$invalid) || (newCustomerForm.billingZipcode.$invalid && submit)}">
                                     <label for="billing-zipcode" class="col-sm-2 control-label form-label">Postcode</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="billing-zipcode" name="billing-zipcode" ng-model="customerFormData.Info.billingZipcode" required>
+                                        <input type="text" class="form-control" id="billing-zipcode" name="billingZipcode" ng-model="customerFormData.Info.billingZipcode" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error' : (newCustomerForm.billingCity.$dirty && newCustomerForm.billingCity.$invalid) || (newCustomerForm.billingCity.$touched && newCustomerForm.billingCity.$invalid) || (newCustomerForm.billingCity.$invalid && submit)}">
                                     <label for="billing-city" class="col-sm-2 control-label form-label">Gemeente</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="billing-city" name="billing-city" ng-model="customerFormData.Info.billingCity" required>
+                                        <input type="text" class="form-control" id="billing-city" name="billingCity" ng-model="customerFormData.Info.billingCity" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ng-class="{'has-error' : (newCustomerForm.billingCountry.$dirty && newCustomerForm.billingCountry.$invalid) || (newCustomerForm.billingCountry.$touched && newCustomerForm.billingCountry.$invalid) || (newCustomerForm.billingCountry.$invalid && submit)}">
                                     <label for="billing-country" class="col-sm-2 control-label form-label">Land</label>
 
                                     <div class="col-sm-10">
-                                        <ol id="billing-country" name="billing-country" class="nya-bs-select col-sm-12 col-xs-12" ng-model="customerFormData.Info.billingCountry" data-live-search="true">
+                                        <ol id="billing-country" name="billingCountry" class="nya-bs-select col-sm-12 col-xs-12" ng-model="customerFormData.Info.billingCountry" data-live-search="true" required>
                                             <li class="nya-bs-option" data-value="België"><a>België</a></li>
                                             <li class="nya-bs-option" data-value="Nederland"><a>Nederland</a></li>
                                             <li class="nya-bs-option" data-value="Frankrijk"><a>Frankrijk</a></li>
@@ -137,13 +137,13 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group" ng-controller="DatePickerController as datePickerCtrl">
-                                    <label for="customer-create" class="col-sm-2 control-label form-label">Klant sinds</label>
+                                <div class="form-group" ng-controller="DatePickerController as datePickerCtrl" ng-class="{'has-error' : (newCustomerForm.date-picker.$dirty && newCustomerForm.date-picker.$invalid) || (newCustomerForm.date-picker.$touched && newCustomerForm.date-picker.$invalid) || (newCustomerForm.date-picker.$invalid && submit)}">
+                                    <label for="dateCreate" class="col-sm-2 control-label form-label">Klant sinds</label>
 
                                     <div class="col-sm-10">
                                         <div class="input-prepend input-group">
                                             <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
-                                            <input type="text" id="date-picker" name="date-picker" class="form-control active" id="customer-create" ng-model="customerFormData.Info.dateCreate" required>
+                                            <input type="text" id="date-picker" name="date-picker" class="form-control active" id="dateCreate" ng-model="customerFormData.Info.dateCreate" required>
                                         </div>
                                     </div>
                                 </div>
