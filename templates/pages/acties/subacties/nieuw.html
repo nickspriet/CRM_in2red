@@ -16,6 +16,10 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <div class="row color4-bg padding-20 margin-0 margin-b-30" ng-controller="DetailsActionController">
+                        <one-action selected-attachments="selectedActionAttachments" action="selectedAction.Info"></one-action>
+                        <modal></modal>
+                    </div>
                     <div class="col-sm-7">
                         <div class="form-horizontal">
                             <div class="form-group" ng-class="{'has-error' : (newSubactionForm.type.$dirty && newSubactionForm.type.$invalid) || (newSubactionForm.type.$touched && newSubactionForm.type.$invalid) || (newSubactionForm.type.$invalid && submit)}">

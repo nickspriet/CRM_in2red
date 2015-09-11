@@ -15,7 +15,7 @@
     <div class="panel">
         <div class="panel-title">
             <div ng-if="selectedAction.Info.customers_name">
-                <div>{{selectedAction.Info.customers_name}}</div>
+                <div><span class="text-capitalize">Bedrijfsnaam: </span>{{selectedAction.Info.customers_name}}</div>
             </div>
         </div>
         <div class="panel-body">
@@ -34,7 +34,7 @@
                     <div class="row padding-20 margin-0">
                         <div class="right z-index">
                             <div class="btn-group small-control-mr" role="group" aria-label="...">
-                                <a href="#/acties/bewerken/{{selectedAction.Info.customers_id}}" class="btn btn-light"><i class="fa fa-pencil"></i>Bewerken</a>
+                                <a href="#/acties/{{selectedAction.Info.customers_id}}/subacties/bewerken/{{subaction.sub_id}}" class="btn btn-light"><i class="fa fa-pencil"></i>Bewerken</a>
                             </div>
                         </div>
                         <one-action selected-attachments="selectedActionAttachments" action="subaction"></one-action>
@@ -44,21 +44,4 @@
         </div>
     </div>
 </div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" ng-class="pdfSource ? 'modal-lg': '';">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">{{filename}}</h4>
-            </div>
-            <div class="modal-body">
-                <iframe ng-if="pdfSource" class="pdfAttach" ng-src="{{pdfSource}}"></iframe>
-                <img ng-if="imgSource" class="imgAttach" ng-src="{{imgSource}}"/>
-            </div>
-
-        </div>
-    </div>
-</div>
+<modal></modal>

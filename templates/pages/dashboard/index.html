@@ -4,72 +4,9 @@
 
 <div class="container-default">
     <div>
-        <div class="col-md-12" ng-controller="ActionController as actionCtrl">
-            <div class="panel">
-                <div class="panel-title">Acties</div>
-                <ul class="panel-tools">
-                    <a href="#/acties/nieuw" class="btn btn-light"><i class="fa fa-plus"></i>Nieuwe actie</a>
-                </ul>
-                <div class="panel-body">
-                    <ul class="basic-list">
-                        <li class="clickable-row" ng-click="goToDetails(action.id)" ng-repeat="action in actions | orderBy: '-date_create'">
-                            <b>{{action.customers_name}}</b> - <span class="desc">{{action.name | limitTo: 150}}{{action.name.length > 150 ? "..." : ""}} ({{action.date_create | DateFilter}})</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <dashboard-acties></dashboard-acties>
 
-        <div class="col-md-4" ng-controller="OfferController as offerCtrl">
-            <div class="panel">
-                <div class="panel-title">Laatst gewijzigde offertes</div>
-                <ul class="panel-tools">
-                    <a href="#/offertes/nieuw" class="btn btn-light"><i class="fa fa-plus"></i>Nieuwe offerte</a>
-                </ul>
-                <div class="panel-body">
-                    <ul class="basic-list">
-                        <li class="clickable-row" ng-repeat="offer in offers | orderBy:'-date' | filter:searchOffer">
-                            <b>{{offer.customers_name}} - {{offer.name}}</b>
-                            <span class="desc">({{offer.date_create | DateFilter}} - € {{offer.totalprice}})</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8" ng-controller="CustomerController as customerCtrl">
-            <div class="panel">
-                <div class="panel-title">Laatst gewijzigde klanten</div>
-                <ul class="panel-tools">
-                    <a href="#/klanten/nieuw" class="btn btn-light"><i class="fa fa-plus"></i>Nieuwe klant</a>
-                </ul>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <td>Naam</td>
-                                <td>Adres</td>
-                                <td>Telefoon</td>
-                                <td>E-mail</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-click="goToDetails(customer.Info.id)" ng-repeat="customer in customers | orderBy:'-Info.date_edit' | limitTo:'10'" class="clickable-row">
-                                <td>{{customer.Info.name}}</td>
-                                <td>
-                                    <a ng-click="$event.stopPropagation();" ng-href="https://www.google.com/maps/search/ {{customer.Info.billing_street + ', ' + customer.Info.billing_zipcode + ' ' + customer.Info.billing_city}}" target="_blank">
-                                        <div>{{customer.Info.billing_street + ", "}}</div>
-                                        <div>{{customer.Info.billing_zipcode + " " + customer.Info.billing_city}}</div>
-                                    </a>
-                                </td>
-                                <td>{{customer.Info.phone}}</td>
-                                <td><a ng-click="$event.stopPropagation();" ng-href="mailto:{{customer.Info.email}}">{{customer.Info.email}}</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <dashboard-offertes></dashboard-offertes>
+        <dashboard-klanten></dashboard-klanten>
     </div>
 </div>

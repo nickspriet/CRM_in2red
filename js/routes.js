@@ -74,6 +74,10 @@ angular.module("routes", ["ngRoute"])
                 templateUrl: "templates/pages/acties/subacties/nieuw.html",
                 controller: "NewActionController"
             })
+            .when("/acties/:id/subacties/bewerken/:subid", {
+                templateUrl: "templates/pages/acties/subacties/bewerken.html",
+                controller: "DetailsActionController"
+            })
 
             .otherwise("/");
     });

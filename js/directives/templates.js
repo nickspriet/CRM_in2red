@@ -79,3 +79,36 @@ angular.module("templates", [])
             }
         }
     })
+
+    //modal
+    .directive("modal", function () {
+        return {
+            restrict: "E",
+            templateUrl: "templates/pages/acties/modal.html"
+        }
+    })
+
+
+    //dashboard acties
+    .directive("dashboardActies", function () {
+        return {
+            restrict: "E",
+            templateUrl: "templates/pages/dashboard/acties.html"
+        }
+    })
+
+    //dashboard offertes
+    .directive("dashboardOffertes", function () {
+        return {
+            restrict: "E",
+            templateUrl: "templates/pages/dashboard/offertes.html"
+        }
+    })
+
+    //dashboard klanten
+    .directive("dashboardKlanten", function () {
+        return {
+            restrict: "E",
+            templateUrl: "templates/pages/dashboard/klanten.html"
+        }
+    })

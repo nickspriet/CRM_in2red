@@ -53,6 +53,7 @@
                                         <td>E-mail</td>
                                         <td>Contactpersonen</td>
                                         <td>Tags</td>
+                                        <td class="text-r">Actief ?</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -74,6 +75,10 @@
                                             </div>
                                         </td>
                                         <td><span ng-repeat="tag in customer.Tags">{{tag.name}}{{$last ? '' : ', '}}</span></td>
+                                        <td class="text-r" ng-init="customer.Info.actief = customer.Info.active == 'Y' ? 'actief' : 'niet actief'">
+                                            <span ng-if="customer.Info.actief == 'actief'" class="color7">ACTIEF</span>
+                                            <span ng-if="customer.Info.actief == 'niet actief'" class="color10">NIET<br>ACTIEF</span>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

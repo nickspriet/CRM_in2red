@@ -17,7 +17,7 @@
         <!-- START CONTAINER -->
 
         <div class="panel padding-0">
-            <div role="tabpanel" ng-init="loadInfo()">
+            <div role="tabpanel" ng-init="loadInfo()" ng-controller="TabController">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs font-title-tab" role="tablist">
                     <li role="presentation" class="active"><a href="" ng-click="setTab(1); loadInfo();" aria-controls="gegevens" role="tab" data-toggle="tab">Gegevens</a></li>

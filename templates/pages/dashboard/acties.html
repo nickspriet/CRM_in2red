@@ -1,0 +1,15 @@
+<div class="col-md-12" ng-controller="ActionController as actionCtrl">
+    <div class="panel">
+        <div class="panel-title">Acties</div>
+        <ul class="panel-tools">
+            <a href="#/acties/nieuw" class="btn btn-light"><i class="fa fa-plus"></i>Nieuwe actie</a>
+        </ul>
+        <div class="panel-body">
+            <ul class="basic-list">
+                <li class="clickable-row" ng-click="goToDetails(action.id)" ng-repeat="action in actions | orderBy: '-date_create'">
+                    <b>{{action.customers_name}}</b> - <span class="desc">{{action.name | limitTo: 150}}{{action.name.length > 150 ? "..." : ""}} ({{action.date_create | DateFilter}})</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

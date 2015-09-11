@@ -18,15 +18,6 @@ angular.module("crmApp").
 
         $scope.deletedContacts = [];
 
-        //change tabs
-        $scope.tab = 1;
-        $scope.checkTab = function (checkTab) {
-            return this.tab === checkTab;
-        };
-        $scope.setTab = function (setTab) {
-            this.tab = setTab;
-        };
-
 
         $scope.loadInfo = function () {
             //get customer by id

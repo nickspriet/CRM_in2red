@@ -1,0 +1,16 @@
+<div class="col-md-4" ng-controller="OfferController as offerCtrl">
+    <div class="panel">
+        <div class="panel-title">Laatst gewijzigde offertes</div>
+        <ul class="panel-tools">
+            <a href="#/offertes/nieuw" class="btn btn-light"><i class="fa fa-plus"></i>Nieuwe offerte</a>
+        </ul>
+        <div class="panel-body">
+            <ul class="basic-list">
+                <li class="clickable-row" ng-repeat="offer in offers | orderBy:'-date' | filter:searchOffer">
+                    <b>{{offer.customers_name}} - {{offer.name}}</b>
+                    <span class="desc">({{offer.date_create | DateFilter}} - € {{offer.totalprice}})</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

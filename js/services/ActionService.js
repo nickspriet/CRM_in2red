@@ -41,6 +41,13 @@ angular.module("crmApp").factory("ActionService", function ($http) {
             })
         },
 
+        getSubactionById: function (formdata) {
+          return $http.get("/php/get/actions", formdata).then(function (response){
+              console.log("data-getSubactionById", response.data);
+              return response;
+          })
+        },
+
         postSubaction: function (formdata) {
             return $http.post("/php/post/subaction", formdata).then(function (response) {
                 console.log("data-subactionPOST", response.data);
