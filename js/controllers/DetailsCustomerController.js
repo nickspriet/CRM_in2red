@@ -4,7 +4,7 @@
 
 
 angular.module("crmApp").
-    controller("DetailsCustomerController", function ($scope, $routeParams, $location, CustomerService, ActionService) {
+    controller("DetailsCustomerController", function ($scope, $routeParams, $location, CustomerService, $filter, ActionService) {
         $scope.customerFormData = {};
         $scope.customerFormData.Info = {};
         $scope.customerFormData.Contacts = {};
@@ -83,7 +83,13 @@ angular.module("crmApp").
 
         //submit detailsCustomerForm
         $scope.submitForm = function () {
+
             $scope.customerFormData.Info.id = $routeParams.id;
+            $scope.customerFormData.Info.active = $scope.customerFormData.Info.active ? "Y" : "N";
+            //if ($scope.customerFormData.Info.archive) $scope.customerFormData.Info.active = "N";
+            $scope.customerFormData.Info.archive = $scope.customerFormData.Info.archive ? "Y" : "N";
+
+
             console.log("formdata", $scope.customerFormData.Info);
 
             //update customer
@@ -107,7 +113,7 @@ angular.module("crmApp").
                 //})
 
                 //after submit => go to details page of inserted customer
-                $location.path("klanten/details/" + $routeParams.id);
+                $scope.customerFormData.Info.archive == "Y" ? $location.path("klanten") : $location.path("klanten/details/" + $routeParams.id);
             });
         };
 
@@ -128,8 +134,9 @@ angular.module("crmApp").
             $scope.customerFormData.Info.officeCity = $scope.selectedCustomer.office_city;
             $scope.customerFormData.Info.officeCountry = $scope.selectedCustomer.office_country;
             $scope.customerFormData.Info.officeCounty = $scope.selectedCustomer.office_county;
-            $scope.customerFormData.Info.dateCreate = $scope.selectedCustomer.date_create;
-            $scope.customerFormData.Info.active = $scope.selectedCustomer.active;
+            $scope.customerFormData.Info.dateCreate = $filter("DateFilter")($scope.selectedCustomer.date_create);
+            $scope.customerFormData.Info.active = $scope.selectedCustomer.active == "Y";
+            $scope.customerFormData.Info.archive = $scope.selectedCustomer.archive == "Y";
         }
     });
 

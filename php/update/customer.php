@@ -22,15 +22,13 @@
     $office_county = isset($request->officeCounty) ? $request->officeCounty : null;
     $office_country = isset($request->officeCountry) ? $request->officeCountry : null;
     $vat = isset($request->vat) ? $request->vat : null;
-    $date_active = date("Y-m-d H:i:s");
-    $date_create = date("Y-m-d H:i:s");
     $date_edit = date("Y-m-d H:i:s");
-    $active = "Y";
-    $archive = "N";
+    $active = isset($request->active) ? $request->active : null;
+    $archive = isset($request->archive) ? $request->archive : null;
 
 
 
-    $sqlUpdate = "UPDATE customers SET customertypes_id=".$customertypes_id.", name='".$name."', phone='".$phone."', email='".$email."', billing_street='".$billing_street."', billing_zipcode='".$billing_zipcode."', billing_city='".$billing_city."', billing_county='".$billing_county."', billing_country='".$billing_country."', office_street='".$office_street."', office_zipcode='".$office_zipcode."', office_city='".$office_city."', office_county='".$office_county."', office_country='".$office_country."', vat='".$vat."', date_active='".$date_active."', date_create='".$date_create."', date_edit='".$date_edit."', active='".$active."', archive='".$archive."' WHERE id=".$id;
+    $sqlUpdate = "UPDATE customers SET customertypes_id=".$customertypes_id.", name='".$name."', phone='".$phone."', email='".$email."', billing_street='".$billing_street."', billing_zipcode='".$billing_zipcode."', billing_city='".$billing_city."', billing_county='".$billing_county."', billing_country='".$billing_country."', office_street='".$office_street."', office_zipcode='".$office_zipcode."', office_city='".$office_city."', office_county='".$office_county."', office_country='".$office_country."', vat='".$vat."', date_edit='".$date_edit."', active='".$active."', archive='".$archive."' WHERE id=".$id;
     if ($stmt = $conn->prepare($sqlUpdate))
     {
         $stmt->execute();

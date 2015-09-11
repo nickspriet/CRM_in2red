@@ -56,16 +56,15 @@
                                             <div>{{selectedCustomer.office_county}}</div>
                                             <div>{{selectedCustomer.office_country}}</div>
                                         </li>
-                                        </li>
                                         <li class="list-group-item">
                                             <div class="panel-subtitle">Extra gegevens</div>
                                             <div>
-                                                <span ng-if="selectedCustomer.active"><i class="fa fa-check color7 padding-r-5"></i> ACTIEF</span>
-                                                <span ng-if="!selectedCustomer.active"><i class="fa fa-times color10 padding-r-5"></i> NIET ACTIEF</span>
+                                                <span ng-if="selectedCustomer.active == 'Y'"><i class="fa fa-check color7 padding-r-5"></i> ACTIEF</span>
+                                                <span ng-if="selectedCustomer.active == 'N'"><i class="fa fa-times color10 padding-r-5"></i> NIET ACTIEF</span>
                                             </div>
                                             <div>
                                                 <span ng-if="selectedCustomer.archive == 'N'"><i class="fa fa-check color7 padding-r-5"></i> NIET GEARCHIVEERD</span>
-                                                <span ng-if="selectedCustomer.archive == 'Y'"><i class="fa fa-times color10 padding-r-5"></i> GEARCHIVEERD</span>
+                                                <span ng-if="selectedCustomer.archive == 'Y'"><i class="fa fa-trash color10 padding-r-5"></i> GEARCHIVEERD</span>
                                             </div>
                                             <div><i class="fa fa-clock-o padding-r-5"></i> Klant sinds: {{selectedCustomer.date_active}}</div>
                                             <div class="padding-l-20">Aanmaakdatum: {{selectedCustomer.date_create}}</div>

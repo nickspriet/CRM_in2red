@@ -6,7 +6,7 @@
     </ol>
     <div class="right">
         <div class="btn-group small-control-mr" role="group" aria-label="...">
-            <a href="#/acties/bewerken/{{selectedAction.Info.customers_id}}" class="btn btn-light"><i class="fa fa-pencil"></i>Bewerken</a>
+            <a href="{{'#/acties/' + selectedAction.Info.actions_id + '/subacties/nieuw'}}" class="btn btn-light"><i class="fa fa-pencil"></i>Nieuwe vervolgactie</a>
         </div>
     </div>
 </div>
@@ -22,11 +22,21 @@
             <ul class="basic-list">
                 <li>
                     <div class="row color4-bg padding-20 margin-0">
+                        <div class="right z-index">
+                            <div class="btn-group small-control-mr" role="group" aria-label="...">
+                                <a href="#/acties/bewerken/{{selectedAction.Info.customers_id}}" class="btn btn-light"><i class="fa fa-pencil"></i>Bewerken</a>
+                            </div>
+                        </div>
                         <one-action selected-attachments="selectedActionAttachments" action="selectedAction.Info"></one-action>
                     </div>
                 </li>
-                <li ng-repeat="subaction in selectedAction.Subactions">
+                <li ng-repeat="subaction in selectedAction.Subactions | orderBy: 'date_create'">
                     <div class="row padding-20 margin-0">
+                        <div class="right z-index">
+                            <div class="btn-group small-control-mr" role="group" aria-label="...">
+                                <a href="#/acties/bewerken/{{selectedAction.Info.customers_id}}" class="btn btn-light"><i class="fa fa-pencil"></i>Bewerken</a>
+                            </div>
+                        </div>
                         <one-action selected-attachments="selectedActionAttachments" action="subaction"></one-action>
                     </div>
                 </li>

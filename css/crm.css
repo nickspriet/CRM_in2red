@@ -103,6 +103,10 @@ div.invoice {
     height: 56px;
 }
 
+.z-index {
+    z-index: 1000;
+}
+
 li.padding-0 {
     padding: 0;
 }
@@ -174,7 +178,6 @@ div.has-error .input-group-addon, div.has-error .form-control {
 .another-file-over-class {
     border: dotted 3px green;
 }
-
 
 /* modal */
 .modal {

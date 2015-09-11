@@ -9,6 +9,9 @@ angular.module("crmApp")
         $scope.selectedContacts = [];
         $scope.customertypes_name = "Klant";
 
+
+        $scope.now = new Date();
+
         //submit newCustomerForm
         $scope.submitForm = function () {
             console.log("formdata", $scope.customerFormData.Info);

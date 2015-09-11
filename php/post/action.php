@@ -5,22 +5,20 @@
     $request = json_decode($postdata);
 
     $customers_id = isset($request->customersId) ? $request->customersId : null;
-    $firstname = isset($request->firstname) ? $request->firstname : null;
-    $lastname = isset($request->lastname) ? $request->lastname : null;
-    $title = isset($request->title) ? $request->title : null;
-    $phone = isset($request->phone) ? $request->phone : null;
-    $mobile = isset($request->mobile) ? $request->mobile : null;
-    $email = isset($request->email) ? $request->email : null;
+    $name = isset($request->name) ? $request->name : null;
+    $type = isset($request->type) ? $request->type : null;
+    $reminder = isset($request->reminder) ? $request->reminder : null;
+    $date_reminder = isset($request->dateReminder) ? $request->dateReminder : null;
     $date_create = date("Y-m-d H:i:s");
     $date_edit = date("Y-m-d H:i:s");
     $archive = "N";
 
 
 
-    $sqlInsert = "INSERT INTO contacts(customers_id, firstname, lastname, title, phone, mobile, email, date_create, date_edit, archive) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    $sqlInsert = "INSERT INTO actions(customers_id, name, type, reminder, date_reminder, date_create, date_edit, archive) VALUES (?,?,?,?,?,?,?,?)";
     if ($stmt = $conn->prepare($sqlInsert))
     {
-        $stmt->bind_param("isssssssss", $customers_id, $firstname, $lastname, $title, $phone, $mobile, $email, $date_create, $date_edit, $archive);
+        $stmt->bind_param("isssssss", $customers_id, $name, $type, $reminder, $date_reminder, $date_create, $date_edit, $archive);
         $stmt->execute();
         echo $conn->insert_id;
         $stmt->close();

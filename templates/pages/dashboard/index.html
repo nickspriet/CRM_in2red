@@ -12,8 +12,8 @@
                 </ul>
                 <div class="panel-body">
                     <ul class="basic-list">
-                        <li class="clickable-row" ng-click="goToDetails(action.id)" ng-repeat="action in actions">
-                            <b>{{action.customers_name}}</b> - <span class="desc">{{action.name}}</span>
+                        <li class="clickable-row" ng-click="goToDetails(action.id)" ng-repeat="action in actions | orderBy: '-date_create'">
+                            <b>{{action.customers_name}}</b> - <span class="desc">{{action.name | limitTo: 150}}{{action.name.length > 150 ? "..." : ""}} ({{action.date_create | DateFilter}})</span>
                         </li>
                     </ul>
                 </div>

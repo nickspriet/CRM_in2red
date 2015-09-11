@@ -3,7 +3,7 @@
  */
 
 
-angular.module("crmApp").controller("DetailsActionController", function ($scope, $routeParams, FileUploader, ActionService) {
+angular.module("crmApp").controller("DetailsActionController", function ($scope, $routeParams, $filter, FileUploader, ActionService) {
 
     $scope.actionFormData = {};
 
@@ -35,12 +35,12 @@ angular.module("crmApp").controller("DetailsActionController", function ($scope,
 
     //init ng-model (because value doesn't work)
     function initFields() {
-        $scope.actionFormData.name = $scope.selectedAction.name;
-        $scope.actionFormData.customersId = $scope.selectedAction.customers_id;
-        $scope.actionFormData.type = $scope.selectedAction.type;
-        $scope.actionFormData.dateCreate = $scope.selectedAction.date_create;
-        $scope.actionFormData.reminder = $scope.selectedAction.reminder;
-        $scope.actionFormData.dateReminder = $scope.selectedAction.date_reminder;
+        $scope.actionFormData.name = $scope.selectedAction.Info.name;
+        $scope.actionFormData.customersId = $scope.selectedAction.Info.customers_id;
+        $scope.actionFormData.type = $scope.selectedAction.Info.type;
+        $scope.actionFormData.dateCreate = $scope.selectedAction.Info.date_create;
+        $scope.actionFormData.reminder = $scope.selectedAction.Info.reminder;
+        $scope.actionFormData.dateReminder = $filter("DateFilter")($scope.selectedAction.Info.date_reminder);
     }
 });
 

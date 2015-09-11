@@ -8,7 +8,7 @@
 	{
 		$id = $_GET["id"];
 
-		$sql1 = "SELECT c.*, ct.name as customertypes_name FROM customers c INNER JOIN customertypes ct ON c.customertypes_id = ct.id WHERE c.active = 'Y' AND c.id  = " . $id;
+		$sql1 = "SELECT c.*, ct.name as customertypes_name FROM customers c INNER JOIN customertypes ct ON c.customertypes_id = ct.id WHERE c.archive = 'N' AND c.id  = " . $id;
 		$resultCustomers = $conn->query($sql1);
 		while($rowCustomer = $resultCustomers->fetch_assoc())
 		{
@@ -27,7 +27,7 @@
 
 
 	//all customers
-	$sql1 = "SELECT c.*, ct.name as customertypes_name FROM customers c INNER JOIN customertypes ct ON c.customertypes_id = ct.id WHERE c.active = 'Y'";
+	$sql1 = "SELECT c.*, ct.name as customertypes_name FROM customers c INNER JOIN customertypes ct ON c.customertypes_id = ct.id WHERE c.archive = 'N'";
 	$resultCustomers = $conn->query($sql1);
 	while($rowCustomer = $resultCustomers->fetch_assoc())
 	{

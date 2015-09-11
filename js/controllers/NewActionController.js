@@ -2,8 +2,9 @@
  * Created by nikes on 08/09/2015.
  */
 
-angular.module("crmApp").controller("NewActionController", function ($scope, $routeParams, FileUploader, ActionService) {
+angular.module("crmApp").controller("NewActionController", function ($scope, $location, $routeParams, FileUploader, ActionService) {
 
+    //init uploader (store customersId in formData)
     var uploader = $scope.uploader = new FileUploader({
         url: '/php/post/upload_files.php',
         formData: [{
@@ -12,10 +13,25 @@ angular.module("crmApp").controller("NewActionController", function ($scope, $ro
     });
 
 
+    if ($routeParams.id) {
+        ActionService.getActionById($routeParams.id).then(function (data) {
+            //store customersId in formData for 'New Subaction' page
+            $scope.uploader.formData = [{customersId: data[$routeParams.id].Info.customers_id}];
+        })
+    }
+
+
     //set customersId for upload folder after company is selected
     $scope.onSelect = function ($item, $model, $label) {
+        $scope.selectedCompany = $item;
         $scope.uploader.formData = [{customersId: $item.Info.id}];
     };
+
+
+    $scope.reminder = false;
+    $scope.onCheckChange = function () {
+        $scope.reminder = !$scope.reminder;
+    }
 
 
     //FILTERS uploader
@@ -64,24 +80,80 @@ angular.module("crmApp").controller("NewActionController", function ($scope, $ro
         console.info('onCompleteAll');
 
         //submit the form when all files are uploaded
-        $scope.submitForm();
+        if ($scope.newActionForm) $scope.submitActionForm();
+        else if ($scope.newSubactionForm) $scope.submitSubactionForm();
     };
 
     console.info('uploader', uploader);
     //</editor-fold>
 
 
-
     //upload attachments & submit newActionForm
     $scope.uploadAndSubmitForm = function () {
-        console.log("uploading... submit...");
         //check if there are items to upload
         if ($scope.uploader.queue.length > 0) $scope.uploader.uploadAll();
-        else $scope.submitForm();  //<-- see uploader.onCompleteAll function for submission form after every file has been uploaded
+        else {
+            //<-- see uploader.onCompleteAll function for submission form after every file has been uploaded
+            if ($scope.newActionForm) $scope.submitActionForm();
+            else if ($scope.newSubactionForm) $scope.submitSubactionForm();
+        }
     }
 
 
-    $scope.submitForm = function () {
+    $scope.submitActionForm = function () {
+        console.log(uploader.formData);
+        $scope.newActionFormData.customersId = uploader.formData[0].customersId != 0 ? uploader.formData[0].customersId : 0;
 
+        console.log("actionFormData", $scope.newActionFormData);
+        //post action
+        ActionService.postAction($scope.newActionFormData).then(function (id) {
+
+            //post attachments
+            angular.forEach($scope.uploader.queue, function (item) {
+                console.log("FILE", item.file);
+                $scope.attachmentFormData = {
+                    actionsId: id.data,
+                    name: item.file.name
+                }
+
+                console.log("attachmentFormData", $scope.attachmentFormData);
+
+                ActionService.postAttachment($scope.attachmentFormData).then(function (id) {
+
+                });
+            });
+
+            //show details of action
+            $location.path("acties/details/" + id.data);
+        });
+    }
+
+
+    $scope.submitSubactionForm = function () {
+        $scope.newSubactionFormData.actionsId = $routeParams.id;
+
+        console.log("subactionFormData", $scope.newSubactionFormData);
+        //post action
+        ActionService.postSubaction($scope.newSubactionFormData).then(function (id) {
+
+            //post attachments
+            angular.forEach($scope.uploader.queue, function (item) {
+                console.log("FILE", item.file);
+                $scope.attachmentFormData = {
+                    actionsId: $routeParams.id,
+                    subactionsId: id.data,
+                    name: item.file.name
+                }
+
+                console.log("attachmentFormData", $scope.attachmentFormData);
+
+                ActionService.postAttachment($scope.attachmentFormData).then(function (id) {
+
+                });
+            });
+
+            //show details of action
+            $location.path("acties/details/" + $routeParams.id);
+        });
     }
 });
