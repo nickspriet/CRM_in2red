@@ -34,7 +34,7 @@ angular.module("routes", ["ngRoute"])
             })
             .when("/klanten/bewerken/:id", {
                 templateUrl: "templates/pages/klanten/bewerken.html",
-                controller: "DetailsCustomerController"
+                controller: "EditCustomerController"
             })
 
             // offertes
@@ -76,7 +76,7 @@ angular.module("routes", ["ngRoute"])
             })
             .when("/acties/:id/subacties/bewerken/:subid", {
                 templateUrl: "templates/pages/acties/subacties/bewerken.html",
-                controller: "DetailsActionController"
+                controller: "DetailsSubactionController"
             })
 
             .otherwise("/");
