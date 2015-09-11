@@ -72,11 +72,15 @@ angular.module("routes", ["ngRoute"])
             })
             .when("/acties/:id/subacties/nieuw", {
                 templateUrl: "templates/pages/acties/subacties/nieuw.html",
-                controller: "NewActionController"
+                controller: "NewSubactionController"
             })
             .when("/acties/:id/subacties/bewerken/:subid", {
                 templateUrl: "templates/pages/acties/subacties/bewerken.html",
                 controller: "DetailsSubactionController"
+            })
+
+            .when("/404", {
+                templateUrl: "templates/404.html"
             })
 
             .otherwise("/");

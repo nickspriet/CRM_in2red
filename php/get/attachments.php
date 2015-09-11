@@ -16,7 +16,8 @@
 			$rows[] = $row;
 		}
 
-		if ($rows) echo json_encode($rows);
+			if (!isset($rows)) http_response_code(404);
+        		else echo json_encode($rows);
 
 		$conn->close();
 	}

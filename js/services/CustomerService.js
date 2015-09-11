@@ -2,7 +2,7 @@
  * Created by nikes on 26/08/2015.
  */
 
-angular.module("crmApp").factory("CustomerService", function ($http) {
+angular.module("crmApp").factory("CustomerService", function ($http, $location) {
     var customers = [];
     var selectedCustomer = [];
     var postedCustomer = [];
@@ -24,6 +24,8 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
                 console.log("data", response.data);
                 selectedCustomer = response.data;
                 return selectedCustomer;
+            }).catch(function (response) {
+                $location.path("404");
             })
         },
 

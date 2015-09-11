@@ -47,13 +47,14 @@
                         <div class="col-sm-5">
                             <div class="form-group">
                                 <div class="checkbox checkbox-danger float-l padding-r-20">
-                                    <input id="reminder" checked type="checkbox" ng-model="actionFormData.reminder">
+                                    <input id="reminder" checked type="checkbox" ng-model="actionFormData.reminder" ng-change="onCheckChange(reminder)">
                                     <label for="reminder">Herinner me op:</label>
                                 </div>
-                                <div class="form-group" ng-controller="DatePickerController as datePickerCtrl">
-                                    <div class="input-prepend input-group">
+
+                                <div class="form-group fc-clear padding-t-10" ng-controller="DatePickerController as datePickerCtrl">
+                                    <div class="input-prepend input-group" ng-show="actionFormData.reminder">
                                         <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input type="text" id="date-picker" name="date-picker" class="form-control active" id="action-create" ng-model="actionFormData.dateReminder">
+                                        <input type="text" id="date-picker" name="datePicker" class="form-control active" id="action-create" ng-model="actionFormData.dateReminder">
                                     </div>
                                 </div>
                             </div>

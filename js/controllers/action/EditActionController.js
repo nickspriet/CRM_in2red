@@ -34,8 +34,7 @@ angular.module("crmApp").controller("EditActionController", function ($scope, $r
         $scope.actionFormData.name = $scope.selectedAction.Info.name;
         $scope.actionFormData.customersId = $scope.selectedAction.Info.customers_id;
         $scope.actionFormData.type = $scope.selectedAction.Info.type;
-        $scope.actionFormData.dateCreate = $scope.selectedAction.Info.date_create;
-        $scope.actionFormData.reminder = $scope.selectedAction.Info.reminder;
+        $scope.actionFormData.reminder = $scope.selectedAction.Info.reminder == "Y";
         $scope.actionFormData.dateReminder = $filter("DateFilter")($scope.selectedAction.Info.date_reminder);
     }
 })

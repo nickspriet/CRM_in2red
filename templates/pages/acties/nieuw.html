@@ -53,13 +53,11 @@
                                     <input id="reminder" checked type="checkbox" ng-model="newActionFormData.reminder" ng-init="newActionFormData.reminder = false" ng-change="onCheckChange(reminder)">
                                     <label for="reminder">Herinner me op:</label>
                                 </div>
-                                <!--<checkbox ng-model="newActionFormData.reminder" ng-true-value="Y" ng-false-value="N" ng-change="onCheckChange(reminder)" name="reminder" id="reminder" class="btn-danger float-l margin-t-5"></checkbox>-->
-                                <!--<div for="reminder" class="float-l margin-r-20 padding-l-10 margin-t-5">Herinner me op:</div>-->
 
                                 <div class="form-group fc-clear padding-t-10" ng-controller="DatePickerController as datePickerCtrl" ng-class="{'has-error' : (newActionForm.datePicker.$dirty && newActionForm.datePicker.$invalid) || (newActionForm.datePicker.$touched && newActionForm.datePicker.$invalid) || (newActionForm.datePicker.$invalid && submit)}">
-                                    <div class="input-prepend input-group" ng-show="!reminder">
+                                    <div class="input-prepend input-group" ng-show="reminder">
                                         <span class="add-on input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input type="text" id="date-picker" name="datePicker" class="form-control active" id="action-create" ng-model="newActionFormData.dateCreate">
+                                        <input type="text" id="date-picker" name="datePicker" class="form-control active" id="action-create" ng-model="newActionFormData.dateReminder">
                                     </div>
                                 </div>
                             </div>

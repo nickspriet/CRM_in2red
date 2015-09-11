@@ -3,20 +3,20 @@
  */
 
 
-angular.module("crmApp").factory("ActionService", function ($http) {
+angular.module("crmApp").factory("ActionService", function ($http, $location) {
 
     return {
         //actions
         getActions: function () {
             return $http.get("/php/get/actions").then(function (response) {
-                console.log("data", response.data);
+                console.log("data-getActions", response.data);
                 return response.data;
             });
         },
 
         getActionById: function (id) {
             return $http.get("/php/get/actions/?id=" + id).then(function (response) {
-                console.log("data", response.data);
+                console.log("data-getActionsById", response.data);
                 return response.data;
             })
         },

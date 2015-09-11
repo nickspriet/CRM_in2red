@@ -18,7 +18,8 @@
 			$rows = getContactsByCustomerId($conn, $rows, $rowCustomer, $id);
 			$rows = getTagsByCustomerId($conn, $rows, $rowCustomer, $id);
 		}
-		echo json_encode($rows);
+		if (!isset($rows)) http_response_code(404);
+		else echo json_encode($rows);
 		$conn->close();
 
 		die();
@@ -38,7 +39,8 @@
 		$rows = getTagsByCustomerId($conn, $rows, $rowCustomer, $id);
 	}
 
-	echo json_encode($rows);
+	if (!isset($rows)) http_response_code(404);
+	else echo json_encode($rows);
 
 
 	function getContactsByCustomerId($conn, $rows, $rowCustomer, $id)

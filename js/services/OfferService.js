@@ -2,7 +2,7 @@
  * Created by nikes on 26/08/2015.
  */
 
-angular.module("crmApp").factory("OfferService", function ($http) {
+angular.module("crmApp").factory("OfferService", function ($http, $location) {
     var offers = [];
 
     return {

@@ -4,6 +4,7 @@
 
 angular.module("crmApp").filter("DateFilter", function () {
     return function (dateString) {
+        //convert date format from "yyyy-mm-dd h:m:s" to "DD/MM/YYYY"
         var date = new Date(dateString);
 
         var dd = date.getDate();

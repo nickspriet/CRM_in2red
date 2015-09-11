@@ -2,14 +2,14 @@
  * Created by nikes on 03/09/2015.
  */
 
-angular.module("crmApp").factory("TagService", function ($http) {
+angular.module("crmApp").factory("TagService", function ($http, $location) {
 
     return {
         getTags: function () {
             return $http.get("/php/get/tags").then(function (response) {
                 console.log("data", response.data);
                 return response.data;
-            });
+            })
         }
     }
 });

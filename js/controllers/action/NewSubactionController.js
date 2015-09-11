@@ -3,7 +3,15 @@
  * Created by nikes on 11/09/2015.
  */
 
-angular.module("crmApp").controller("NewSubactionController", function ($scope, $routeParams, $location, $filter, ActionService) {
+angular.module("crmApp").controller("NewSubactionController", function ($scope, $routeParams, $location, $filter, FileUploader, ActionService) {
+    //init uploader (store customersId in formData)
+    var uploader = $scope.uploader = new FileUploader({
+        url: '/php/post/upload_files.php',
+        formData: [{
+            customersId: $scope.selectedCompany == null ? 0 : $scope.selectedCompany.Info.id
+        }]
+    });
+
     //upload attachments & submit newActionForm
     $scope.uploadAndSubmitForm = function () {
         //check if there are items to upload
