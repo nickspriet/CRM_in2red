@@ -42,6 +42,7 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
             })
         },
 
+        //contacts
         postContact: function (formdata) {
             return $http.post("/php/post/contact", formdata).then(function (response) {
                 console.log("data-contactPOST", response.data);
@@ -50,6 +51,7 @@ angular.module("crmApp").factory("CustomerService", function ($http) {
             })
         },
 
+        //tags
         postTag: function (formdata) {
             return $http.post("/php/post/tag", formdata).then(function (response) {
                 console.log("data-tagPOST", response.data);

@@ -8,9 +8,15 @@ angular.module("crmApp").factory("OfferService", function ($http) {
     return {
         getOffers: function () {
             return $http.get("/php/get/offers").then(function(response){
-                offers = response.data;
-                console.log("data", response.data);
-                return offers;
+                console.log("getOffersData", response.data);
+                return response.data;
+            })
+        },
+
+        getOffersByCustomersId: function (customers_id) {
+            return $http.get("/php/get/offers/?customers_id=" + customers_id).then(function(response){
+                console.log("getOffersByCustomersIdData", response.data);
+                return response.data;
             })
         }
     }

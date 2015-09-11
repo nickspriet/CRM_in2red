@@ -8,7 +8,7 @@
 	{
 		$id = $_GET["id"];
 
-		$sql1 = "SELECT a.id as 'actions_id', a.customers_id, a.name, a.type, a.reminder, a.date_reminder, a.date_create, a.date_edit, a.archive, c.name as 'customers_name' FROM actions a INNER JOIN customers c ON a.customers_id = c.id WHERE a.archive = 'N' AND a.id=".$id;
+		$sql1 = "SELECT a.id as 'actions_id', a.customers_id, a.name, a.type, a.reminder, a.date_reminder, a.date_create, a.date_edit, a.archive, c.name as 'customers_name' FROM actions a LEFT JOIN customers c ON a.customers_id = c.id WHERE a.archive = 'N' AND a.id=".$id;
 		$result = $conn->query($sql1);
 		while($row = $result->fetch_assoc())
 		{
@@ -56,7 +56,7 @@
 
 
 	//all actions
-	$sql1 = "SELECT a.*, c.name as customers_name FROM actions a INNER JOIN customers c ON a.customers_id = c.id WHERE a.archive = 'N'";
+	$sql1 = "SELECT a.*, c.name as customers_name FROM actions a LEFT JOIN customers c ON a.customers_id = c.id WHERE a.archive = 'N'";
 	$result = $conn->query($sql1);
 	while($row = $result->fetch_assoc())
 	{

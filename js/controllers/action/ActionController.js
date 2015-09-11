@@ -9,7 +9,7 @@ angular.module("crmApp")
 
         //get all actions
         ActionService.getActions().then(function (data) {
-            console.log(data);
+            console.log("all actions", data);
 
             $scope.actions = data;
 

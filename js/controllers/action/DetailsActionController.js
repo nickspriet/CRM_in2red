@@ -18,32 +18,7 @@ angular.module("crmApp").controller("DetailsActionController", function ($scope,
 
             console.log("selectedActionAttachments", $scope.selectedActionAttachments);
         });
-
-        initFields();
     });
-
-
-
-
-
-
-    var uploader = $scope.uploader = new FileUploader({
-        url: '/php/post/upload_files.php',
-        formData: [{
-            // customersId: $scope.selectedAction.customers_id
-        }]
-    });
-
-
-    //init ng-model (because value doesn't work)
-    function initFields() {
-        $scope.actionFormData.name = $scope.selectedAction.Info.name;
-        $scope.actionFormData.customersId = $scope.selectedAction.Info.customers_id;
-        $scope.actionFormData.type = $scope.selectedAction.Info.type;
-        $scope.actionFormData.dateCreate = $scope.selectedAction.Info.date_create;
-        $scope.actionFormData.reminder = $scope.selectedAction.Info.reminder;
-        $scope.actionFormData.dateReminder = $filter("DateFilter")($scope.selectedAction.Info.date_reminder);
-    }
 });
 
 

@@ -92,17 +92,15 @@ angular.module("crmApp").controller("NewActionController", function ($scope, $lo
     $scope.uploadAndSubmitForm = function () {
         //check if there are items to upload
         if ($scope.uploader.queue.length > 0) $scope.uploader.uploadAll();
-        else {
-            //<-- see uploader.onCompleteAll function for submission form after every file has been uploaded
-            if ($scope.newActionForm) $scope.submitActionForm();
-            else if ($scope.newSubactionForm) $scope.submitSubactionForm();
-        }
+        else $scope.submitForm(); //<-- see uploader.onCompleteAll function for submission form after every file has been uploaded
     }
 
 
-    $scope.submitActionForm = function () {
+    $scope.submitForm = function () {
         console.log(uploader.formData);
         $scope.newActionFormData.customersId = uploader.formData[0].customersId != 0 ? uploader.formData[0].customersId : 0;
+        $scope.newActionFormData.reminder =  $scope.newActionFormData.reminder ? "Y" : "N";
+
 
         console.log("actionFormData", $scope.newActionFormData);
         //post action
@@ -129,31 +127,5 @@ angular.module("crmApp").controller("NewActionController", function ($scope, $lo
     }
 
 
-    $scope.submitSubactionForm = function () {
-        $scope.newSubactionFormData.actionsId = $routeParams.id;
 
-        console.log("subactionFormData", $scope.newSubactionFormData);
-        //post action
-        ActionService.postSubaction($scope.newSubactionFormData).then(function (id) {
-
-            //post attachments
-            angular.forEach($scope.uploader.queue, function (item) {
-                console.log("FILE", item.file);
-                $scope.attachmentFormData = {
-                    actionsId: $routeParams.id,
-                    subactionsId: id.data,
-                    name: item.file.name
-                }
-
-                console.log("attachmentFormData", $scope.attachmentFormData);
-
-                ActionService.postAttachment($scope.attachmentFormData).then(function (id) {
-
-                });
-            });
-
-            //show details of action
-            $location.path("acties/details/" + $routeParams.id);
-        });
-    }
 });

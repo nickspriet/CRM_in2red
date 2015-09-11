@@ -114,10 +114,13 @@
                             </div>
                         </div>
                         <ul class="basic-list fc-clear" ng-controller="OfferController as offerCtrl">
-                            <li ng-repeat="offer in offers | orderBy:'-date' | filter:searchOffer">
+                            <li ng-if="customerOffers" ng-repeat="offer in customerOffers | orderBy:'-date' | filter:searchOffer">
                                 <b>{{offer.name}}</b>
                                 <span class="desc">({{offer.date_create | date:'dd/MM/yyyy'}} - € {{offer.totalprice}})</span>
                             </li>
+                            <div ng-if="!customerOffers">
+                                Er zijn nog geen offertes aan deze klant toegevoegd.
+                            </div>
                         </ul>
                     </div>
                     <div ng-class="{active: checkTab(3)}" role="tabpanel" class="tab-pane" id="acties">

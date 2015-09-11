@@ -68,7 +68,7 @@ angular.module("routes", ["ngRoute"])
             })
             .when("/acties/bewerken/:id", {
                 templateUrl: "templates/pages/acties/bewerken.html",
-                controller: "DetailsActionController"
+                controller: "EditActionController"
             })
             .when("/acties/:id/subacties/nieuw", {
                 templateUrl: "templates/pages/acties/subacties/nieuw.html",

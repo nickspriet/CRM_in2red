@@ -3,11 +3,21 @@
  */
 
 angular.module("crmApp")
-    .controller("OfferController", function ($scope, $location, OfferService) {
+    .controller("OfferController", function ($scope, $routeParams, $location, OfferService) {
 
-        OfferService.getOffers().then(function (offers) {
-            $scope.offers = angular.fromJson(offers);
-
-            console.log("scope", $scope.offers);
+        //get all offers
+        OfferService.getOffers().then(function (data) {
+            $scope.offers = data;
+            console.log("offers", $scope.offers);
         });
+
+        //get offers by customersId
+        if ($routeParams.id) {
+            OfferService.getOffersByCustomersId($routeParams.id).then(function (data) {
+                $scope.customerOffers = data;
+
+                console.log("customerOffers", $scope.customerOffers);
+            });
+        }
+
     });
